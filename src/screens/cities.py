@@ -36,7 +36,6 @@ while running:
             y = pygame.mouse.get_pos()[1]
             if i.collidepoint(x, y) and not stats_showing:
                 stats_showing = a
-                print(a)
             if pygame.Rect((750, 560), (50, 20)).collidepoint(x, y) and stats_showing:
                 stats_showing = False
         if pygame.mouse.get_pressed()[2]:
