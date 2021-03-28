@@ -36,7 +36,7 @@ while running:
             y = pygame.mouse.get_pos()[1]
             if i.collidepoint(x, y) and not stats_showing:
                 stats_showing = a
-            if pygame.Rect((750, 560), (50, 20)).collidepoint(x, y) and stats_showing:
+            if pygame.Rect((446, 480), (54, 20)).collidepoint(x, y) and stats_showing:
                 stats_showing = False
         if pygame.mouse.get_pressed()[2]:
             x = pygame.mouse.get_pos()[0]
@@ -48,6 +48,7 @@ while running:
 
     if stats_showing:
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((250, 100), (250, 400)))
+        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect((250, 100), (250, 400)), 2)
         font = pygame.font.Font('freesansbold.ttf', 30)
         text = font.render(stats_showing, True, (0, 0, 0))
         w = text.get_rect().width
@@ -60,14 +61,13 @@ while running:
             screen.blit(text, (260, 150 + temp * 20))
             temp += 1
 
-        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect((250, 100), (250, 400)), 2)
-        pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((740, 560), (54, 20)))
-        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect((740, 560), (54, 20)), 1)
-        city_name('Close', 742, 562, 18)
+        #pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((446, 480), (54, 20)))
+        pygame.draw.rect(screen, (0, 0, 0), pygame.Rect((446, 480), (54, 20)), 1)
+        city_name('Close', 448, 482, 18)
 
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(100, 550, 600, 50))
     font = pygame.font.Font('freesansbold.ttf', 15)
-    current_coins = 20000
+    current_coins = 25000
     text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
     w = text.get_rect().width
     screen.blit(text, (100 + (600 - w) / 2, 555))
