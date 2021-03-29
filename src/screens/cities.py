@@ -1,10 +1,15 @@
-import pygame
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Ayush Gupta
 
+import pygame
+from main_logic import Giza, Agra, Paris, Rome, New_York
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
+
 city_coords = [[(0, 0), (52, 20)], [(50, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
                [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
-city_names = ['Agra', 'Delhi', 'Egypt', 'Pune', 'Pi', 'Hello']
+
+cities = [Giza, Agra, Paris, Rome, New_York]
 
 example_dict = {k: ['-Condition1', '-Condition2', '-Condition3'] for k in city_names}
 

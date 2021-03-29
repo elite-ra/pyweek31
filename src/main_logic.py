@@ -1,18 +1,10 @@
 import random
-
-main_dict = {'Giza': {'Big Banks': 2, 'Hospitals': 0, 'Rich Population': 3, 'Old Artefacts': 9, 'Crime Rate': 8,
-                      'Black Market': 1},
-             'Agra': {'Big Banks': 5, 'Hospitals': 0, 'Rich Population': 6, 'Old Artefacts': 8, 'Crime Rate': 3,
-                      'Black Market': 0},
-             'Paris': {'Big Banks': 9, 'Hospitals': 1, 'Rich Population': 7, 'Old Artefacts': 7, 'Crime Rate': 6,
-                       'Black Market': 1},
-             'New York': {'Big Banks': 10, 'Hospitals': 5, 'Rich Population': 8, 'Old Artefacts': 1, 'Crime Rate': 3,
-                          'Black Market': 0},
-             'Rome': {'Big Banks': 9, 'Hospitals': 3, 'Rich Population': 3, 'Old Artefacts': 8, 'Crime Rate': 7,
-                      'Black Market': 1}}
-
-artefacts = {'Giza': ['sarcophagus', 'gold slipper'], 'Agra': ['mughal artefact'], 'Paris': ['painting from le louvre'],
-             'Rome': ['precious gladiator sword']}
+from utils.models import City
+Giza = City('Giza', 3, False, 40000, 20, 83, True, ['sarcophagus', 'gold slipper'])
+Agra = City('Agra', 10, False, 530000, 18, 37, False, ['mughal artefact'])
+Paris = City('Paris', 22, True, 9310000, 15, 65, True, ['painting from le louvre'])
+New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
+Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
 
 
 class Game:
@@ -70,26 +62,6 @@ class Game:
 
         choices.sort(key = lambda x: main_dict[x]['Big Banks'])
 
-
-
-def get_prev_steal():
-    global prev_steal
-    return prev_steal
-
-
-def get_last_seen():
-    global last_seen
-    return last_seen
-
-
-def get_coins():
-    global coins
-    return coins
-
-
-def get_skill_level():
-    global skill_level
-    return skill_level
 
 # changing robber values based on difficulty ((number of chances**1.4/20**1.4) * 10)
 #
