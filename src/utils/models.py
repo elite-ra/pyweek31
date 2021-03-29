@@ -15,11 +15,10 @@
 
 import typing
 
-
 class City:
     def __init__(self, name: str, bank_count: int, is_hospital_present: bool,
                  per_capita_income: int, museum_count: int, crime_rate: float,
-                 is_blackmarket_present: typing.Union[bool, None]):
+                 is_blackmarket_present: bool, artefacts: typing.Union[list, None]):
         """ Pass none to is_blackmarket if the user is not having informant."""
 
         self.name = name
@@ -38,6 +37,8 @@ class City:
 
         self.is_hospital_present = is_hospital_present
         self.is_blackmarket_present = is_blackmarket_present
+
+        self.artefacts = artefacts
 
     def __convert_bank_count(self):
         if self.bank_count <= 2:
@@ -125,3 +126,9 @@ class City:
             f"- Black market:{(30-len(blckmrkt_str))*' '}{blckmrkt_str}\n"
 
         return s
+
+    def has_artefacts(self):
+        if self.artefacts is None:
+            return False
+        else:
+            return True
