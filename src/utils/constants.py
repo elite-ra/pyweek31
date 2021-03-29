@@ -7,8 +7,8 @@ import os
 import platform
 
 # CWD
-SRC_PATH = str(Path(__file__).parents[0])
-ROOT_PATH = str(Path(__file__).parents[1])
+SRC_PATH = str(Path(__file__).parents[1])
+ROOT_PATH = str(Path(__file__).parents[2])
 
 # game
 SCREEN_TITLE = ""
