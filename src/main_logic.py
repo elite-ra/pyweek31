@@ -71,25 +71,5 @@ class Game:
         choices.sort(key = lambda x: main_dict[x]['Big Banks'])
 
 
-
-def get_prev_steal():
-    global prev_steal
-    return prev_steal
-
-
-def get_last_seen():
-    global last_seen
-    return last_seen
-
-
-def get_coins():
-    global coins
-    return coins
-
-
-def get_skill_level():
-    global skill_level
-    return skill_level
-
 # changing robber values based on difficulty ((number of chances**1.4/20**1.4) * 10)
 #
