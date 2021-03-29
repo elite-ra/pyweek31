@@ -1,10 +1,13 @@
 import random
 from utils.models import City
+
 Giza = City('Giza', 3, False, 40000, 20, 83, True, ['sarcophagus', 'gold slipper'])
 Agra = City('Agra', 10, False, 530000, 18, 37, False, ['mughal artefact'])
 Paris = City('Paris', 22, True, 9310000, 15, 65, True, ['painting from le louvre'])
 New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
+
+cities_list = [Giza, Agra, Paris, Rome, New_York]
 
 
 class Game:
@@ -41,27 +44,26 @@ class Game:
         if self.stolen_item:
             self.total_coins += random.randint(5000, 10000)
         chance = random.choice([0, 0, 1])
-        if chance:
+        if chance and self.last_seen.has_artefacts:
             if artefacts.get(self.last_seen):
                 self.stolen_item = random.choice(artefacts.get(self.last_seen))
         else:
             self.stolen_item = None
 
         # hospital case
-        choices = list(main_dict.keys())
+        choices = cities_list[:]
         if self.robber_health < 60:
             temp = choices[:]
             for i in temp:
-                if not main_dict[i]['Hospital']:
+                if not i.is_hospital_present:
                     choices.remove(i)
         if self.stolen_item:
             temp = choices[:]
             for i in temp:
-                if not main_dict[i]['Black Market']:
+                if not i.is_blackmarket_present:
                     choices.remove(i)
 
-        choices.sort(key = lambda x: main_dict[x]['Big Banks'])
-
+        choices.sort(key=lambda x: x.bank_count)
 
 # changing robber values based on difficulty ((number of chances**1.4/20**1.4) * 10)
 #
