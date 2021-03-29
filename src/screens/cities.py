@@ -61,7 +61,7 @@ while running:
             screen.blit(text, (260, 150 + temp * 20))
             temp += 1
 
-        #pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((446, 480), (54, 20)))
+        # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((446, 480), (54, 20)))
         pygame.draw.rect(screen, (0, 0, 0), pygame.Rect((446, 480), (54, 20)), 1)
         city_name('Close', 448, 482, 18)
 
@@ -73,6 +73,6 @@ while running:
     screen.blit(text, (100 + (600 - w) / 2, 555))
 
     pygame.draw.rect(screen, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
-    pygame.draw.rect(screen, (255, 215, 0), pygame.Rect(120, 575, (current_coins/coin_limit)*560, 10))
+    pygame.draw.rect(screen, (255, 215, 0), pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
     pygame.display.update()
