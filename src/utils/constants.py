@@ -15,4 +15,4 @@ SCREEN_TITLE = ""
 TICK_RATE = 60
 CLOCK = pygame.time.Clock()
 
-# TODO: add display here, with __Variable__ screen resolution!
+# TODO: add display here, with FIXED screen resolution!

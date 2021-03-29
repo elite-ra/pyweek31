@@ -15,6 +15,7 @@
 
 import typing
 
+
 class City:
     def __init__(self, name: str, bank_count: int, is_hospital_present: bool,
                  per_capita_income: int, museum_count: int, crime_rate: float,
