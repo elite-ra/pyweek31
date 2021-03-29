@@ -45,8 +45,7 @@ class Game:
             self.total_coins += random.randint(5000, 10000)
         chance = random.choice([0, 0, 1])
         if chance and self.last_seen.has_artefacts:
-            if artefacts.get(self.last_seen):
-                self.stolen_item = random.choice(artefacts.get(self.last_seen))
+            self.stolen_item = random.choice(self.last_seen.artefacts)
         else:
             self.stolen_item = None
 
