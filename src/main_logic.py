@@ -151,7 +151,9 @@ class Game:
         return True
 
     def __str__(self):
+        lastseenstr = str(self.last_seen_city.name) if self.last_seen_city is not None else "N/A"
+        stolenitemstr = str(self.stolen_item.capitalize()) if self.stolen_item is not None else "N/A"
         s = f"- Robber Health:{(30 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
-            f"- Last Seen City:{(28 - len(str(self.last_seen_city))) * ' '}{self.last_seen_city}\n" \
-            f"- Stolen Item:{(24 - len(self.stolen_item)) * ' '}{self.stolen_item}\n"
+            f"- Last Seen City:{(28 - len(lastseenstr)) * ' '}{lastseenstr}\n" \
+            f"- Stolen Item:{(24 - len(stolenitemstr)) * ' '}{stolenitemstr}\n"
         return s

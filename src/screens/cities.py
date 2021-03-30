@@ -6,6 +6,7 @@ import pygame
 from .. import utils
 from ..main_logic import Game
 from . import chase
+from . import home_screen
 
 import os
 
@@ -47,20 +48,19 @@ def play():
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 90))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (150, 150, 150), pygame.Rect(0, 0, 800, 90))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 86), 1)
         font = utils.constants.FONT_MONO_MEDIUM
-        text = font.render('Robber Stats', True, (255, 255, 255))
+        text = font.render('Robber Stats', True, (200, 200, 200))
+        font = utils.constants.FONT_MONO_SMALL
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2, 5))
         random_string = str(game_obj)
         temp = 0
         for i in random_string.split('\n'):
-            text = font.render(i, True, (0, 0, 0))
-            utils.constants.MAIN_DISPLAY.blit(text, (30, 10 + temp * 20))
+            text = font.render(i, True, (200, 200, 200))
+            utils.constants.MAIN_DISPLAY.blit(text, (30, 30 + temp * 20))
             temp += 1
-        
-
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
@@ -83,8 +83,8 @@ def play():
                     if do_chase:
                         return chase.play()
                     else:
-                        # TODO: lost msg
-                        print("NO! HAHHAHA SAD!")
+                        # TODO: show error msg and disable guessing for a while
+                        
 
         if stats_showing:
             s = pygame.Surface((1000, 750))  # the size of your rect
