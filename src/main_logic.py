@@ -4,8 +4,8 @@
 import random
 from .utils.models import City
 
-Giza = City('Giza', 3, False, 40000, 20, 83, True, ['sarcophagus', 'gold slipper'])
-Agra = City('Agra', 10, False, 530000, 18, 37, False, ['mughal artefact'])
+Giza = City('Giza', 3, False, 40000, 20, 37, True, ['sarcophagus', 'gold slipper'])
+Agra = City('Agra', 10, False, 530000, 18, 83, False, ['mughal artefact'])
 Paris = City('Paris', 22, True, 9310000, 15, 65, True, ['painting from le louvre'])
 New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
