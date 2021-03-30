@@ -1,3 +1,6 @@
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Ayush Gupta, Pranjal Rastogi
+
 import random
 from .utils.models import City
 
@@ -8,10 +11,11 @@ New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
 
 cities_list = City.get_all_cities()
-#print(cities_list)
 
 
 class Game:
+
+    robber_types = ['MUSEUM', 'BANK', 'NORM', 'GROUPIE']
 
     def __init__(self):
 
@@ -28,6 +32,9 @@ class Game:
         self.is_item_stolen = False
         self.coins_stolen = 0
 
+        # robber type
+        self.robber_type = random.choice(Game.robber_types)
+
     def __calculate_skill_level(self):
         # skill level - based on number of invalid guesses. The more invalid guesses, the higher the skill of the
         # robber gets.
@@ -42,45 +49,97 @@ class Game:
         self.do_robber_turn()
 
         if city_chosen_by_player == self.current_robber_location:
-            # It is a correct guess
+            # It is a correct guess - the robber moved to what you chose!
+            return True, self.skill_level
 
-            pass
         else:
             # It is a wrong guess
 
-            # increasing robber skill
+            # increase robber skill
             self.number_of_invalid_guesses += 1
             self.__calculate_skill_level()
 
+            return False, self.skill_level
+
     def do_robber_turn(self):
-        # calculating robbers new attributes based on skill level and make move
-        self.robber_health -= random.randint(int((10 - self.skill_level) * 3), int((11 - self.skill_level) * 3))
-        self.coins_stolen = random.randint(int(self.skill_level * 1000), int(self.skill_level * 2500))
-        self.total_coins_stolen += self.coins_stolen
+        # calculating robbers new attributes based on skill level
+        change_robber_health = random.randint(int((10 - self.skill_level) * 3), int((11 - self.skill_level) * 3))
+        coins_change = random.randint(int(self.skill_level * 1000), int(self.skill_level * 2500))
+
         # selling previously stolen item
-        if self.stolen_item:
-            self.total_coins_stolen += random.randint(5000, 10000)
-        chance = random.choice([0, 0, 1])
-        if chance and self.last_seen_city.has_artefacts:
-            self.stolen_item = random.choice(self.last_seen_city.artefacts)
-        else:
+        if self.is_item_stolen:
+            self.is_item_stolen = False  # reset: it is now sold.
             self.stolen_item = None
+            # selling price 5000-10000
+            coins_change += random.randint(5000, 10000)
 
-        # hospital case
-        choices = cities_list[:]
-        if self.robber_health < 60:
-            temp = choices[:]
-            for i in temp:
-                if not i.is_hospital_present:
-                    choices.remove(i)
-        if self.stolen_item:
-            temp = choices[:]
-            for i in temp:
-                if not i.is_blackmarket_present:
-                    choices.remove(i)
+        # stealing item chance = 25%
+        chance = random.choice([0, 0, 0, 1])
+        if chance and self.current_robber_location.has_artefacts:  # can steal
+            # steal a random item
+            self.stolen_item = random.choice(self.current_robber_location.artefacts)
+            self.is_item_stolen = True
+        else:
+            # can't steal
+            self.stolen_item = None
+            self.is_item_stolen = False
 
-        choices.sort(key=lambda x: x.bank_count)
+        # make move based on attributes
+        choices = cities_list[:]  # all the available choices
 
+        # health case - HIGHEST PRIORITY
+        if self.robber_health < 60:  # if health < 60, then **must** go to the hospital city
+            choices_for_hosp = set([i for i in choices if i.is_hospital_present is True])
+        else:
+            choices_for_hosp = set()
 
-# changing robber values based on difficulty ((number of chances**1.4/20**1.4) * 10)
+        # if item stolen, then go to blackmarket
+        if self.is_item_stolen:
+            choices_for_blckmrkt = set([i for i in choices if i.is_blackmarket_present is True])
+        else:
+            choices_for_blckmrkt = set()
 
+        intersect_of_above = choices_for_blckmrkt.intersection(choices_for_hosp)
+        if intersect_of_above == set():
+            # no choice based on black market and hospital, prioritize hospital
+            if choices_for_hosp != set():
+                next_move = sorted(list(choices_for_hosp), key=lambda x: x.per_capita_income_norm)
+            else:
+                # no hosp, prioritize blackmarket
+                if choices_for_blckmrkt != set():
+                    next_move = sorted(list(choices_for_blckmrkt), key=lambda x: x.per_capita_income_norm)
+                else:
+                    # no hosp, no blackmarket required, just go based on high Museum if Robber is MUSEUM, or PCI if
+                    # robber is normal, or BANK if robber is bank.
+                    if self.robber_type == "MUSEUM":  # likes high museum count
+                        sort_on_museum = sorted(choices, key=lambda x: x.museum_norm)
+                        next_move = sort_on_museum[0]
+                    elif self.robber_type == "BANK":  # likes high bank count
+                        sort_on_bank = sorted(choices, key=lambda x: x.bank_norm)
+                        next_move = sort_on_bank[0]
+                    elif self.robber_type == "GROUPIE":  # likes high crime rate
+                        sort_on_crime_rate = sorted(choices, key=lambda x: x.crime_rate_norm)
+                        next_move = sort_on_crime_rate[0]
+                    elif self.robber_type == "NORM":  # likes high PCI/ doesnt care
+                        sort_on_pci = sorted(choices, key=lambda x: x.per_capita_income_norm)
+                        chance = random.choice([0, 0, 0, 0, 0, 0, 1])
+                        if not chance:
+                            # pci chance
+                            next_move = sort_on_pci[0]
+                        else:
+                            # doesnt care
+                            next_move = random.choice(choices)
+                    else:
+                        # this connect happen, unreachable code.
+                        return False
+        else:
+            # blackmrkt and hospital can be chosen together
+            next_move = sorted(list(intersect_of_above), key=lambda x: x.per_capita_income_norm)
+
+        # CHANGE VARIABLES BASED ON MOVE
+        self.last_seen_city = self.current_robber_location
+        self.current_robber_location = next_move
+        self.robber_health -= change_robber_health
+        self.coins_stolen = coins_change
+        self.total_coins_stolen += self.coins_stolen
+        return True
