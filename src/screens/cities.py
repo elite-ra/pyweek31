@@ -2,7 +2,7 @@
 # Author: Ayush Gupta
 
 import pygame
-from main_logic import Giza, Agra, Paris, Rome, New_York
+from utils.models import City
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -10,7 +10,11 @@ screen = pygame.display.set_mode((800, 600))
 city_coords = [[(0, 0), (52, 20)], [(50, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
                [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
 
-cities_list = [Giza, Agra, Paris, Rome, New_York]
+
+import main_logic  # so that main_logic is run and the cities are defined (we can remove once we actually make the
+# whole thing run together)
+cities_list = City.get_all_cities()
+print(cities_list)
 
 coin_limit = 50000
 
@@ -42,7 +46,7 @@ while running:
     pygame.draw.rect(screen, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
     pygame.draw.rect(screen, (255, 215, 0), pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-    for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities, city_coords):
+    for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
         pygame.draw.rect(screen, (0, 0, 0), i, 2)
         city_name(a.name, b[0][0] + 2, b[0][1] + 2, 18)
         if pygame.mouse.get_pressed()[0]:

@@ -17,6 +17,13 @@ import typing
 
 
 class City:
+
+    __all_cities = []
+
+    @classmethod
+    def get_all_cities(cls):
+        return cls.__all_cities
+
     def __init__(self, name: str, bank_count: int, is_hospital_present: bool,
                  per_capita_income: int, museum_count: int, crime_rate: float,
                  is_blackmarket_present: bool, artefacts: typing.Union[list, None]):
@@ -40,6 +47,8 @@ class City:
         self.is_blackmarket_present = is_blackmarket_present
 
         self.artefacts = artefacts
+
+        City.__all_cities.append(self)
 
     def __convert_bank_count(self):
         if self.bank_count <= 2:
