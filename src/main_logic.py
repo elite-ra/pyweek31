@@ -8,7 +8,7 @@ New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
 
 cities_list = City.get_all_cities()
-print(cities_list)
+#print(cities_list)
 
 
 class Game:
