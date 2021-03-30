@@ -9,7 +9,8 @@ if __name__ == "__main__":
     sys.exit()
 
 import pygame
+from .screens import home_screen
 
 
 def play_game():
-    pass
+    home_screen.home_screen()

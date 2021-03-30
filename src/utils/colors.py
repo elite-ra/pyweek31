@@ -2,3 +2,7 @@
 # Author: Pranjal Rastogi
 
 # TODO: fill with colors!
+WHITE_COLOR = (255, 255, 255)
+BLACK_COLOR = (0, 0, 0)
+GREY_COLOR = (200, 200, 200)
+BROWN_COLOR = (150, 80, 30)

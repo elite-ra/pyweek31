@@ -1,5 +1,5 @@
 import random
-from utils.models import City
+from .utils.models import City
 
 Giza = City('Giza', 3, False, 40000, 20, 83, True, ['sarcophagus', 'gold slipper'])
 Agra = City('Agra', 10, False, 530000, 18, 37, False, ['mughal artefact'])
