@@ -42,7 +42,7 @@ while running:
     pygame.draw.rect(screen, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
     pygame.draw.rect(screen, (255, 215, 0), pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-    for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities, city_coords):
+    for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
         pygame.draw.rect(screen, (0, 0, 0), i, 2)
         city_name(a.name, b[0][0] + 2, b[0][1] + 2, 18)
         if pygame.mouse.get_pressed()[0]:
