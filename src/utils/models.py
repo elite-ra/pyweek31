@@ -127,7 +127,7 @@ class City:
         else:
             self.per_capita_income_norm = 10
 
-    def __repr__(self):
+    def __str__(self):
 
         pci_str = "{:,}".format(self.per_capita_income)
         hosp_str = "Not "*(not self.is_hospital_present) + "Present"
@@ -144,6 +144,10 @@ class City:
             f"- Black market:{(30-len(blckmrkt_str))*' '}{blckmrkt_str}\n"
 
         return s
+
+    def __repr__(self):
+
+        return f'<utils.models.City({self.name}, {self.bank_count, self.is_hospital_present, self.per_capita_income, self.museum_count, self.crime_rate, self.is_blackmarket_present, self.artefacts})>'
 
     def has_artefacts(self):
         if self.artefacts is None:
