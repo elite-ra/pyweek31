@@ -11,11 +11,11 @@ class Database:
     def __init__(self):
         print("Database initialization.")
         self.user_store_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'user_store.json'))
-        self.player = map(models.Player, self.user_store_db)
+        self.player = models.Player(self.user_store_db)
 
         self.const_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'const_db.json'))
 
-        self.all_moves = map(models.FightMove, self.const_db['ALL_MOVES'])
+        self.all_moves = [models.FightMove(move) for move in self.const_db['ALL_MOVES']]
 
         self.settings_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'settings.json'))
 
@@ -58,4 +58,5 @@ def store_json(fp, json_dict):
 
 
 def validate_databases_and_settings():
+    # TODO: add validation system
     pass

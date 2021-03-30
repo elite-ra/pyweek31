@@ -14,6 +14,7 @@
 # 10: bank_count 26+   | per_capita_income 10000001-25000000 | crime_rate 96-99% |
 
 import typing
+from . import constants as consts
 
 
 class City:
@@ -132,10 +133,11 @@ class City:
         pci_str = "{:,}".format(self.per_capita_income)
         hosp_str = "Not "*(not self.is_hospital_present) + "Present"
 
-        if self.is_blackmarket_present is not None:
+        if consts.DB.player.has_informant:
             blckmrkt_str = "Not "*(not self.is_blackmarket_present) + "Present"
         else:
             blckmrkt_str = "???"
+
         s = f"- No. of banks:{(30-len(str(self.bank_count)))*' '}{self.bank_count}\n" \
             f"- No. of museums:{(28-len(str(self.museum_count)))*' '}{self.museum_count}\n" \
             f"- Crime rate:{(31-len(str(self.crime_rate)))*' '}{self.crime_rate}%\n" \
@@ -157,23 +159,25 @@ class City:
 
 
 class FightMove:
-    def __init__(self, name, description, damage, percentage_damage, can_backfire, accuracy, price):
-        self.name = name
-        self.description = description
+    def __init__(self, d):
+        print(d)
 
-        self.damage = damage
+        self.name = d['name']
+        self.description = d['description']
+
+        self.damage = d['damage']
         if self.damage is None:
             self.is_percentage_based = True
-            self.percentage_damage = percentage_damage
+            self.percentage_damage = d['percent_damage']
 
-        self.percentage_damage = percentage_damage
+        self.percentage_damage = d['percent_damage']
         if self.percentage_damage is None:
             self.is_percentage_based = False
-            self.damage = damage
+            self.damage = d['damage']
 
-        self.can_backfire = can_backfire
-        self.accuracy = accuracy
-        self.price = price
+        self.can_backfire = d['can_backfire']
+        self.accuracy = d['accuracy']
+        self.price = d['price']
         if self.price == 0:
             self.is_intial = False
         else:
@@ -182,6 +186,8 @@ class FightMove:
 
 class Player:
     def __init__(self, user_store_db):
+        print(user_store_db)
+
         self.has_reached_fight = user_store_db['HAS_REACHED_FIGHT_ONCE']
         self.has_reached_chase = user_store_db['HAS_REACHED_CHASE_ONCE']
         self.has_informant = user_store_db['HAS_INFORMANT']

@@ -3,9 +3,7 @@
   "HAS_REACHED_CHASE_ONCE": false,
   "HAS_INFORMANT": false,
   "STORE": {
-    "MOVES": {
-      "SELECTED":  [],
-      "BOUGHT_BUT_UNUSED": []
-    }
+    "SELECTED":  [],
+    "BOUGHT_BUT_UNUSED": []
   }
 }
