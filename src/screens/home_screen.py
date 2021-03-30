@@ -11,6 +11,7 @@ from ..utils import colors
 pygame.init()
 
 
+# temporary home screen
 def home_screen():
     city_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                                (consts.SCREEN_HEIGHT / 2) + 100),
