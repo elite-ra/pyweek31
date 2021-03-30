@@ -15,4 +15,7 @@ SCREEN_TITLE = ""
 TICK_RATE = 60
 CLOCK = pygame.time.Clock()
 
-# TODO: add display here, with FIXED screen resolution!
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+MAIN_DISPLAY = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+# TODO: load fonts

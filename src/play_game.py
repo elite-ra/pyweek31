@@ -3,11 +3,14 @@
 
 import sys
 
+
 if __name__ == "__main__":
     print("\n\nDo not run this file!\nRun main.py instead!\n\n")
     sys.exit()
 
 import pygame
+from .screens import home_screen
+
 
 def play_game():
-    pass
+    home_screen.home_screen()

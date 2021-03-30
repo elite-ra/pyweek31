@@ -11,5 +11,5 @@ if sys.version_info[:2] < MIN_VER:
     )
 
 # run game
-import play_game
+from src import play_game
 play_game.play_game()
