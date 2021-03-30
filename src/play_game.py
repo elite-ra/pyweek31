@@ -3,11 +3,13 @@
 
 import sys
 
+
 if __name__ == "__main__":
     print("\n\nDo not run this file!\nRun main.py instead!\n\n")
     sys.exit()
 
 import pygame
+
 
 def play_game():
     pass

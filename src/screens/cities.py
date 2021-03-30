@@ -2,7 +2,8 @@
 # Author: Ayush Gupta
 
 import pygame
-from utils.models import City
+
+from ..utils import models
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -13,7 +14,7 @@ city_coords = [[(0, 0), (52, 20)], [(50, 50), (52, 20)], [(130, 60), (52, 20)], 
 
 import main_logic  # so that main_logic is run and the cities are defined (we can remove once we actually make the
 # whole thing run together)
-cities_list = City.get_all_cities()
+cities_list = models.City.get_all_cities()
 #print(cities_list)
 
 coin_limit = 50000
