@@ -24,6 +24,14 @@ class City:
     def get_all_cities(cls):
         return cls.__all_cities
 
+    @classmethod
+    def get_city_from_name(cls, name):
+        for city in cls.__all_cities:
+            if city.name == name:
+                return city
+        else:
+            return None
+
     def __init__(self, name: str, bank_count: int, is_hospital_present: bool,
                  per_capita_income: int, museum_count: int, crime_rate: float,
                  is_blackmarket_present: bool, artefacts: typing.Union[list, None]):
