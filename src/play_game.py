@@ -10,7 +10,6 @@ if __name__ == "__main__":
 from .screens import home_screen
 from .utils import constants
 from .utils import database
-import yaml
 import os
 
 

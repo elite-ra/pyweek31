@@ -9,13 +9,15 @@ import os
 
 class Database:
     def __init__(self):
-
+        print("Database initialization.")
         self.user_store_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'user_store.json'))
         self.player = map(models.Player, self.user_store_db)
 
         self.const_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'const_db.json'))
 
         self.all_moves = map(models.FightMove, self.const_db['ALL_MOVES'])
+
+        self.settings_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'settings.json'))
 
     def get_all_moves(self):
         return self.all_moves
@@ -35,6 +37,13 @@ class Database:
         self.user_store_db = d
         self.player = player
         store_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'user_store.json'), self.user_store_db)
+
+    def get_settings(self):
+        return self.settings_db
+
+    def set_settings(self, new_settings):
+        self.settings_db = new_settings
+        store_json(os.path.join(consts.ROOT_PATH, 'settings.json'), self.settings_db)
 
 
 def read_json(fp):
