@@ -16,10 +16,16 @@ def play():
     robber_X = 700
     robber_Y = 200
 
-    bird = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'seagull.png'))
-    bird_X = 600
-    bird_Y = random.randint(0, 350)
-    bird_change = 2
+    n = 5
+    bird = []
+    bird_X = []
+    bird_Y = []
+    bird_change = []
+    for i in range(n):
+        bird.append(pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'seagull.png')))
+        bird_X.append(random.randint(500,600))
+        bird_Y.append(random.randint(0, 350))
+        bird_change.append(2)
 
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
@@ -27,8 +33,8 @@ def play():
     def robber_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(robber, (x, y))
 
-    def bird_game(x, y):
-        utils.constants.MAIN_DISPLAY.blit(bird, (x, y))
+    def bird_game(x, y,i):
+        utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
 
     def is_collision(heli_x, heli_y, bird_x, bird_y):
         if bird_x in range(heli_x - 10, heli_x + 100) and bird_y in range(heli_y, heli_y + 90): 
@@ -62,20 +68,23 @@ def play():
         heli_Y += heli_change
         if heli_Y >= 350:
             heli_Y = 350
-        if heli_Y <= 0:
-            heli_Y = 0
+        if heli_Y <= -27:
+            heli_Y = -27
         
-        if bird_X <= 0:
-            bird_X = 600
-        bird_X -= bird_change
+        for i in range(n):
+            if bird_X[i] <= 0:
+                bird_X[i] = random.randint(500,600)
+                bird_Y[i] = random.randint(0,350)
+            bird_X[i] -= bird_change[i]
 
-        collision = is_collision(heli_X, heli_Y, bird_X, bird_Y)
-        if collision:
-            game_over_text()
+            collision = is_collision(heli_X, heli_Y, bird_X[i], bird_Y[i])
+            if collision:
+                game_over_text()
+
+            bird_game(bird_X[i],bird_Y[i],i)
 
         heli_game(heli_X, heli_Y)
         robber_game(robber_X, robber_Y)
-        bird_game(bird_X, bird_Y)
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
