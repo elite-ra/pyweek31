@@ -16,8 +16,8 @@ def play():
 
     coin_limit = 50000
 
-    def city_name(name, x, y, size):
-        font = pygame.font.SysFont("monospace", size)
+    def city_name(name, x, y):
+        font = utils.constants.FONT_MONO_MEDIUM
         text = font.render(name, True, (0, 0, 0))
         utils.constants.MAIN_DISPLAY.blit(text, (x, y))
 
@@ -34,7 +34,7 @@ def play():
 
         # Coins stolen
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(100, 550, 600, 50))
-        font = pygame.font.SysFont("monospace", 15)
+        font = utils.constants.FONT_MONO_SMALL
         current_coins = 25000
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
         w = text.get_rect().width
@@ -46,7 +46,7 @@ def play():
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
-            city_name(a.name, b[0][0] + 2, b[0][1] + 2, 30)
+            city_name(a.name, b[0][0] + 2, b[0][1] + 2)
             if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
@@ -69,12 +69,12 @@ def play():
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect((150, 200), (500, 200)))
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect((150, 200), (500, 200)), 2)
-            font = pygame.font.SysFont("monospace", 30)
+            font = utils.constants.FONT_MONO_LARGE
             text = font.render(stats_showing.name, True, (0, 0, 0))
             w = text.get_rect().width
             utils.constants.MAIN_DISPLAY.blit(text, (150 + (500 - w) / 2, 205))
 
-            font = pygame.font.SysFont("monospace", 15)
+            font = utils.constants.FONT_MONO_SMALL
             temp = 0
             for condition in str(stats_showing).split('\n'):
                 text = font.render(condition, True, (0, 0, 0))
@@ -83,7 +83,7 @@ def play():
 
             # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect((446, 480), (54, 20)))
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect((620, 200), (30, 30)), 1)
-            font = pygame.font.SysFont("monospace", 25)
+            font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('X', True, (255, 0, 0))
             utils.constants.MAIN_DISPLAY.blit(text, (627, 202))
 
