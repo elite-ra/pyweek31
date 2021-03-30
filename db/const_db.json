@@ -1,52 +1,58 @@
 {
   "ALL_MOVES": [
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
-      "damage": null,
-      "percent_damage": 20.0,
+      "name": "Kick",
+      "description": "Normal kick, does 15 damage",
+      "damage": 15,
+      "percent_damage": null,
       "can_backfire": false,
-      "accuracy": 100.0
+      "accuracy": 100.0,
+      "price": 0
     },
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
-      "damage": null,
-      "percent_damage": 20.0,
+      "name": "Punch",
+      "description": "A good ol' punch, does 10 damage",
+      "damage": 10,
+      "percent_damage": null,
       "can_backfire": false,
-      "accuracy": 100.0
+      "accuracy": 100.0,
+      "price": 0
     },
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
-      "damage": null,
-      "percent_damage": 20.0,
+      "name": "Gunshot",
+      "description": "A shot that does 30 damage. But, you miss 10% of the time.",
+      "damage": 30,
+      "percent_damage": null,
       "can_backfire": false,
-      "accuracy": 100.0
+      "accuracy": 90.0,
+      "price": 0
     },
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "name": "Super Mega Smash",
+      "description": "Does 50% damage, but it can backfire!",
       "damage": null,
-      "percent_damage": 20.0,
-      "can_backfire": false,
-      "accuracy": 100.0
+      "percent_damage": 50.0,
+      "can_backfire": true,
+      "accuracy": 100.0,
+      "price": 0
     },
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "name": "Stare",
+      "description": "Does 25 damage, lethal.",
       "damage": null,
       "percent_damage": 20.0,
       "can_backfire": false,
-      "accuracy": 100.0
+      "accuracy": 100.0,
+      "price": 0
     },
     {
-      "name": "NAME",
-      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "name": "The huge missile.",
+      "description": "Does 85% damage. But it may never hit!",
       "damage": null,
-      "percent_damage": 20.0,
+      "percent_damage": 85.0,
       "can_backfire": false,
-      "accuracy": 100.0
+      "accuracy": 40.0,
+      "price": 0
     }
   ]
 }
