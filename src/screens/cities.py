@@ -66,7 +66,7 @@ def play():
                     do_chase, skill_level = game_obj.play_turn(a)
                     print(do_chase, skill_level)
                     if do_chase:
-                        chase.play()
+                        return chase.play()
                     else:
                         # TODO: lost msg
                         print("NO! HAHHAHA SAD!")
