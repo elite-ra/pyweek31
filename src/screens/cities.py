@@ -4,6 +4,8 @@
 import pygame
 
 from .. import utils
+from ..main_logic import Game
+from . import chase
 
 import os
 
@@ -22,6 +24,8 @@ def play():
         utils.constants.MAIN_DISPLAY.blit(text, (x, y))
 
     stats_showing = False
+
+    game_obj = Game()
 
     running = True
     while running:
@@ -43,7 +47,6 @@ def play():
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
@@ -60,7 +63,13 @@ def play():
                 if i.collidepoint(x, y):
                     # 'a' is the city name and this condition means that there was a right click on the city name
                     # Change scene to chase
-                    pass
+                    do_chase, skill_level = game_obj.play_turn(a)
+                    print(do_chase, skill_level)
+                    if do_chase:
+                        chase.play()
+                    else:
+                        # TODO: lost msg
+                        print("NO! HAHHAHA SAD!")
 
         if stats_showing:
             s = pygame.Surface((1000, 750))  # the size of your rect

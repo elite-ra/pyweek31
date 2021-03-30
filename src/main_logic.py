@@ -3,6 +3,7 @@
 
 import random
 from .utils.models import City
+from .utils import constants as consts
 
 Giza = City('Giza', 3, False, 40000, 20, 37, True, ['sarcophagus', 'gold slipper'])
 Agra = City('Agra', 10, False, 530000, 18, 83, False, ['mughal artefact'])
@@ -11,7 +12,6 @@ New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
 
 cities_list = City.get_all_cities()
-
 
 class Game:
 
@@ -149,3 +149,9 @@ class Game:
         self.coins_stolen = coins_change
         self.total_coins_stolen += self.coins_stolen
         return True
+
+    def __str__(self):
+        s = f"- Robber Health:{(30 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
+            f"- Last Seen City:{(28 - len(str(self.last_seen_city))) * ' '}{self.last_seen_city}\n" \
+            f"- Stolen Item:{(24 - len(self.stolen_item)) * ' '}{self.stolen_item}\n"
+        return s
