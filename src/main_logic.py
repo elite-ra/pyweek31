@@ -15,7 +15,7 @@ cities_list = City.get_all_cities()
 
 class Game:
 
-    robber_types = ['MUSEUM', 'BANK', 'NORM', 'GROUPIE']
+    robber_types = ['MUSEUM', 'BANK', 'NORM', 'GROUP_PERSON']
 
     def __init__(self):
 
@@ -117,7 +117,7 @@ class Game:
                     elif self.robber_type == "BANK":  # likes high bank count
                         sort_on_bank = sorted(choices, key=lambda x: x.bank_norm)
                         next_move = sort_on_bank[0]
-                    elif self.robber_type == "GROUPIE":  # likes high crime rate
+                    elif self.robber_type == "GROUP_PERSON":  # likes high crime rate
                         sort_on_crime_rate = sorted(choices, key=lambda x: x.crime_rate_norm)
                         next_move = sort_on_crime_rate[0]
                     elif self.robber_type == "NORM":  # likes high PCI/ doesnt care
