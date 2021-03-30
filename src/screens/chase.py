@@ -19,7 +19,7 @@ def play():
     bird = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'seagull.png'))
     bird_X = 600
     bird_Y = random.randint(0, 350)
-    bird_change = 1
+    bird_change = 2
 
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
@@ -31,8 +31,7 @@ def play():
         utils.constants.MAIN_DISPLAY.blit(bird, (x, y))
 
     def is_collision(heli_x, heli_y, bird_x, bird_y):
-        d = math.sqrt(math.pow(heli_x - bird_x, 2) + math.pow(heli_y - bird_y, 2))
-        if d <= 100:
+        if bird_x in range(heli_x - 10, heli_x + 100) and bird_y in range(heli_y, heli_y + 90): 
             return True
         else:
             return False
@@ -50,9 +49,9 @@ def play():
                 status = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    heli_change = -1.5
+                    heli_change = -3
                 if event.key == pygame.K_s:
-                    heli_change = 1.5
+                    heli_change = 3
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or pygame.K_s:
@@ -65,7 +64,9 @@ def play():
             heli_Y = 350
         if heli_Y <= 0:
             heli_Y = 0
-
+        
+        if bird_X <= 0:
+            bird_X = 600
         bird_X -= bird_change
 
         collision = is_collision(heli_X, heli_Y, bird_X, bird_Y)
@@ -78,4 +79,3 @@ def play():
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
-
