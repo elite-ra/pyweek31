@@ -1,0 +1,12 @@
+{
+  "HAS_REACHED_FIGHT_ONCE": false,
+  "HAS_REACHED_CHASE_ONCE": false,
+  "HAS_INFORMANT": false,
+  "STORE": {
+    "INFORMANT": false,
+    "MOVES": {
+      "SELECTED":  [],
+      "ALL_BOUGHT": []
+    }
+  }
+}
