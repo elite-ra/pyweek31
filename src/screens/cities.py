@@ -5,10 +5,14 @@ import pygame
 
 from .. import utils
 
+import os
+
 
 def play():
     city_coords = [[(0, 0), (52, 20)], [(50, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
                    [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
+
+    shop_image = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'shop.png'))
 
     cities_list = utils.models.City.get_all_cities()
 
@@ -30,15 +34,26 @@ def play():
             if event.type == pygame.QUIT:
                 running = False
 
+        # Coins stolen
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(100, 550, 600, 50))
         font = pygame.font.SysFont("monospace", 15)
         current_coins = 25000
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, (100 + (600 - w) / 2, 555))
-
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0), pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
+        
+        # in game shop
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(763, 98, 37, 39))
+        utils.constants.MAIN_DISPLAY.blit(shop_image, (765, 100))
+        if pygame.mouse.get_pressed()[0]:
+            x = pygame.mouse.get_pos()[0]
+            y = pygame.mouse.get_pos()[1]
+            if pygame.Rect(763, 98, 37, 39).collidepoint(x, y):
+                # open shop
+                print('shop')
+                pass
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
