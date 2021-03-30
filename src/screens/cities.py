@@ -11,7 +11,7 @@ import os
 
 
 def play():
-    city_coords = [[(0, 0), (52, 20)], [(50, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
+    city_coords = [[(150, 0), (52, 20)], [(200, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
                    [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
 
     cities_list = utils.models.City.get_all_cities()
@@ -46,6 +46,21 @@ def play():
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
+
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 90))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 86), 1)
+        font = utils.constants.FONT_MONO_MEDIUM
+        text = font.render('Robber Stats', True, (255, 255, 255))
+        w = text.get_rect().width
+        utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2, 5))
+        random_string = str(game_obj)
+        temp = 0
+        for i in random_string.split('\n'):
+            text = font.render(i, True, (0, 0, 0))
+            utils.constants.MAIN_DISPLAY.blit(text, (30, 10 + temp * 20))
+            temp += 1
+        
+
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
