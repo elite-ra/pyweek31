@@ -6,7 +6,7 @@
     "INFORMANT": false,
     "MOVES": {
       "SELECTED":  [],
-      "ALL_BOUGHT": []
+      "BOUGHT_BUT_UNUSED": []
     }
   }
 }

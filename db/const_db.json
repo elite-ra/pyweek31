@@ -1,0 +1,52 @@
+{
+  "ALL_MOVES": [
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    },
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    },
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    },
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    },
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    },
+    {
+      "name": "NAME",
+      "description": "Does 20% damage, has a 100% accuracy, and doesn't backfire.",
+      "damage": null,
+      "percent_damage": 20.0,
+      "can_backfire": false,
+      "accuracy": 100.0
+    }
+  ]
+}
