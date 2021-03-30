@@ -1,0 +1,10 @@
+{
+  "KEY_BINDS": {
+    "CHASE_UP": "W",
+    "CHASE_DOWN": "S"
+  },
+  "SOUND": {
+    "EFFECTS": 100,
+    "MUSIC": 80
+  }
+}
