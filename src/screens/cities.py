@@ -46,7 +46,7 @@ def play():
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
-            city_name(a.name, b[0][0] + 2, b[0][1] + 2, 18)
+            city_name(a.name, b[0][0] + 2, b[0][1] + 2, 30)
             if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
