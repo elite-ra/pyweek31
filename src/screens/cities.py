@@ -19,6 +19,8 @@ def play():
 
     coin_limit = 50000
 
+    mouse_pressed = False
+
     def city_name(name, x, y):
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render(name, True, (0, 0, 0))
@@ -75,15 +77,19 @@ def play():
             if pygame.mouse.get_pressed()[2]:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
-                if i.collidepoint(x, y):
+                if i.collidepoint(x, y) and not mouse_pressed:
                     # 'a' is the city name and this condition means that there was a right click on the city name
                     # Change scene to chase
                     do_chase, skill_level = game_obj.play_turn(a)
                     print(do_chase, skill_level)
+                    mouse_pressed = True
                     if do_chase:
                         return chase.play()
                     else:
+                        pass
                         # TODO: show error msg and disable guessing for a while
+            else:
+                mouse_pressed = False
                         
 
         if stats_showing:
