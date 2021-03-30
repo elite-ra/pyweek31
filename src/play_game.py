@@ -1,16 +1,19 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
-import sys
-
-
 if __name__ == "__main__":
+    import sys
     print("\n\nDo not run this file!\nRun main.py instead!\n\n")
     sys.exit()
 
-import pygame
+
 from .screens import home_screen
+from .utils import constants
+from .utils import database
+import yaml
+import os
 
 
 def play_game():
+    database.validate_databases_and_settings()
     home_screen.home_screen()
