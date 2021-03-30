@@ -9,6 +9,7 @@ from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
 from .. import utils
+from ..utils import database
 
 pygame.init()
 
@@ -16,6 +17,7 @@ pygame.init()
 # settings screen
 def play():
     utils.constants.MAIN_DISPLAY.fill((0, 255, 255))
+    utils.constants.DB.get_settings()
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
     is_game_over = False
     while not is_game_over:

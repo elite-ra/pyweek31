@@ -154,3 +154,50 @@ class City:
             return False
         else:
             return True
+
+
+class FightMove:
+    def __init__(self, name, description, damage, percentage_damage, can_backfire, accuracy, price):
+        self.name = name
+        self.description = description
+
+        self.damage = damage
+        if self.damage is None:
+            self.is_percentage_based = True
+            self.percentage_damage = percentage_damage
+
+        self.percentage_damage = percentage_damage
+        if self.percentage_damage is None:
+            self.is_percentage_based = False
+            self.damage = damage
+
+        self.can_backfire = can_backfire
+        self.accuracy = accuracy
+        self.price = price
+        if self.price == 0:
+            self.is_intial = False
+        else:
+            self.is_intial = True
+
+
+class Player:
+    def __init__(self, user_store_db):
+        self.has_reached_fight = user_store_db['HAS_REACHED_FIGHT_ONCE']
+        self.has_reached_chase = user_store_db['HAS_REACHED_CHASE_ONCE']
+        self.has_informant = user_store_db['HAS_INFORMANT']
+        self.selected_moves = user_store_db['STORE']['SELECTED']
+        self.bought_moves = user_store_db['STORE']['BOUGHT_BUT_UNUSED']
+
+    def to_dict(self):
+        d = {
+                'HAS_REACHED_FIGHT_ONCE': self.has_reached_fight,
+                'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
+                'HAS_INFORMANT': self.has_informant,
+                'STORE': {
+                    "SELECTED": self.selected_moves,
+                    "BOUGHT_BUT_UNUSED": self.bought_moves
+                }
+            }
+
+        return d
+
