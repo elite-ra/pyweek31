@@ -87,18 +87,45 @@ def play():
                     # 'a' is the city name and this condition means that there was a right click on the city name
                     # Change scene to chase
                     do_chase, skill_level = game_obj.play_turn(a)
-                    print(do_chase, skill_level, game_obj.current_robber_location.name)
+                    #print(do_chase, skill_level, game_obj.current_robber_location.name)
                     mouse_pressed = True
                     if do_chase:
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.set_alpha(240)  # alpha level
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        font = utils.constants.FONT_MONO_VERY_LARGE
+                        text = font.render('You found the robber!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
+                        font = utils.constants.FONT_MONO_MEDIUM
+                        text = font.render('The robber is trying to run away.', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 300))
+                        font = utils.constants.FONT_MONO_MEDIUM
+                        text = font.render('Chase him till his fuel runs out!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
+                        pygame.display.update()
+                        pygame.time.wait(5000)
                         return chase.play(skill_level)
+
                     else:
-                        pass
-                        # TODO: show error msg and disable guessing for a while
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.set_alpha(240)  # alpha level
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        font = utils.constants.FONT_MONO_VERY_LARGE
+                        text = font.render('You guessed wrong!!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (200, 200))
+                        text = font.render('Try again', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (300, 300))
+                        pygame.display.update()
+                        pygame.time.wait(1000)
+
+
             else:
                 mouse_pressed = False
 
         if stats_showing:
-            s = pygame.Surface((1000, 750))  # the size of your rect
+            s = pygame.Surface((800, 600))  # the size of your rect
             s.set_alpha(128)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates

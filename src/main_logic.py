@@ -80,10 +80,10 @@ class Game:
             choices_for_hosp = set()
 
         # if item stolen, then go to blackmarket
-        print(self.is_item_stolen)
+        # print(self.is_item_stolen)
         if self.is_item_stolen:
             choices_for_blckmrkt = set([i for i in choices if i.is_blackmarket_present is True])
-            print([i.name for i in choices_for_blckmrkt])
+            # print([i.name for i in choices_for_blckmrkt])
             if self.current_robber_location in choices_for_blckmrkt:
                 choices_for_blckmrkt.remove(self.current_robber_location)
         else:
@@ -140,18 +140,18 @@ class Game:
         # CHANGE VARIABLES BASED ON MOVE
         self.last_seen_city = self.current_robber_location
         self.current_robber_location = next_move
-        print("====")
-        print(self.current_robber_location.name)
+        #print("====")
+        #print(self.current_robber_location.name)
 
         self.robber_health -= change_robber_health
         self.coins_stolen = coins_change
         self.total_coins_stolen += self.coins_stolen
         # selling previously stolen item
-        print(self.is_item_stolen)
-        print(self.stolen_item)
-        print(self.last_seen_city)
+        #print(self.is_item_stolen)
+        #print(self.stolen_item)
+        #print(self.last_seen_city)
         if self.is_item_stolen and self.current_robber_location.is_blackmarket_present:
-            print("SELLING")
+            #print("SELLING")
             self.is_item_stolen = False  # reset: it is now sold.
             self.stolen_item = None
             # selling price 5000-10000
