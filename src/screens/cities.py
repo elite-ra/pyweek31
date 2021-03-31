@@ -80,7 +80,7 @@ def play():
                     stats_showing = a
                 if pygame.Rect((620, 200), (30, 30)).collidepoint(x, y) and stats_showing:
                     stats_showing = False
-            if pygame.mouse.get_pressed()[2]:
+            if pygame.mouse.get_pressed()[2] and not stats_showing:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if i.collidepoint(x, y) and not mouse_pressed:
