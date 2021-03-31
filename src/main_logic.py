@@ -95,16 +95,22 @@ class Game:
         # health case - HIGHEST PRIORITY
         if self.robber_health < 60:  # if health < 60, then **must** go to the hospital city
             choices_for_hosp = set([i for i in choices if i.is_hospital_present is True])
+            if self.current_robber_location in choices_for_hosp:
+                choices_for_hosp.remove(self.current_robber_location)
         else:
             choices_for_hosp = set()
 
         # if item stolen, then go to blackmarket
         if self.is_item_stolen:
             choices_for_blckmrkt = set([i for i in choices if i.is_blackmarket_present is True])
+            if self.current_robber_location in choices_for_blckmrkt:
+                choices_for_blckmrkt.remove(self.current_robber_location)
         else:
             choices_for_blckmrkt = set()
 
         intersect_of_above = choices_for_blckmrkt.intersection(choices_for_hosp)
+        if self.current_robber_location in intersect_of_above:
+            intersect_of_above.remove(self.current_robber_location)
         if intersect_of_above == set():
             # no choice based on black market and hospital, prioritize hospital
             if choices_for_hosp != set():
@@ -119,15 +125,23 @@ class Game:
                     # robber is normal, or BANK if robber is bank.
                     if self.robber_type == "MUSEUM":  # likes high museum count
                         sort_on_museum = sorted(choices, key=lambda x: x.museum_norm)
+                        if self.current_robber_location in sort_on_museum:
+                            sort_on_museum.remove(self.current_robber_location)
                         next_move = sort_on_museum[-1]
                     elif self.robber_type == "BANK":  # likes high bank count
                         sort_on_bank = sorted(choices, key=lambda x: x.bank_norm)
+                        if self.current_robber_location in sort_on_bank:
+                            sort_on_bank.remove(self.current_robber_location)
                         next_move = sort_on_bank[-1]
                     elif self.robber_type == "GROUP_PERSON":  # likes high crime rate
                         sort_on_crime_rate = sorted(choices, key=lambda x: x.crime_rate_norm)
+                        if self.current_robber_location in sort_on_crime_rate:
+                            sort_on_crime_rate.remove(self.current_robber_location)
                         next_move = sort_on_crime_rate[-1]
                     elif self.robber_type == "NORM":  # likes high PCI/ doesnt care
                         sort_on_pci = sorted(choices, key=lambda x: x.per_capita_income_norm)
+                        if self.current_robber_location in sort_on_pci:
+                            sort_on_pci.remove(self.current_robber_location)
                         chance = random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
                         if not chance:
                             # pci chance
@@ -151,7 +165,7 @@ class Game:
         return True
 
     def __str__(self):
-        lastseenstr = str(self.last_seen_city.name) if self.last_seen_city is not None else "N/A"
+        lastseenstr = str(self.current_robber_location.name) if self.current_robber_location is not None else "N/A"
         stolenitemstr = str(self.stolen_item.capitalize()) if self.stolen_item is not None else "N/A"
         s = f"- Robber Health:{(30 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
             f"- Last Seen City:{(28 - len(lastseenstr)) * ' '}{lastseenstr}\n" \

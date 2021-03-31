@@ -81,7 +81,7 @@ def play():
                     # 'a' is the city name and this condition means that there was a right click on the city name
                     # Change scene to chase
                     do_chase, skill_level = game_obj.play_turn(a)
-                    print(do_chase, skill_level)
+                    print(do_chase, skill_level, game_obj.current_robber_location.name)
                     mouse_pressed = True
                     if do_chase:
                         return chase.play()
