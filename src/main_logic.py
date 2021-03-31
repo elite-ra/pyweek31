@@ -66,28 +66,7 @@ class Game:
         change_robber_health = random.randint(int((10 - self.skill_level) * 3), int((11 - self.skill_level) * 3))
         coins_change = random.randint(int(self.skill_level * 1000), int(self.skill_level * 2500))
 
-        # selling previously stolen item
-        if self.is_item_stolen:
-            self.is_item_stolen = False  # reset: it is now sold.
-            self.stolen_item = None
-            # selling price 5000-10000
-            coins_change += random.randint(5000, 10000)
 
-        # stealing item chance = 25%
-        if self.current_robber_location is not None:
-            chance = random.choice([0, 1])
-            if chance and self.current_robber_location.has_artefacts():  # can steal
-                # steal a random item
-                self.stolen_item = random.choice(self.current_robber_location.artefacts)
-                self.is_item_stolen = True
-            else:
-                # can't steal
-                self.stolen_item = None
-                self.is_item_stolen = False
-        else:
-            # can't steal
-            self.stolen_item = None
-            self.is_item_stolen = False
 
         # make move based on attributes
         choices = cities_list[:]  # all the available choices
@@ -101,8 +80,10 @@ class Game:
             choices_for_hosp = set()
 
         # if item stolen, then go to blackmarket
+        print(self.is_item_stolen)
         if self.is_item_stolen:
             choices_for_blckmrkt = set([i for i in choices if i.is_blackmarket_present is True])
+            print([i.name for i in choices_for_blckmrkt])
             if self.current_robber_location in choices_for_blckmrkt:
                 choices_for_blckmrkt.remove(self.current_robber_location)
         else:
@@ -142,7 +123,7 @@ class Game:
                         sort_on_pci = sorted(choices, key=lambda x: x.per_capita_income_norm)
                         if self.current_robber_location in sort_on_pci:
                             sort_on_pci.remove(self.current_robber_location)
-                        chance = random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
+                        chance = random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 1])
                         if not chance:
                             # pci chance
                             next_move = sort_on_pci[-1]
@@ -155,13 +136,35 @@ class Game:
         else:
             # blackmrkt and hospital can be chosen together
             next_move = sorted(list(intersect_of_above), key=lambda x: x.per_capita_income_norm)[-1]
-            self.robber_health = random.randint(90, 100)
+            self.robber_health = random.randint(90, 100) + change_robber_health
         # CHANGE VARIABLES BASED ON MOVE
         self.last_seen_city = self.current_robber_location
         self.current_robber_location = next_move
         self.robber_health -= change_robber_health
         self.coins_stolen = coins_change
         self.total_coins_stolen += self.coins_stolen
+        # selling previously stolen item
+        if self.is_item_stolen and self.current_robber_location.is_blackmarket_present:
+            self.is_item_stolen = False  # reset: it is now sold.
+            self.stolen_item = None
+            # selling price 5000-10000
+            coins_change += random.randint(5000, 10000)
+
+        # stealing item chance = 25%
+        if self.current_robber_location is not None:
+            chance_steal = random.choice([0, 1])
+            if chance_steal and self.current_robber_location.has_artefacts():  # can steal
+                # steal a random item
+                self.stolen_item = random.choice(self.current_robber_location.artefacts)
+                self.is_item_stolen = True
+            else:
+                # can't steal
+                self.stolen_item = None
+                self.is_item_stolen = False
+        else:
+            # can't steal
+            self.stolen_item = None
+            self.is_item_stolen = False
         return True
 
     def __str__(self):
