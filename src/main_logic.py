@@ -74,9 +74,9 @@ class Game:
             coins_change += random.randint(5000, 10000)
 
         # stealing item chance = 25%
-        if self.current_robber_location is not None and self.current_robber_location != New_York:
+        if self.current_robber_location is not None:
             chance = random.choice([0, 0, 0, 1])
-            if chance and self.current_robber_location.has_artefacts:  # can steal
+            if chance and self.current_robber_location.has_artefacts():  # can steal
                 # steal a random item
                 self.stolen_item = random.choice(self.current_robber_location.artefacts)
                 self.is_item_stolen = True
