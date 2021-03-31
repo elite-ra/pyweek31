@@ -13,8 +13,8 @@ Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword']
 
 cities_list = City.get_all_cities()
 
-class Game:
 
+class Game:
     robber_types = ['MUSEUM', 'BANK', 'NORM', 'GROUP_PERSON']
 
     def __init__(self):
@@ -74,7 +74,7 @@ class Game:
             coins_change += random.randint(5000, 10000)
 
         # stealing item chance = 25%
-        if self.current_robber_location is not None:
+        if self.current_robber_location is not None and self.current_robber_location != New_York:
             chance = random.choice([0, 0, 0, 1])
             if chance and self.current_robber_location.has_artefacts:  # can steal
                 # steal a random item
