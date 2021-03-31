@@ -17,7 +17,7 @@ pygame.init()
 # settings screen
 def play():
     utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
-    print(utils.constants.DB.get_settings())
+    # print(utils.constants.DB.get_settings())
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
     is_game_over = False
     while not is_game_over:

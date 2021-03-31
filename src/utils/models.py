@@ -18,7 +18,6 @@ from . import constants as consts
 
 
 class City:
-
     __all_cities = []
 
     @classmethod
@@ -131,19 +130,19 @@ class City:
     def __str__(self):
 
         pci_str = "{:,}".format(self.per_capita_income)
-        hosp_str = "Not "*(not self.is_hospital_present) + "Present"
+        hosp_str = "Not " * (not self.is_hospital_present) + "Present"
 
         if consts.DB.player.has_informant:
-            blckmrkt_str = "Not "*(not self.is_blackmarket_present) + "Present"
+            blckmrkt_str = "Not " * (not self.is_blackmarket_present) + "Present"
         else:
             blckmrkt_str = "???"
 
-        s = f"- No. of banks:{(30-len(str(self.bank_count)))*' '}{self.bank_count}\n" \
-            f"- No. of museums:{(28-len(str(self.museum_count)))*' '}{self.museum_count}\n" \
-            f"- Crime rate:{(31-len(str(self.crime_rate)))*' '}{self.crime_rate}%\n" \
-            f"- Per Capita Income:{(24-len(pci_str))*' '}${pci_str}\n" \
-            f"- Hospital:{(34-len(hosp_str))*' '}{hosp_str}\n" \
-            f"- Black market:{(30-len(blckmrkt_str))*' '}{blckmrkt_str}\n"
+        s = f"- No. of banks:{(30 - len(str(self.bank_count))) * ' '}{self.bank_count}\n" \
+            f"- No. of museums:{(28 - len(str(self.museum_count))) * ' '}{self.museum_count}\n" \
+            f"- Crime rate:{(31 - len(str(self.crime_rate))) * ' '}{self.crime_rate}%\n" \
+            f"- Per Capita Income:{(24 - len(pci_str)) * ' '}${pci_str}\n" \
+            f"- Hospital:{(34 - len(hosp_str)) * ' '}{hosp_str}\n" \
+            f"- Black market:{(30 - len(blckmrkt_str)) * ' '}{blckmrkt_str}\n"
 
         return s
 
@@ -160,7 +159,7 @@ class City:
 
 class FightMove:
     def __init__(self, d):
-        print(d)
+        # print(d)
 
         self.name = d['name']
         self.description = d['description']
@@ -186,7 +185,7 @@ class FightMove:
 
 class Player:
     def __init__(self, user_store_db):
-        print(user_store_db)
+        # print(user_store_db)
 
         self.has_reached_fight = user_store_db['HAS_REACHED_FIGHT_ONCE']
         self.has_reached_chase = user_store_db['HAS_REACHED_CHASE_ONCE']
@@ -196,14 +195,13 @@ class Player:
 
     def to_dict(self):
         d = {
-                'HAS_REACHED_FIGHT_ONCE': self.has_reached_fight,
-                'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
-                'HAS_INFORMANT': self.has_informant,
-                'STORE': {
-                    "SELECTED": self.selected_moves,
-                    "BOUGHT_BUT_UNUSED": self.bought_moves
-                }
+            'HAS_REACHED_FIGHT_ONCE': self.has_reached_fight,
+            'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
+            'HAS_INFORMANT': self.has_informant,
+            'STORE': {
+                "SELECTED": self.selected_moves,
+                "BOUGHT_BUT_UNUSED": self.bought_moves
             }
+        }
 
         return d
-

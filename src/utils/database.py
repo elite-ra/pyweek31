@@ -9,7 +9,7 @@ import os
 
 class Database:
     def __init__(self):
-        print("Database initialization.")
+        # print("Database initialization.")
         self.user_store_db = read_json(os.path.join(f'{consts.ROOT_PATH}', 'db', 'user_store.json'))
         self.player = models.Player(self.user_store_db)
 
