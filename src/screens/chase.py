@@ -37,7 +37,7 @@ def play():
         utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
 
     def is_collision(heli_x, heli_y, bird_x, bird_y):
-        if bird_x in range(heli_x - 10, heli_x + 100) and bird_y in range(heli_y, heli_y + 90): 
+        if bird_x in range(heli_x - 10, heli_x + 100) and bird_y in range(heli_y - 20, heli_y + 90): 
             return True
         else:
             return False
@@ -63,7 +63,8 @@ def play():
                 if event.key == pygame.K_w or pygame.K_s:
                     heli_change = 0
 
-        utils.constants.MAIN_DISPLAY.fill((0, 0, 100))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0,0,255), (0, 0, 800, 450))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0,255,0), (0, 450, 800, 250))
 
         heli_Y += heli_change
         if heli_Y >= 350:
