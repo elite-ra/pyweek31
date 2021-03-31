@@ -6,7 +6,7 @@ import pygame
 from .. import utils
 from ..main_logic import Game
 from . import chase
-from . import home_screen
+from . import end_screen
 
 import os
 
@@ -49,7 +49,8 @@ def play():
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
         # losing condition
         if current_coins >= 50000:
-            pass
+            return end_screen.end_screen_func(1)
+
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, (100 + (600 - w) / 2, 555))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
