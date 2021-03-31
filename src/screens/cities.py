@@ -84,7 +84,7 @@ def play():
                     print(do_chase, skill_level, game_obj.current_robber_location.name)
                     mouse_pressed = True
                     if do_chase:
-                        return chase.play()
+                        return chase.play(skill_level)
                     else:
                         pass
                         # TODO: show error msg and disable guessing for a while

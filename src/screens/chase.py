@@ -5,7 +5,7 @@ import os
 from .. import utils
 
 
-def play():
+def play(skill_level):
 
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_X = 100
@@ -25,7 +25,7 @@ def play():
         bird.append(pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'seagull.png')))
         bird_X.append(random.randint(500,600))
         bird_Y.append(random.randint(0, 350))
-        bird_change.append(2)
+        bird_change.append(2 + 0.05*skill_level)
 
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
