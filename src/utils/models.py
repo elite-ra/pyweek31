@@ -104,7 +104,7 @@ class City:
             self.museum_norm = 10
 
     def __convert_crime_rate(self):
-        self.crime_norm = self.crime_rate // 10
+        self.crime_rate_norm = self.crime_rate // 10
 
     def __convert_per_capita_income(self):
         if self.per_capita_income <= 10000:
