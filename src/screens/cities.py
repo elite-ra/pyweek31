@@ -12,7 +12,7 @@ import os
 
 
 def play():
-    city_coords = [[(150, 0), (52, 20)], [(200, 50), (52, 20)], [(130, 60), (52, 20)], [(150, 300), (52, 20)],
+    city_coords = [[(150, 150), (52, 20)], [(200, 200), (52, 20)], [(130, 210), (52, 20)], [(150, 300), (52, 20)],
                    [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
 
     cities_list = utils.models.City.get_all_cities()
@@ -42,7 +42,7 @@ def play():
         # Coins stolen
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(100, 550, 600, 50))
         font = utils.constants.FONT_MONO_SMALL
-        current_coins = 25000
+        current_coins = game_obj.total_coins_stolen
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, (100 + (600 - w) / 2, 555))
