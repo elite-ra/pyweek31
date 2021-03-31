@@ -12,10 +12,12 @@ import os
 
 
 def play():
-    city_coords = [[(150, 150), (52, 20)], [(200, 200), (52, 20)], [(130, 210), (52, 20)], [(150, 300), (52, 20)],
-                   [(400, 200), (52, 20)], [(600, 500), (52, 20)]]
+    city_coords = [[(545, 425), (64, 30)], [(155, 245), (64, 30)], [(350, 365), (77, 30)], [(150, 445), (125, 30)],
+                   [(550, 278), (63, 30)]]
 
     cities_list = utils.models.City.get_all_cities()
+
+    bg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'cities.png'))
 
     coin_limit = 50000
 
@@ -34,23 +36,27 @@ def play():
     while running:
 
         utils.constants.MAIN_DISPLAY.fill((0, 255, 255))
+        utils.constants.MAIN_DISPLAY.blit(bg, (0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
         # Coins stolen
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(100, 550, 600, 50))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 550, 800, 50))
         font = utils.constants.FONT_MONO_SMALL
         current_coins = game_obj.total_coins_stolen
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
+        # losing condition
+        if current_coins >= 50000:
+            pass
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, (100 + (600 - w) / 2, 555))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (150, 150, 150), pygame.Rect(0, 0, 800, 90))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 90))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 86), 1)
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render('Robber Stats', True, (200, 200, 200))
@@ -90,7 +96,6 @@ def play():
                         # TODO: show error msg and disable guessing for a while
             else:
                 mouse_pressed = False
-                        
 
         if stats_showing:
             s = pygame.Surface((1000, 750))  # the size of your rect
