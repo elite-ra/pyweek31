@@ -140,11 +140,18 @@ class Game:
         # CHANGE VARIABLES BASED ON MOVE
         self.last_seen_city = self.current_robber_location
         self.current_robber_location = next_move
+        print("====")
+        print(self.current_robber_location.name)
+
         self.robber_health -= change_robber_health
         self.coins_stolen = coins_change
         self.total_coins_stolen += self.coins_stolen
         # selling previously stolen item
+        print(self.is_item_stolen)
+        print(self.stolen_item)
+        print(self.last_seen_city)
         if self.is_item_stolen and self.current_robber_location.is_blackmarket_present:
+            print("SELLING")
             self.is_item_stolen = False  # reset: it is now sold.
             self.stolen_item = None
             # selling price 5000-10000
@@ -153,18 +160,10 @@ class Game:
         # stealing item chance = 25%
         if self.current_robber_location is not None:
             chance_steal = random.choice([0, 1])
-            if chance_steal and self.current_robber_location.has_artefacts():  # can steal
+            if chance_steal and self.current_robber_location.has_artefacts() and self.is_item_stolen is False:  # can steal
                 # steal a random item
                 self.stolen_item = random.choice(self.current_robber_location.artefacts)
                 self.is_item_stolen = True
-            else:
-                # can't steal
-                self.stolen_item = None
-                self.is_item_stolen = False
-        else:
-            # can't steal
-            self.stolen_item = None
-            self.is_item_stolen = False
         return True
 
     def __str__(self):
