@@ -16,14 +16,14 @@ city_bg_map = {
 
 
 def play(skill_level, city_name):
-
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_x = 100
     heli_y = 200
     heli_change = 0
 
-    robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
-    robber_small = pygame.transform.scale(robber, (125,60))
+    robber = pygame.image.load(
+        os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
+    robber_small = pygame.transform.scale(robber, (125, 60))
     robber_x = 650
     robber_y = 200
 
@@ -66,7 +66,7 @@ def play(skill_level, city_name):
 
     status = True
     while status:
-        utils.constants.MAIN_DISPLAY.blit(bgimg, (0,0))
+        utils.constants.MAIN_DISPLAY.blit(bgimg, (0, 0))
         # TODO: blur instead!
         s = pygame.Surface((800, 600))  # the size of your rect
         s.set_alpha(120)  # alpha level
@@ -77,13 +77,13 @@ def play(skill_level, city_name):
             if event.type == pygame.QUIT:
                 status = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
                     heli_change = -3
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     heli_change = 3
 
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w or pygame.K_s:
+                if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     heli_change = 0
 
         heli_y += heli_change
