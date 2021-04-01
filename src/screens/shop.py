@@ -15,6 +15,8 @@ from ..utils import database
 # TODO: show message on hover on button.
 
 
+# TODO: CHECK IF ALREADY BOUGHT!
+
 # settings screen
 def play():
 
