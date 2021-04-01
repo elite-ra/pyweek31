@@ -4,9 +4,19 @@ import os
 from .. import utils
 import time
 from . import end_screen
+from . import fight
+
+city_bg_map = {
+    "Giza": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'giza_chase_blur.png'),
+    "New York": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'ny_chase_blur.png'),
+    "Paris": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'paris_chase_blur.png'),
+    "Agra": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'agra_chase_blur.png'),
+    "Rome": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'rome_chase_blur.png')
+}
 
 
-def play(skill_level):
+def play(skill_level, city_name):
+
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_x = 100
     heli_y = 200
@@ -16,6 +26,8 @@ def play(skill_level):
     robber_small = pygame.transform.scale(robber, (125,60))
     robber_x = 650
     robber_y = 200
+
+    bgimg = pygame.image.load(city_bg_map[city_name])
 
     n = 6
     bird = []
@@ -54,6 +66,13 @@ def play(skill_level):
 
     status = True
     while status:
+        utils.constants.MAIN_DISPLAY.blit(bgimg, (0,0))
+        # TODO: blur instead!
+        s = pygame.Surface((800, 600))  # the size of your rect
+        s.set_alpha(120)  # alpha level
+        s.fill((0, 0, 0))  # this fills the entire surface
+        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 status = False
@@ -66,8 +85,6 @@ def play(skill_level):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or pygame.K_s:
                     heli_change = 0
-
-        utils.constants.MAIN_DISPLAY.fill((0,0,255))
 
         heli_y += heli_change
         if heli_y >= 350:
@@ -94,7 +111,19 @@ def play(skill_level):
 
         # show fight scene
         if time_taken >= 30:
-            pass
+            s = pygame.Surface((800, 600))  # the size of your rect
+            s.set_alpha(240)  # alpha level
+            s.fill((0, 0, 0))  # this fills the entire surface
+            utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+            font = utils.constants.FONT_MONO_VERY_LARGE
+            text = font.render('You caught the robber!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
+            font = utils.constants.FONT_MONO_MEDIUM
+            text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
+            pygame.display.update()
+            pygame.time.wait(4000)
+            return fight.main()
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)

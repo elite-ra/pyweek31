@@ -6,6 +6,8 @@ import pygame
 from . import chase
 from . import cities
 from . import settings
+from . import fight
+from . import shop
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
@@ -33,6 +35,11 @@ def play():
                                                                (consts.SCREEN_HEIGHT / 2) - 300),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=pygame.font.Font('freesansbold.ttf', 30), text='Shop')
+
+    fight_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 250,
+                                                                (consts.SCREEN_HEIGHT / 2) - 200),
+                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                              font=pygame.font.Font('freesansbold.ttf', 30), text='Fight')
 
     settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                                    (consts.SCREEN_HEIGHT / 2) - 300),
@@ -65,7 +72,7 @@ def play():
             chase_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 chase_button.toggle_bg(colors.BROWN_COLOR)
-                return chase.play(1)
+                return chase.play(1, 'Agra')
         else:
             chase_button.toggle_bg(colors.BLACK_COLOR)
 
@@ -81,7 +88,7 @@ def play():
             shop_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 shop_button.toggle_bg(colors.BROWN_COLOR)
-                pass  # return shop.play()
+                return shop.play()
         else:
             shop_button.toggle_bg(colors.BLACK_COLOR)
 
@@ -92,6 +99,14 @@ def play():
                 return settings.play()
         else:
             settings_button.toggle_bg(colors.BLACK_COLOR)
+
+        if fight_button.hovered:
+            fight_button.toggle_bg(colors.BROWN_COLOR)
+            if mouse_down:
+                fight_button.toggle_bg(colors.BROWN_COLOR)
+                return fight.main()
+        else:
+            fight_button.toggle_bg(colors.BLACK_COLOR)
 
         # update all the things in game
         pygame.display.update()

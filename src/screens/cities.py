@@ -101,12 +101,11 @@ def play():
                         font = utils.constants.FONT_MONO_MEDIUM
                         text = font.render('The robber is trying to run away.', True, (255, 255, 255))
                         utils.constants.MAIN_DISPLAY.blit(text, (170, 300))
-                        font = utils.constants.FONT_MONO_MEDIUM
                         text = font.render('Chase him till his fuel runs out!', True, (255, 255, 255))
                         utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
                         pygame.display.update()
                         pygame.time.wait(5000)
-                        return chase.play(skill_level)
+                        return chase.play(skill_level, a.name)
 
                     else:
                         s = pygame.Surface((800, 600))  # the size of your rect
