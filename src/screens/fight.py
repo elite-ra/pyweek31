@@ -175,6 +175,8 @@ def main(skill_level):
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
+    else:
+        pygame.quit()
 
     # end(screen) end screen
     if condition:

@@ -38,7 +38,7 @@
     },
     {
       "name": "Stare",
-      "description": "Does 25 damage, lethal.",
+      "description": "Does 20% damage, lethal.",
       "damage": null,
       "percent_damage": 20.0,
       "can_backfire": false,
