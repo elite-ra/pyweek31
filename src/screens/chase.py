@@ -21,9 +21,10 @@ def play(skill_level, city_name):
     heli_y = 200
     heli_change = 0
 
-    robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber.png'))
-    robber_x = 700
-    robber_y = 200
+    robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
+    robber_small = pygame.transform.scale(robber, (125,60))
+    robber_X = 650
+    robber_Y = 200
 
     bgimg = pygame.image.load(city_bg_map[city_name])
 
@@ -44,7 +45,7 @@ def play(skill_level, city_name):
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(x + 24, y + 30, 80, 68), 2)
 
     def robber_game(x, y):
-        utils.constants.MAIN_DISPLAY.blit(robber, (x, y))
+        utils.constants.MAIN_DISPLAY.blit(robber_small, (x, y))
 
     def bird_game(x, y, i):
         utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
