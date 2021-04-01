@@ -154,6 +154,7 @@ def main():
                 if damage == 0:
                     hpcop = hpcop * 0.5
                 hpvil = hpvil - damage
+                hpcop = hpcop - 0.1
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
