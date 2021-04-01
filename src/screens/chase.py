@@ -67,7 +67,6 @@ def play(skill_level, city_name):
     status = True
     while status:
         utils.constants.MAIN_DISPLAY.blit(bgimg, (0, 0))
-        # TODO: blur instead!
         s = pygame.Surface((800, 600))  # the size of your rect
         s.set_alpha(120)  # alpha level
         s.fill((0, 0, 0))  # this fills the entire surface
@@ -125,5 +124,12 @@ def play(skill_level, city_name):
             pygame.time.wait(4000)
             return fight.main(skill_level)
 
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
+        font = utils.constants.FONT_MONO_VERY_SMALL
+        text = font.render('Robber Fuel', True, (255, 255, 255))
+        utils.constants.MAIN_DISPLAY.blit(text, (0, 60))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (50, 50, 50), (5, 100, 65, 400))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),
+                         pygame.Rect(5, (100 + int((time_taken / 30)*400)), 65, int(((30 - time_taken) / 30) * 400)))
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
