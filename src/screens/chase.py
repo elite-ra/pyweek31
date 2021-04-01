@@ -46,9 +46,10 @@ def play(skill_level, city_name):
         bird_y.append(random.randint(0, 350))
         bird_change.append(2 + 0.1 * skill_level)
 
-    coin = pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (random.randint(800, 1540), random.randint(0,350), 32, 32))
+    coin = pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (random.randint(800, 1540),
+                                                                            random.randint(0, 350), 32, 32))
     coin_x = random.randint(800, 1540)
-    coin_y = random.randint(0,350)
+    coin_y = random.randint(0, 350)
     coin_change = 2 + 0.1 * skill_level
 
     def heli_game(x, y):
