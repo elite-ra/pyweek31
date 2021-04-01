@@ -23,8 +23,8 @@ def play(skill_level, city_name):
 
     robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
     robber_small = pygame.transform.scale(robber, (125,60))
-    robber_X = 650
-    robber_Y = 200
+    robber_x = 650
+    robber_y = 200
 
     bgimg = pygame.image.load(city_bg_map[city_name])
 
