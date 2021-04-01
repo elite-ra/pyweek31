@@ -5,6 +5,7 @@ from .. import utils
 import time
 from . import end_screen
 from . import fight
+from .. utils import constants as consts
 
 city_bg_map = {
     "Giza": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'giza_chase_blur.png'),
@@ -41,6 +42,11 @@ def play(skill_level, city_name):
         bird_y.append(random.randint(0, 350))
         bird_change.append(2 + 0.1 * skill_level)
 
+    coin = pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (random.randint(800, 1540), random.randint(0,350), 32, 32))
+    coin_x = random.randint(800, 1540)
+    coin_y = random.randint(0,350)
+    coin_change = 2 + 0.1 * skill_level
+
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(x + 24, y + 30, 80, 68), 2)
@@ -52,8 +58,17 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(x, y + 4, 64, 56), 2)
 
+    def coin_game(x,y):
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (x, y, 32, 32))
+
     def is_collision(heli_x, heli_y, bird_x, bird_y):
         if heli_x - 40 <= bird_x <= heli_x + 104 and heli_y - 30 <= bird_y <= heli_y + 94:
+            return True
+        else:
+            return False
+
+    def is_collect_coin(heli_x, heli_y, coin_x, coin_y):
+        if heli_x - 40 <= coin_x <= heli_x + 104 and heli_y - 30 <= coin_y <= heli_y + 94:
             return True
         else:
             return False
@@ -90,7 +105,12 @@ def play(skill_level, city_name):
             heli_y = 350
         if heli_y <= -27:
             heli_y = -27
-
+        
+        coin_x -= coin_change
+        if coin_x <= -60:
+            coin_x = random.randint(800, 1540)
+            coin_y = random.randint(0,350)
+        
         for i in range(n):
             if bird_x[i] <= -60:
                 bird_x[i] = random.randint(800, 1540)
@@ -102,8 +122,19 @@ def play(skill_level, city_name):
             if collision:
                 return end_screen.end_screen_func(2)
 
+        collect_coin = is_collect_coin(heli_x, heli_y, coin_x, coin_y)
+        if collect_coin:
+            plyr = consts.DB.get_player_details()
+            # increase:
+            plyr.coins += 30
+            # set
+            consts.DB.set_player_details(plyr)
+            coin_x = random.randint(800, 1540)
+            coin_y = random.randint(0,350)
+
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
+        coin_game(coin_x, coin_y)
 
         time_taken = round(time.time() - time1, 1)
         display_time(str(time_taken))
