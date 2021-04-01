@@ -54,24 +54,6 @@ def main():
             a = random.randint(0, 1)
             return (0.5 * hpcop * a)
 
-    def attackchoice(screen):
-
-        punch = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='PUNCH')
-
-        kick = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
-                          width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                          font=consts.FONT_MONO_VERY_SMALL, text='KICK')
-
-        shoot = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='SHOOT')
-
-        wild_swing = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
-                                width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                                font=consts.FONT_MONO_VERY_SMALL, text='WILD SWING')
-
     done = False
     hpcop = 100
     hpvil = 100
