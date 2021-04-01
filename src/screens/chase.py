@@ -4,6 +4,7 @@ import os
 from .. import utils
 import time
 from . import end_screen
+from . import fight
 
 city_bg_map = {
     "Giza": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'giza_chase_blur.png'),
@@ -109,8 +110,20 @@ def play(skill_level, city_name):
         display_time(str(time_taken))
 
         # show fight scene
-        if time_taken >= 30:
-            pass
+        if time_taken >= 5:
+            s = pygame.Surface((800, 600))  # the size of your rect
+            s.set_alpha(240)  # alpha level
+            s.fill((0, 0, 0))  # this fills the entire surface
+            utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+            font = utils.constants.FONT_MONO_VERY_LARGE
+            text = font.render('You caught the robber!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
+            font = utils.constants.FONT_MONO_MEDIUM
+            text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
+            pygame.display.update()
+            pygame.time.wait(5000)
+            return fight.main()
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
