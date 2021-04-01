@@ -110,7 +110,7 @@ def play(skill_level, city_name):
         display_time(str(time_taken))
 
         # show fight scene
-        if time_taken >= 5:
+        if time_taken >= 30:
             s = pygame.Surface((800, 600))  # the size of your rect
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
@@ -122,7 +122,7 @@ def play(skill_level, city_name):
             text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
             pygame.display.update()
-            pygame.time.wait(5000)
+            pygame.time.wait(4000)
             return fight.main()
 
         pygame.display.update()

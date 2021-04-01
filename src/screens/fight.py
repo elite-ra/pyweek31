@@ -4,6 +4,13 @@ import random
 import math
 from .. import utils
 from . import end_screen
+from ..utils.widgets import TextButton
+from ..utils import constants as consts
+
+'''TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+                                                               (consts.SCREEN_HEIGHT / 2) + 100),
+                             width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                             font=pygame.font.Font('freesansbold.ttf', 30), text='Cities')'''
 
 
 def main():
@@ -53,25 +60,22 @@ def main():
             return (0.5 * hpcop * a)
 
     def attackchoice(screen):
-        pygame.draw.rect(screen, (130, 130, 130), (5, 480, 180, 110))
 
-        pygame.draw.rect(screen, (50, 50, 50), (7, 482, 87, 52))
-        punch = myfont.render('PUNCH', False, (255, 255, 255))
+        punch = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
+                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                           font=consts.FONT_MONO_VERY_SMALL, text='PUNCH')
 
-        pygame.draw.rect(screen, (50, 50, 50), (96, 482, 87, 52))
-        kick = myfont.render('KICK', False, (255, 255, 255))
+        kick = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
+                          width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                          font=consts.FONT_MONO_VERY_SMALL, text='KICK')
 
-        pygame.draw.rect(screen, (50, 50, 50), (7, 536, 87, 52))
-        shoot = myfont.render('SHOOT', False, (255, 255, 255))
+        shoot = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
+                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                           font=consts.FONT_MONO_VERY_SMALL, text='SHOOT')
 
-        pygame.draw.rect(screen, (50, 50, 50), (96, 536, 87, 52))
-        WildSwing = myfont.render('''WILD SWING''', False, (255, 255, 255))
-
-        # printing the text
-        screen.blit(punch, (27, 495))
-        screen.blit(kick, (116, 495))
-        screen.blit(shoot, (26, 556))
-        screen.blit(WildSwing, (97, 556))
+        wild_swing = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
+                                width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                                font=consts.FONT_MONO_VERY_SMALL, text='WILD SWING')
 
     done = False
     hpcop = 100
@@ -81,35 +85,14 @@ def main():
 
     while not done:
 
+        mouse_down = False
         temp = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
             if event.type == pygame.MOUSEBUTTONDOWN:
-                x = pygame.mouse.get_pos()[0]
-                y = pygame.mouse.get_pos()[1]
-                if pygame.Rect((7, 482, 87, 52)).collidepoint(x, y):
-                    damage = Attacks(1, hpvil)
-                    hpvil = hpvil - damage
-
-                elif pygame.Rect((7, 536, 87, 52)).collidepoint(x, y):
-                    damage = Attacks(3, hpvil)
-                    hpvil = hpvil - damage
-
-                elif pygame.Rect((96, 482, 87, 52)).collidepoint(x, y):
-                    damage = Attacks(2, hpvil)
-                    hpvil = hpvil - damage
-
-                elif pygame.Rect((96, 536, 87, 52)).collidepoint(x, y):
-                    damage = Attacks(4, hpvil)
-                    if damage == 0:
-                        hpcop = hpcop * 0.5
-                        temp = True
-                    hpvil = hpvil - damage
-                
-                if not temp:
-                    hpcop = hpcop - random.randint(7, 10)
+                mouse_down = True
 
         screen.blit(background_image, [0, 0])
         screen.blit(copimg, [230, 300])
@@ -122,7 +105,56 @@ def main():
             break
         HealthCop(hpcop, screen)
         HealthVil(hpvil, screen)
-        attackchoice(screen)
+
+        punch = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
+                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                           font=consts.FONT_MONO_VERY_SMALL, text='PUNCH')
+
+        kick = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
+                          width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                          font=consts.FONT_MONO_VERY_SMALL, text='KICK')
+
+        shoot = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
+                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                           font=consts.FONT_MONO_VERY_SMALL, text='SHOOT')
+
+        wild_swing = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
+                                width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                                font=consts.FONT_MONO_VERY_SMALL, text='WILD SWING')
+
+        if punch.hovered:
+            punch.toggle_bg((100, 100, 100))
+            if mouse_down:
+                punch.toggle_bg((50, 50, 50))
+                damage = Attacks(1, hpvil)
+                hpvil = hpvil - damage
+                hpcop = hpcop - random.randint(10, 20)
+
+        if kick.hovered:
+            kick.toggle_bg((100, 100, 100))
+            if mouse_down:
+                kick.toggle_bg((50, 50, 50))
+                damage = Attacks(2, hpvil)
+                hpvil = hpvil - damage
+                hpcop = hpcop - random.randint(10, 20)
+
+        if shoot.hovered:
+            shoot.toggle_bg((100, 100, 100))
+            if mouse_down:
+                shoot.toggle_bg((50, 50, 50))
+                damage = Attacks(3, hpvil)
+                hpvil = hpvil - damage
+                hpcop = hpcop - random.randint(10, 20)
+
+        if wild_swing.hovered:
+            wild_swing.toggle_bg((100, 100, 100))
+            if mouse_down:
+                wild_swing.toggle_bg((50, 50, 50))
+                damage = Attacks(4, hpvil)
+                if damage == 0:
+                    hpcop = hpcop * 0.5
+                hpvil = hpvil - damage
+
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
 
