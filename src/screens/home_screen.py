@@ -43,6 +43,7 @@ def play():
     is_game_over = False
     while not is_game_over:
         mouse_down = False
+        consts.MAIN_DISPLAY.fill((0, 0, 0))
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
