@@ -6,11 +6,7 @@ from .. import utils
 from . import end_screen
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
-
-'''TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                               (consts.SCREEN_HEIGHT / 2) + 100),
-                             width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                             font=pygame.font.Font('freesansbold.ttf', 30), text='Cities')'''
+from . import win_screen
 
 
 def main():
@@ -24,7 +20,6 @@ def main():
     copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop.png'))
     vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Villain.png'))
 
-    pygame.init()
     screen = utils.constants.MAIN_DISPLAY
 
     def HealthCop(value, screen):
@@ -161,6 +156,6 @@ def main():
 
     # end(screen) end screen
     if condition:
-        pass  # win screen
+        return win_screen.play()
     else:
         return end_screen.end_screen_func(3)
