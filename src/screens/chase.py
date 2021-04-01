@@ -14,8 +14,8 @@ def play(skill_level):
 
     robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
     robber_small = pygame.transform.scale(robber, (125,60))
-    robber_X = 650
-    robber_Y = 200
+    robber_x = 650
+    robber_y = 200
 
     n = 6
     bird = []
