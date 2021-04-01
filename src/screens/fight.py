@@ -14,10 +14,11 @@ ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 def main(skill_level):
     global ROB_DMG_MAX, ROB_DMG_MIN
     print(skill_level)
-    ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - 20
+    ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - (0 if 10 * int(skill_level)/10 * 5 < 21 else 20)
     ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
-
+    rob_max_helth = 100 * (skill_level/10 - 0.1 + 1)
     BG = (153, 102, 255)
+    print(rob_max_helth)
 
     myfont = utils.constants.FONT_MONO_VERY_SMALL
 
@@ -40,18 +41,20 @@ def main(skill_level):
         pygame.draw.rect(dscreen, colour, (41, 11, math.ceil(2 * value - 1), 18))
 
     def health_vil(value, dscreen):
-        if value > 50:
+
+        percentval = (value/rob_max_helth) * 100
+        if percentval > 50:
             colour = (0, 255, 0)
-        elif 50 >= value > 10:
+        elif 50 >= percentval > 10:
             colour = (255, 200, 0)
         else:
             colour = (255, 0, 0)
         pygame.draw.rect(dscreen, (255, 255, 255), (560, 10, 200, 20))
-        pygame.draw.rect(dscreen, colour, (561, 11, math.ceil(2 * value - 1), 18))
+        pygame.draw.rect(dscreen, colour, (561, 11, math.ceil(2 * percentval - 1), 18))
 
     done = False
     hpcop = 100
-    hpvil = 100 * (skill_level/10 - 0.1 + 1)
+    hpvil = rob_max_helth
     condition = True
 
     player_selected_moves = consts.DB.get_player_moves()
