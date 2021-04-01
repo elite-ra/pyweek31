@@ -65,7 +65,7 @@ def play():
             chase_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 chase_button.toggle_bg(colors.BROWN_COLOR)
-                return chase.play(1)
+                return chase.play(1, 'Agra')
         else:
             chase_button.toggle_bg(colors.BLACK_COLOR)
 

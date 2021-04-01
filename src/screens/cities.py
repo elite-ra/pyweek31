@@ -106,7 +106,7 @@ def play():
                         utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
                         pygame.display.update()
                         pygame.time.wait(5000)
-                        return chase.play(skill_level)
+                        return chase.play(skill_level, a.name)
 
                     else:
                         s = pygame.Surface((800, 600))  # the size of your rect

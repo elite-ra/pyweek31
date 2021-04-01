@@ -5,8 +5,17 @@ from .. import utils
 import time
 from . import end_screen
 
+city_bg_map = {
+    "Giza": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'giza_chase_blur.png'),
+    "New York": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'ny_chase_blur.png'),
+    "Paris": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'paris_chase_blur.png'),
+    "Agra": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'agra_chase_blur.png'),
+    "Rome": os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'rome_chase_blur.png')
+}
 
-def play(skill_level):
+
+def play(skill_level, city_name):
+
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_x = 100
     heli_y = 200
@@ -15,6 +24,8 @@ def play(skill_level):
     robber = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber.png'))
     robber_x = 700
     robber_y = 200
+
+    bgimg = pygame.image.load(city_bg_map[city_name])
 
     n = 6
     bird = []
@@ -53,6 +64,13 @@ def play(skill_level):
 
     status = True
     while status:
+        utils.constants.MAIN_DISPLAY.blit(bgimg, (0,0))
+        # TODO: blur instead!
+        s = pygame.Surface((800, 600))  # the size of your rect
+        s.set_alpha(120)  # alpha level
+        s.fill((0, 0, 0))  # this fills the entire surface
+        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 status = False
@@ -65,9 +83,6 @@ def play(skill_level):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or pygame.K_s:
                     heli_change = 0
-
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 255), (0, 0, 800, 450))
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), (0, 450, 800, 250))
 
         heli_y += heli_change
         if heli_y >= 350:
