@@ -103,6 +103,8 @@ def play():
                         utils.constants.MAIN_DISPLAY.blit(text, (170, 300))
                         text = font.render('Chase him till his fuel runs out!', True, (255, 255, 255))
                         utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
+                        text = font.render("Use 'W', 'S' or arrow keys to navigate ", True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (140, 400))
                         pygame.display.update()
                         pygame.time.wait(5000)
                         return chase.play(skill_level, a.name)
