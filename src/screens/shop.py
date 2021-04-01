@@ -15,8 +15,6 @@ from ..utils import database
 # TODO: show message on hover on button.
 
 
-# TODO: CHECK IF ALREADY BOUGHT!
-
 # settings screen
 def play():
 
@@ -83,16 +81,25 @@ def play():
                     utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
                     no_coins = True
                 else:
-                    s = pygame.Surface((800, 600))  # the size of your rect
-                    s.fill((0, 0, 0))  # this fills the entire surface
-                    consts.MAIN_DISPLAY.blit(s, (0, 0))
-                    t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                    consts.MAIN_DISPLAY.blit(t, (50, 100))
                     plyr = consts.DB.get_player_details()
-                    plyr.has_informant = True
-                    plyr.coins -= 150
-                    consts.DB.set_player_details(plyr)
-                    no_coins = True
+                    if plyr.has_informant:
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.set_alpha(240)  # alpha level
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        consts.MAIN_DISPLAY.blit(s, (0, 0))
+                        t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade", True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
+                        no_coins = True
+                    else:
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        consts.MAIN_DISPLAY.blit(s, (0, 0))
+                        t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
+                        consts.MAIN_DISPLAY.blit(t, (50, 100))
+                        plyr.has_informant = True
+                        plyr.coins -= 150
+                        consts.DB.set_player_details(plyr)
+                        no_coins = True
         else:
             informant.toggle_bg(colors.BLACK_COLOR)
 
@@ -111,16 +118,25 @@ def play():
                         utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
                         no_coins = True
                     else:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                        consts.MAIN_DISPLAY.blit(t, (50, 100))
-                        plyr = consts.DB.get_player_details()
-                        plyr.bought_moves.append(allmove[0].name)
-                        plyr.coins -= allmove[0].price
-                        consts.DB.set_player_details(plyr)
-                        no_coins = True
+                        if allmove[0].name in plyr.bought_moves:
+                            s = pygame.Surface((800, 600))  # the size of your rect
+                            s.set_alpha(240)  # alpha level
+                            s.fill((0, 0, 0))  # this fills the entire surface
+                            consts.MAIN_DISPLAY.blit(s, (0, 0))
+                            t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade", True, (255, 255, 255))
+                            utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
+                            no_coins = True
+                        else:
+                            s = pygame.Surface((800, 600))  # the size of your rect
+                            s.fill((0, 0, 0))  # this fills the entire surface
+                            consts.MAIN_DISPLAY.blit(s, (0, 0))
+                            t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
+                            consts.MAIN_DISPLAY.blit(t, (50, 100))
+                            plyr = consts.DB.get_player_details()
+                            plyr.bought_moves.append(allmove[0].name)
+                            plyr.coins -= allmove[0].price
+                            consts.DB.set_player_details(plyr)
+                            no_coins = True
             else:
                 bm1.toggle_bg(colors.BLACK_COLOR)
 
@@ -139,16 +155,25 @@ def play():
                         utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
                         no_coins = True
                     else:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                        consts.MAIN_DISPLAY.blit(t, (50, 100))
-                        plyr = consts.DB.get_player_details()
-                        plyr.bought_moves.append(allmove[1].name)
-                        plyr.coins -= allmove[1].price
-                        consts.DB.set_player_details(plyr)
-                        no_coins = True
+                        if allmove[1].name in plyr.bought_moves:
+                            s = pygame.Surface((800, 600))  # the size of your rect
+                            s.set_alpha(240)  # alpha level
+                            s.fill((0, 0, 0))  # this fills the entire surface
+                            consts.MAIN_DISPLAY.blit(s, (0, 0))
+                            t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade", True, (255, 255, 255))
+                            utils.constants.MAIN_DISPLAY.blit(t, (10, 10))
+                            no_coins = True
+                        else:
+                            s = pygame.Surface((800, 600))  # the size of your rect
+                            s.fill((0, 0, 0))  # this fills the entire surface
+                            consts.MAIN_DISPLAY.blit(s, (0, 0))
+                            t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
+                            consts.MAIN_DISPLAY.blit(t, (50, 100))
+                            plyr = consts.DB.get_player_details()
+                            plyr.bought_moves.append(allmove[1].name)
+                            plyr.coins -= allmove[1].price
+                            consts.DB.set_player_details(plyr)
+                            no_coins = True
             else:
                 bm2.toggle_bg(colors.BLACK_COLOR)
 
