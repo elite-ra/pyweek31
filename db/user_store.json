@@ -2,8 +2,9 @@
   "HAS_REACHED_FIGHT_ONCE": false,
   "HAS_REACHED_CHASE_ONCE": false,
   "HAS_INFORMANT": false,
+  "COINS": 0,
   "STORE": {
-    "SELECTED":  [],
+    "SELECTED":  ["Kick", "Punch", "Gunshot", "Super Mega Smash"],
     "BOUGHT_BUT_UNUSED": []
   }
 }

@@ -29,6 +29,10 @@ class Database:
         else:
             return None
 
+    def get_player_moves(self):
+        moves = [self.get_move_from_name(i) for i in self.player.selected_moves]
+        return moves
+
     def get_player_details(self):
         return self.player
 

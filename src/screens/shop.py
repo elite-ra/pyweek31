@@ -11,8 +11,6 @@ from ..utils import colors
 from .. import utils
 from ..utils import database
 
-pygame.init()
-
 
 # settings screen
 def play():

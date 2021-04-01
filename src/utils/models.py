@@ -158,6 +158,7 @@ class City:
 
 
 class FightMove:
+
     def __init__(self, d):
         # print(d)
 
@@ -185,19 +186,21 @@ class FightMove:
 
 class Player:
     def __init__(self, user_store_db):
-        # print(user_store_db)
 
         self.has_reached_fight = user_store_db['HAS_REACHED_FIGHT_ONCE']
         self.has_reached_chase = user_store_db['HAS_REACHED_CHASE_ONCE']
         self.has_informant = user_store_db['HAS_INFORMANT']
+        # selected, bought is only move name.
         self.selected_moves = user_store_db['STORE']['SELECTED']
         self.bought_moves = user_store_db['STORE']['BOUGHT_BUT_UNUSED']
+        self.coins = user_store_db['COINS']
 
     def to_dict(self):
         d = {
             'HAS_REACHED_FIGHT_ONCE': self.has_reached_fight,
             'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
             'HAS_INFORMANT': self.has_informant,
+            'COINS': self.coins,
             'STORE': {
                 "SELECTED": self.selected_moves,
                 "BOUGHT_BUT_UNUSED": self.bought_moves

@@ -8,8 +8,15 @@ from ..utils.widgets import TextButton
 from ..utils import constants as consts
 from . import win_screen
 
+ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 
-def main():
+
+def main(skill_level):
+    global ROB_DMG_MAX, ROB_DMG_MIN
+    print(skill_level)
+    ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - 20
+    ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
+
     BG = (153, 102, 255)
 
     myfont = utils.constants.FONT_MONO_VERY_SMALL
@@ -22,66 +29,36 @@ def main():
 
     screen = utils.constants.MAIN_DISPLAY
 
-    def HealthCop(value, screen):
+    def health_cop(value, dscreen):
         if value > 50:
             colour = (0, 255, 0)
-        elif value <= 50 and value > 10:
+        elif 50 >= value > 10:
             colour = (255, 200, 0)
         else:
             colour = (255, 0, 0)
-        pygame.draw.rect(screen, (255, 255, 255), (40, 10, 200, 20))
-        pygame.draw.rect(screen, colour, (41, 11, math.ceil(2 * value - 1), 18))
+        pygame.draw.rect(dscreen, (255, 255, 255), (40, 10, 200, 20))
+        pygame.draw.rect(dscreen, colour, (41, 11, math.ceil(2 * value - 1), 18))
 
-    def HealthVil(value, screen):
+    def health_vil(value, dscreen):
         if value > 50:
             colour = (0, 255, 0)
-        elif value <= 50 and value > 10:
+        elif 50 >= value > 10:
             colour = (255, 200, 0)
         else:
             colour = (255, 0, 0)
-        pygame.draw.rect(screen, (255, 255, 255), (560, 10, 200, 20))
-        pygame.draw.rect(screen, colour, (561, 11, math.ceil(2 * value - 1), 18))
-
-    def Attacks(choice, hpvil):
-        if choice == 1:
-            return 10
-        elif choice == 2:
-            return 12
-        elif choice == 3:
-            a = random.randint(0, 1)
-            return 20 * a
-        elif choice == 4:
-            a = random.randint(0, 1)
-            return (0.5 * hpcop * a)
-
-    def attackchoice(screen):
-
-        punch = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='PUNCH')
-
-        kick = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
-                          width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                          font=consts.FONT_MONO_VERY_SMALL, text='KICK')
-
-        shoot = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='SHOOT')
-
-        wild_swing = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
-                                width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                                font=consts.FONT_MONO_VERY_SMALL, text='WILD SWING')
+        pygame.draw.rect(dscreen, (255, 255, 255), (560, 10, 200, 20))
+        pygame.draw.rect(dscreen, colour, (561, 11, math.ceil(2 * value - 1), 18))
 
     done = False
     hpcop = 100
-    hpvil = 100
+    hpvil = 100 * (skill_level/10 - 0.1 + 1)
     condition = True
-    damage = 0
+
+    player_selected_moves = consts.DB.get_player_moves()
 
     while not done:
 
         mouse_down = False
-        temp = False
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -98,58 +75,100 @@ def main():
         elif hpcop <= 0:
             condition = False
             break
-        HealthCop(hpcop, screen)
-        HealthVil(hpvil, screen)
 
-        punch = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='PUNCH')
+        # update cop, villain health
+        health_cop(hpcop, screen)
+        health_vil(hpvil, screen)
 
-        kick = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
-                          width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                          font=consts.FONT_MONO_VERY_SMALL, text='KICK')
+        move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
+                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                            font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[0].name}')
 
-        shoot = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
-                           width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                           font=consts.FONT_MONO_VERY_SMALL, text='SHOOT')
+        move_2 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
+                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                            font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[1].name}')
 
-        wild_swing = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
-                                width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
-                                font=consts.FONT_MONO_VERY_SMALL, text='WILD SWING')
+        move_3 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
+                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                            font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[2].name}')
 
-        if punch.hovered:
-            punch.toggle_bg((100, 100, 100))
+        move_4 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
+                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+                            font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[3].name}')
+
+        if move_1.hovered:
+            move_1.toggle_bg((100, 100, 100))
             if mouse_down:
-                punch.toggle_bg((50, 50, 50))
-                damage = Attacks(1, hpvil)
-                hpvil = hpvil - damage
-                hpcop = hpcop - random.randint(10, 20)
+                move_1.toggle_bg((50, 50, 50))
+                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[0], hpcop, hpvil)
+                if rbdm is None:
+                    # missed
+                    # TODO: show eror
+                    pass
+                else:
+                    # not missed
+                    print(ncphp)
+                    hpcop = ncphp
+                    hpvil = nrbhp
+                    print(hpvil, hpcop)
+                    # TODO: show damage
+                    if is_bckfre:
+                        # TODO: show msg
+                        pass
 
-        if kick.hovered:
-            kick.toggle_bg((100, 100, 100))
+        if move_2.hovered:
+            move_2.toggle_bg((100, 100, 100))
             if mouse_down:
-                kick.toggle_bg((50, 50, 50))
-                damage = Attacks(2, hpvil)
-                hpvil = hpvil - damage
-                hpcop = hpcop - random.randint(10, 20)
+                move_2.toggle_bg((50, 50, 50))
+                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[1], hpcop, hpvil)
+                if rbdm is None:
+                    # missed
+                    # TODO: show eror
+                    pass
+                else:
+                    # not missed
+                    hpcop = ncphp
+                    hpvil = nrbhp
+                    # TODO: show damage
+                    if is_bckfre:
+                        # TODO: show msg
+                        pass
 
-        if shoot.hovered:
-            shoot.toggle_bg((100, 100, 100))
+        if move_3.hovered:
+            move_3.toggle_bg((100, 100, 100))
             if mouse_down:
-                shoot.toggle_bg((50, 50, 50))
-                damage = Attacks(3, hpvil)
-                hpvil = hpvil - damage
-                hpcop = hpcop - random.randint(10, 20)
+                move_3.toggle_bg((50, 50, 50))
+                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[2], hpcop, hpvil)
+                if rbdm is None:
+                    # missed
+                    # TODO: show eror
+                    pass
+                else:
+                    # not missed
+                    hpcop = ncphp
+                    hpvil = nrbhp
+                    # TODO: show damage
+                    if is_bckfre:
+                        # TODO: show msg
+                        pass
 
-        if wild_swing.hovered:
-            wild_swing.toggle_bg((100, 100, 100))
+        if move_4.hovered:
+            move_4.toggle_bg((100, 100, 100))
             if mouse_down:
-                wild_swing.toggle_bg((50, 50, 50))
-                damage = Attacks(4, hpvil)
-                if damage == 0:
-                    hpcop = hpcop * 0.5
-                hpvil = hpvil - damage
-                hpcop = hpcop - 0.1
+                move_4.toggle_bg((50, 50, 50))
+                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[3], hpcop, hpvil)
+                if rbdm is None:
+                    # missed
+                    # TODO: show eror
+                    pass
+                else:
+                    # not missed
+                    hpcop = ncphp
+                    hpvil = nrbhp
+                    # TODO: show damage
+                    if is_bckfre:
+                        # TODO: show msg
+                        pass
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
@@ -159,3 +178,69 @@ def main():
         return win_screen.play()
     else:
         return end_screen.end_screen_func(3)
+
+
+def damage_calc(move: utils.models.FightMove, cophp, robhp):
+    if random.random() < move.accuracy/100:
+        not_miss = True
+    else:
+        not_miss = False
+
+    if not not_miss:
+        return None, None
+
+    if move.is_percentage_based:
+        # move is precentage based
+        # check backfire
+        if move.can_backfire:
+            backfire_chance = random.choice([0, 0, 1])  # fixed for all moves.
+            if backfire_chance:
+                # move hits cop itself
+                dmg = (move.percentage_damage/100) * cophp
+                return dmg, True
+            else:
+                # move hits robber
+                dmg = (move.percentage_damage/100) * robhp
+                return dmg, False
+        else:
+            # cant backfire
+            dmg = (move.percentage_damage/100) * robhp
+            return dmg, False
+    else:
+        # move is normal damage
+        dmg = move.damage
+        if move.can_backfire:
+            backfire_chance = random.choice([0, 0, 1])
+            if backfire_chance:
+                return dmg, True
+            else:
+                return dmg, False
+        else:
+            # move cant backfire
+            return dmg, False
+
+
+def play_turn(mv: utils.models.FightMove, cophp, vilhp):
+    damagee, is_backfire = damage_calc(mv, cophp, vilhp)
+    copdmg, robdmg = 0, 0
+    if damagee is None:
+        # missed
+        robdmg = None
+    else:
+        # didnt miss
+        if is_backfire is True:
+            # backfired
+            cophp -= damagee
+            copdmg += damagee
+        else:
+            print("HIT", damagee)
+            # didnt backfire, normal hit
+            vilhp -= damagee
+            robdmg += damagee
+
+    # robber hit, always hits.
+    ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
+    copdmg += ndm
+    cophp -= ndm
+    print(ndm)
+    return cophp, vilhp, copdmg, robdmg, is_backfire

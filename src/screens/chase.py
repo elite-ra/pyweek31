@@ -123,7 +123,7 @@ def play(skill_level, city_name):
             utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
             pygame.display.update()
             pygame.time.wait(4000)
-            return fight.main()
+            return fight.main(skill_level)
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)

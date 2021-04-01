@@ -104,7 +104,7 @@ def play():
             fight_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 fight_button.toggle_bg(colors.BROWN_COLOR)
-                return fight.main()
+                return fight.main(1)
         else:
             fight_button.toggle_bg(colors.BLACK_COLOR)
 
