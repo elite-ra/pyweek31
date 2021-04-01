@@ -5,6 +5,12 @@ from ..utils import constants as consts
 
 
 def play():
+
+    # GIVE COINS
+    plyr = consts.DB.get_player_details()
+    plyr.coins += 150
+    consts.DB.set_player_details(plyr)
+
     running = True
 
     while running:
@@ -20,7 +26,7 @@ def play():
                 mouse_down = True
 
         font = consts.FONT_MONO_LARGE
-        # coins limit reached
+        # they get em coins.
 
         text = font.render('You caught the robber! You get 150 coins!', True, (255, 255, 255))
         w, h = text.get_rect().width, text.get_rect().height
