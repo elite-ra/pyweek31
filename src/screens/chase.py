@@ -16,6 +16,10 @@ city_bg_map = {
 
 
 def play(skill_level, city_name):
+
+    plyr = utils.constants.DB.get_player_details()
+    plyr.has_reached_chase = True
+    utils.constants.DB.set_player_details(plyr)
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_x = 100
     heli_y = 200

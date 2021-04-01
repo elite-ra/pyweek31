@@ -179,9 +179,9 @@ class FightMove:
         self.accuracy = d['accuracy']
         self.price = d['price']
         if self.price == 0:
-            self.is_intial = False
-        else:
             self.is_intial = True
+        else:
+            self.is_intial = False
 
 
 class Player:
