@@ -28,23 +28,23 @@ def play(skill_level, city_name):
 
     robber = pygame.image.load(
         os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
-    robber_small = pygame.transform.scale(robber, (125, 60))
+    robber_small = pygame.transform.scale(robber, (150, 40))
     robber_x = 650
-    robber_y = 200
+    robber_y = 220
 
     bgimg = pygame.image.load(city_bg_map[city_name])
 
     n = 6
-    bird = []
-    bird_x = []
-    bird_y = []
-    bird_change = []
+    missile = []
+    missile_x = []
+    missile_y = []
+    missile_change = []
     for i in range(n):
-        bird.append(
-            pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'seagull.png')))
-        bird_x.append(random.randint(800, 1540))
-        bird_y.append(random.randint(0, 350))
-        bird_change.append(2 + 0.1 * skill_level)
+        missile.append(
+            pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'missile.png')))
+        missile_x.append(random.randint(800, 1540))
+        missile_y.append(random.randint(0, 350))
+        missile_change.append(2 + 0.1 * skill_level)
 
     m = 3
     coin = []
@@ -69,8 +69,8 @@ def play(skill_level, city_name):
     def robber_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(robber_small, (x, y))
 
-    def bird_game(x, y, i):
-        utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
+    def missile_game(x, y, i):
+        utils.constants.MAIN_DISPLAY.blit(missile[i], (x, y))
 
     def coin_game(x,y, i):
         utils.constants.MAIN_DISPLAY.blit(coin[i], (x, y))
@@ -78,8 +78,8 @@ def play(skill_level, city_name):
     def coin_triple_display(x, y):
         utils.constants.MAIN_DISPLAY.blit(coin_triple, (x, y))
 
-    def is_collision(heli_x, heli_y, bird_x, bird_y):
-        if heli_x - 40 <= bird_x <= heli_x + 104 and heli_y - 30 <= bird_y <= heli_y + 94:
+    def is_collision(heli_x, heli_y, missile_x, missile_y):
+        if heli_x - 40 <= missile_x <= heli_x + 104 and heli_y - 30 <= missile_y <= heli_y + 94:
             return True
         else:
             return False
@@ -147,18 +147,24 @@ def play(skill_level, city_name):
                 coin_y[i] = random.randint(0,350)
         
         for i in range(n):
-            if bird_x[i] <= -60:
-                bird_x[i] = random.randint(800, 1540)
-                bird_y[i] = random.randint(0, 350)
+            if missile_x[i] <= -60:
+                missile_x[i] = random.randint(800, 1540)
+                missile_y[i] = random.randint(0, 350)
 
-            bird_game(bird_x[i], bird_y[i], i)
-            bird_x[i] -= bird_change[i]
-            collision = is_collision(heli_x, heli_y, bird_x[i], bird_y[i])
+            missile_game(missile_x[i], missile_y[i], i)
+
+            if missile_x[i] - 100 <= robber_x <= missile_x[i] and missile_y[i] + 20 <= robber_y <= missile_y[i] + 120:
+                missile_x[i] = 550
+
+            missile_x[i] -= missile_change[i]
+            collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 return end_screen.end_screen_func(2)
 
+            
+
             for j in range(m):
-                if bird_x[i] - 40 <= coin_x[j] <= bird_x[i] + 104 and bird_y[i] - 30 <= coin_y[j] <= bird_y[i] + 94:
+                if missile_x[i] - 40 <= coin_x[j] <= missile_x[i] + 104 and missile_y[i] - 30 <= coin_y[j] <= missile_y[i] + 94:
                     coin_x[j] = random.randint(800, 1540)
                     coin_y[j] = random.randint(0, 350)
 
