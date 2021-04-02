@@ -18,14 +18,10 @@ def main(skill_level):
     utils.constants.DB.set_player_details(plyr)
 
     global ROB_DMG_MAX, ROB_DMG_MIN
-    #print(skill_level)
+
     ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - (0 if 10 * int(skill_level)/10 * 5 < 21 else 20)
     ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
     rob_max_helth = 100 * (skill_level/10 - 0.1 + 1)
-    BG = (153, 102, 255)
-    #print(rob_max_helth)
-
-    myfont = utils.constants.FONT_MONO_VERY_SMALL
 
     # Images and Sprites
     background_image = pygame.image.load(
@@ -66,6 +62,12 @@ def main(skill_level):
     condition = True
 
     player_selected_moves = consts.DB.get_player_moves()
+    screen.blit(background_image, [0, 0])
+
+    # draw background at top to show what moves did
+    s = pygame.Surface((800, 100))
+    s.fill((0, 0, 0))
+    screen.blit(s, (0, 0))
 
     while not done:
         mouse_down = False
@@ -75,9 +77,8 @@ def main(skill_level):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-        screen.blit(background_image, [0, 0])
-        screen.blit(copimg, [230, 100+200])
-        screen.blit(vilimg, [490, 60+220])
+        screen.blit(copimg, [230, 100 + 200])
+        screen.blit(vilimg, [490, 60 + 220])
 
         screen.blit(img, [0, 500])
 
@@ -116,9 +117,10 @@ def main(skill_level):
                 t_test1 = consts.FONT_MONO_SMALL.render(player_selected_moves[c].description, True, (0, 0, 0))
 
                 if t_test1.get_width() > 600 - 525:
-                    t_test1 = consts.FONT_MONO_SMALL.render(" ".join(player_selected_moves[c].description.split(" ")[:7]), True, (0, 0, 0))
-                    t_test2 = consts.FONT_MONO_SMALL.render(" ".join(player_selected_moves[c].description.split(" ")[7:]), True, (0, 0, 0))
-                    print()
+                    t_test1 = consts.FONT_MONO_SMALL.\
+                        render(" ".join(player_selected_moves[c].description.split(" ")[:7]), True, (0, 0, 0))
+                    t_test2 = consts.FONT_MONO_SMALL.\
+                        render(" ".join(player_selected_moves[c].description.split(" ")[7:]), True, (0, 0, 0))
                     consts.MAIN_DISPLAY.blit(t_test1, (185 + 5 + 160 + 30, 525))
                     consts.MAIN_DISPLAY.blit(t_test2, (185 + 5 + 160 + 30, 555))
 
@@ -131,16 +133,44 @@ def main(skill_level):
                     ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[c], hpcop, hpvil)
                     if rbdm is None:
                         # missed
-                        # TODO: show eror
-                        pass
+                        t_mis1 = consts.FONT_MONO_SMALL.render(f'You missed! The robber dealt {cpdm} damage to you!',
+                                                               True, (255, 255, 255))
+
+                        s = pygame.Surface((770, t_mis1.get_height() + 10))
+                        s.fill((0, 0, 0))
+                        screen.blit(s, (15, 45))
+
+                        consts.MAIN_DISPLAY.blit(t_mis1, (20, 50))
+                        hpcop = ncphp
                     else:
                         # not missed
                         hpcop = ncphp
                         hpvil = nrbhp
-                        # TODO: show damage
+
                         if is_bckfre:
-                            # TODO: show msg
-                            pass
+                            # backfired
+                            t_mis1 = consts.FONT_MONO_SMALL.render(f'You tried to hit the robber, '
+                                                                   f'but it backfired! You suffer {cpdm} damage!',
+                                                                   True, (255, 255, 255))
+
+                            s = pygame.Surface((770, t_mis1.get_height() + 10))
+                            s.fill((0, 0, 0))
+                            screen.blit(s, (15, 45))
+
+                            consts.MAIN_DISPLAY.blit(t_mis1, (20, 50))
+                        else:
+                            # normal, not missed, not backfire
+                            t_mis1 = consts.FONT_MONO_SMALL.render(f'You did {rbdm} damage to the robber, '
+                                                                   f'and the robber '
+                                                                   f'dealt {cpdm} damage to you!', True,
+                                                                   (255, 255, 255))
+
+                            s = pygame.Surface((770, t_mis1.get_height() + 10))
+                            s.fill((0, 0, 0))
+                            screen.blit(s, (15, 45))
+
+                            consts.MAIN_DISPLAY.blit(t_mis1, (20, 50))
+
             c += 1
 
         pygame.display.update()
