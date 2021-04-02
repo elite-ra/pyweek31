@@ -30,7 +30,8 @@ def main(skill_level):
     # Images and Sprites
     background_image = pygame.image.load(
         os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'fight_bg_blur.png'))
-    copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop.png'))
+    copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop_n.png'))
+    copimg = pygame.transform.scale(copimg, (108, 200))
     vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Villain.png'))
 
     screen = utils.constants.MAIN_DISPLAY
@@ -75,8 +76,8 @@ def main(skill_level):
                 mouse_down = True
 
         screen.blit(background_image, [0, 0])
-        screen.blit(copimg, [230, 300])
-        screen.blit(vilimg, [490, 300])
+        screen.blit(copimg, [230, 100+200])
+        screen.blit(vilimg, [490, 100+200])
 
         pygame.draw.rect(screen, (80, 80, 80), (0, 500, 800, 100))
         if hpvil <= 0:
