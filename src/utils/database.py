@@ -58,7 +58,7 @@ def read_json(fp):
 
 def store_json(fp, json_dict):
     with open(fp, "w") as f:
-        json.dump(json_dict, f)
+        json.dump(json_dict, f, indent=4, sort_keys=True)
 
 
 def validate_databases_and_settings():
