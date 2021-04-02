@@ -17,6 +17,7 @@ city_bg_map = {
 
 
 def play(skill_level, city_name):
+    chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png')).convert()
 
     plyr = utils.constants.DB.get_player_details()
     plyr.has_reached_chase = True
@@ -32,7 +33,7 @@ def play(skill_level, city_name):
     robber_x = 650
     robber_y = 200
 
-    bgimg = pygame.image.load(city_bg_map[city_name])
+
 
     n = 6
     bird = []
@@ -99,14 +100,17 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(time_display, (750, 10))
 
     time1 = time.time()
-
+    bg_X = 0
     status = True
     while status:
-        utils.constants.MAIN_DISPLAY.blit(bgimg, (0, 0))
-        s = pygame.Surface((800, 600))  # the size of your rect
-        s.set_alpha(120)  # alpha level
-        s.fill((0, 0, 0))  # this fills the entire surface
-        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+
+        rel_x = bg_X % chase_cont.get_width()
+        utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x - chase_cont.get_width(), 0))
+        if rel_x < consts.SCREEN_WIDTH:
+            utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
+        bg_X -= 2 + 0.1 * skill_level
+
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
