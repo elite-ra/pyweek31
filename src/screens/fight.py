@@ -18,12 +18,12 @@ def main(skill_level):
     utils.constants.DB.set_player_details(plyr)
 
     global ROB_DMG_MAX, ROB_DMG_MIN
-    print(skill_level)
+    #print(skill_level)
     ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - (0 if 10 * int(skill_level)/10 * 5 < 21 else 20)
     ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
     rob_max_helth = 100 * (skill_level/10 - 0.1 + 1)
     BG = (153, 102, 255)
-    print(rob_max_helth)
+    #print(rob_max_helth)
 
     myfont = utils.constants.FONT_MONO_VERY_SMALL
 
@@ -116,10 +116,8 @@ def main(skill_level):
                     pass
                 else:
                     # not missed
-                    print(ncphp)
                     hpcop = ncphp
                     hpvil = nrbhp
-                    print(hpvil, hpcop)
                     # TODO: show damage
                     if is_bckfre:
                         # TODO: show msg
@@ -244,7 +242,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             cophp -= damagee
             copdmg += damagee
         else:
-            print("HIT", damagee)
+            #print("HIT", damagee)
             # didnt backfire, normal hit
             vilhp -= damagee
             robdmg += damagee
@@ -253,5 +251,5 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
     ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
     copdmg += ndm
     cophp -= ndm
-    print(ndm)
+    #print(ndm)
     return cophp, vilhp, copdmg, robdmg, is_backfire
