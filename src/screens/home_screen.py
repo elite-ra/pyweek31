@@ -11,6 +11,7 @@ from . import shop
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
+from . import edit_screen
 import os
 
 pygame.init()
@@ -49,6 +50,19 @@ def play():
                                                                    (consts.SCREEN_HEIGHT / 2) - 300),
                                  width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text='Settings')
+
+    plyr = consts.DB.get_player_details()
+    if plyr.has_reached_fight:
+        edit_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+                                                                   (consts.SCREEN_HEIGHT / 2) - 150),
+                                 width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                                 font=pygame.font.Font('freesansbold.ttf', 30), text='Edit Fight Moves')
+    else:
+        edit_button = None
+        edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
+                                                                     (consts.SCREEN_HEIGHT / 2) - 10),
+                                   width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
+                                   font=pygame.font.Font('freesansbold.ttf', 30), text='???')
 
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
     is_game_over = False
@@ -112,6 +126,17 @@ def play():
                 return fight.main(1)
         else:
             fight_button.toggle_bg(colors.BLACK_COLOR)
+
+        if edit_button is None:
+            edit_d_button.toggle_bg(colors.GREY_COLOR)
+        else:
+            if edit_button.hovered:
+                edit_button.toggle_bg(colors.RED_COLOR)
+                if mouse_down:
+                    edit_button.toggle_bg(colors.RED_COLOR)
+                    return edit_screen.play()
+            else:
+                edit_button.toggle_bg(colors.BLACK_COLOR)
 
         # update all the things in game
         pygame.display.update()

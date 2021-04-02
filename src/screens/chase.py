@@ -17,7 +17,7 @@ city_bg_map = {
 
 
 def play(skill_level, city_name):
-    chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png')).convert()
+    chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png'))
 
     plyr = utils.constants.DB.get_player_details()
     plyr.has_reached_chase = True
