@@ -48,6 +48,7 @@ class Game:
         # do the robbers turn, which changes the robber's location.
         self.do_robber_turn()
 
+        print('Turn done')
         if city_chosen_by_player == self.current_robber_location:
             # It is a correct guess - the robber moved to what you chose!
             return True, self.skill_level

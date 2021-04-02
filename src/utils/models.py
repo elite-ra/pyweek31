@@ -137,12 +137,12 @@ class City:
         else:
             blckmrkt_str = "???"
 
-        s = f"- No. of banks:{(30 - len(str(self.bank_count))) * ' '}{self.bank_count}\n" \
-            f"- No. of museums:{(28 - len(str(self.museum_count))) * ' '}{self.museum_count}\n" \
-            f"- Crime rate:{(31 - len(str(self.crime_rate))) * ' '}{self.crime_rate}%\n" \
-            f"- Per Capita Income:{(24 - len(pci_str)) * ' '}${pci_str}\n" \
-            f"- Hospital:{(34 - len(hosp_str)) * ' '}{hosp_str}\n" \
-            f"- Black market:{(30 - len(blckmrkt_str)) * ' '}{blckmrkt_str}\n"
+        s = f"No. of banks:{(15 - len(str(self.bank_count))) * ' '}{self.bank_count}\n" \
+            f"No. of museums:{(13 - len(str(self.museum_count))) * ' '}{self.museum_count}\n" \
+            f"Crime rate:{(16 - len(str(self.crime_rate))) * ' '}{self.crime_rate}%\n" \
+            f"Per Capita Income:{(9 - len(pci_str)) * ' '}${pci_str}\n" \
+            f"Hospital:{(19 - len(hosp_str)) * ' '}{hosp_str}\n" \
+            f"Black market:{(15 - len(blckmrkt_str)) * ' '}{blckmrkt_str}\n"
 
         return s
 

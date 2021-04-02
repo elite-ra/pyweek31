@@ -113,7 +113,6 @@ def play(skill_level, city_name):
             utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
         bg_X -= 1.5
         no_of_frames += 1
-        print(no_of_frames)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
