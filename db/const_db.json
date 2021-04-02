@@ -42,7 +42,7 @@
       "damage": null,
       "percent_damage": 20.0,
       "can_backfire": false,
-      "accuracy": 100.0,
+      "accuracy": 70.0,
       "price": 50
     },
     {
