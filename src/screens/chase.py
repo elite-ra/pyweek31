@@ -189,9 +189,9 @@ def play(skill_level, city_name):
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
-            font = utils.constants.FONT_MONO_VERY_LARGE
+            font = utils.constants.FONT_MONO_LARGE
             text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
+            utils.constants.MAIN_DISPLAY.blit(text, (75, 200))
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
