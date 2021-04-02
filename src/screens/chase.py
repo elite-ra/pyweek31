@@ -141,10 +141,10 @@ def play(skill_level, city_name):
             if collect_coin:
                 plyr = consts.DB.get_player_details()
                 # increase:
-                plyr.coins += 30
+                # plyr.coins += 30
                 coins += 30
                 # set
-                consts.DB.set_player_details(plyr)
+
                 coin_x[i] = random.randint(800, 1540)
                 coin_y[i] = random.randint(0, 350)
         
@@ -172,6 +172,7 @@ def play(skill_level, city_name):
 
         
 
+
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
         coin_triple_display(coin_triple_x, coin_triple_y)
@@ -183,18 +184,21 @@ def play(skill_level, city_name):
 
         # show fight scene
         if time_taken >= 30:
+
             s = pygame.Surface((800, 600))  # the size of your rect
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
             font = utils.constants.FONT_MONO_VERY_LARGE
-            text = font.render('You caught the robber!', True, (255, 255, 255))
+            text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
             pygame.display.update()
             pygame.time.wait(4000)
+            plyr.coins += coins
+            consts.DB.set_player_details(plyr)
             return fight.main(skill_level)
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
