@@ -167,6 +167,7 @@ def play(skill_level, city_name):
             if collision:
                 return end_screen.end_screen_func(2)
 
+
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
         coin_triple_display(coin_triple_x, coin_triple_y)

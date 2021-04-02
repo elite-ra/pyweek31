@@ -41,6 +41,10 @@ def play():
                       width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                       font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
 
+    reset_btn = TextButton(surface=consts.MAIN_DISPLAY, pos = (500, 100), width=100, height=40,
+                           fg_color=colors.WHITE_COLOR, bg_color=colors.RED_COLOR,
+                           font=pygame.font.Font('freesansbold.ttf', 10), text='Reset Game Progress')
+
     is_game_over = False
     while not is_game_over:
         curr_setting = consts.DB.get_settings()
@@ -104,6 +108,14 @@ def play():
             if mouse_down:
                 back.toggle_bg(colors.BROWN_COLOR)
                 # update volume bar
+                return home_screen.play()
+        else:
+            back.toggle_bg(colors.BLACK_COLOR)
+
+        if reset_btn.hovered:
+            reset_btn.toggle_bg(colors.BROWN_COLOR)
+            if mouse_down:
+                consts.DB.reset_player_settings()
                 return home_screen.play()
         else:
             back.toggle_bg(colors.BLACK_COLOR)

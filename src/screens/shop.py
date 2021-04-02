@@ -38,7 +38,7 @@ def play():
             informant = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
                                                                      (consts.SCREEN_HEIGHT / 2) + 100),
                                    width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                   font=pygame.font.Font('freesansbold.ttf', 30), text='INFORMANT | 150')
+                                   font=pygame.font.Font('freesansbold.ttf', 30), text='Informant | 150')
 
             if consts.DB.get_player_details().has_reached_fight:
                 bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
@@ -76,6 +76,12 @@ def play():
 
         if informant.hovered and not no_coins:
             informant.toggle_bg(colors.BROWN_COLOR)
+
+            mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
+
+            rect = pygame.draw.rect(consts.MAIN_DISPLAY, (180, 180, 180), (mx, my, 200, 75))
+
+
             if mouse_down:
                 informant.toggle_bg(colors.BROWN_COLOR)
                 # check coins

@@ -49,6 +49,10 @@ class Database:
         self.settings_db = new_settings
         store_json(os.path.join(consts.ROOT_PATH, 'settings.json'), self.settings_db)
 
+    def reset_player_settings(self):
+        plyr = models.Player.new()
+        self.player = plyr
+
 
 def read_json(fp):
     with open(fp, "r") as f:

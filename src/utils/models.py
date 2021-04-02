@@ -208,3 +208,17 @@ class Player:
         }
 
         return d
+
+    @classmethod
+    def new(cls):
+        d = {
+            'HAS_REACHED_FIGHT_ONCE': False,
+            'HAS_REACHED_CHASE_ONCE': False,
+            'HAS_INFORMANT': False,
+            'COINS': 0,
+            'STORE': {
+                "SELECTED": ['Punch', 'Kick', 'Super Mega Smash', 'Gunshot'],
+                "BOUGHT_BUT_UNUSED": []
+            }
+        }
+        return Player(d)
