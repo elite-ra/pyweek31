@@ -45,7 +45,7 @@ def play(skill_level, city_name):
             pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'missile.png')))
         missile_x.append(random.randint(800, 1540))
         missile_y.append(random.randint(0, 350))
-        missile_change.append(2 + 0.1 * skill_level)
+        missile_change.append(2 + 0.5 * skill_level)
 
     m = 3
     coin = []
@@ -55,7 +55,7 @@ def play(skill_level, city_name):
         coin.append(pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'textures', 'coin.png')))
         coin_x.append(random.randint(800, 1540))
         coin_y.append(random.randint(0, 350))
-    coin_change = 2 + 0.1 * skill_level
+    coin_change = 2 + 0.5 * skill_level
 
     coin_triple = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'textures', 'coin_triple.png'))
     coin_triple_x = 500
@@ -108,7 +108,7 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x - chase_cont.get_width(), 0))
         if rel_x < consts.SCREEN_WIDTH:
             utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
-        bg_X -= 2 + 0.1 * skill_level
+        bg_X -= 1
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
