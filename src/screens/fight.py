@@ -32,7 +32,9 @@ def main(skill_level):
         os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'fight_bg_blur.png'))
     copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop_n.png'))
     copimg = pygame.transform.scale(copimg, (108, 200))
-    vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Villain.png'))
+    vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Robber.png'))
+    vilimg = pygame.transform.scale(vilimg, (108, 220))
+    img = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'bg_platform_down.png'))
 
     screen = utils.constants.MAIN_DISPLAY
 
@@ -77,9 +79,10 @@ def main(skill_level):
 
         screen.blit(background_image, [0, 0])
         screen.blit(copimg, [230, 100+200])
-        screen.blit(vilimg, [490, 100+200])
+        screen.blit(vilimg, [490, 60+220])
 
-        pygame.draw.rect(screen, (80, 80, 80), (0, 500, 800, 100))
+        screen.blit(img, [0, 500])
+
         if hpvil <= 0:
             break
         elif hpcop <= 0:
@@ -90,20 +93,20 @@ def main(skill_level):
         health_cop(hpcop, screen)
         health_vil(hpvil, screen)
 
-        move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(25, 525),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[0].name}')
 
-        move_2 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_2 = TextButton(surface=consts.MAIN_DISPLAY, pos=(185 + 5, 525),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[1].name}')
 
-        move_3 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_3 = TextButton(surface=consts.MAIN_DISPLAY, pos=(25, 555),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[2].name}')
 
-        move_4 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_4 = TextButton(surface=consts.MAIN_DISPLAY, pos=(185 + 5, 555),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[3].name}')
 
         if move_1.hovered:
