@@ -79,8 +79,19 @@ def play():
 
             mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
 
-            rect = pygame.draw.rect(consts.MAIN_DISPLAY, (180, 180, 180), (mx, my, 200, 75))
+            text_a = consts.FONT_MONO_MEDIUM.render('Informant!', True, (255, 255, 255))
+            text_b = consts.FONT_MONO_SMALL.render('Hire an informant. The informant', True, (255, 255, 255))
+            text_c = consts.FONT_MONO_SMALL.render('reveals more details about the robber.', True, (255, 255, 255))
+            text_d = consts.FONT_MONO_SMALL.render('Cost: 400 coins', True, (255, 255, 255))
 
+            s = pygame.Surface((400, 5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
+
+            s.blit(text_a, (5, 0))
+            s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
+            s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
+            s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
+                            text_c.get_rect().height + 5))
+            consts.MAIN_DISPLAY.blit(s, (mx, my))
 
             if mouse_down:
                 informant.toggle_bg(colors.BROWN_COLOR)
@@ -118,6 +129,23 @@ def play():
 
         if consts.DB.get_player_details().has_reached_fight:
             if bm1.hovered and not no_coins:
+                mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
+
+                text_a = consts.FONT_MONO_MEDIUM.render(f'{allmove[0].name}', True, (255, 255, 255))
+                text_b = consts.FONT_MONO_SMALL.render(f'Buy the "{allmove[0].name}" move', True, (255, 255, 255))
+                text_c = consts.FONT_MONO_SMALL.render(f'{allmove[0].description}', True, (255, 255, 255))
+                text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[0].price} coins', True, (255, 255, 255))
+
+                s = pygame.Surface((400,
+                                    5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
+
+                s.blit(text_a, (5, 0))
+                s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
+                s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
+                s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
+                                text_c.get_rect().height + 5))
+                consts.MAIN_DISPLAY.blit(s, (mx, my))
+
                 bm1.toggle_bg(colors.BROWN_COLOR)
                 if mouse_down:
                     bm1.toggle_bg(colors.BROWN_COLOR)
