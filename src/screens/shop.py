@@ -31,32 +31,39 @@ def play():
                       font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
 
     while not is_game_over:
+
         if not no_coins:
             utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
 
-            informant = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+            informant = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
                                                                      (consts.SCREEN_HEIGHT / 2) + 100),
-                                   width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                   font=pygame.font.Font('freesansbold.ttf', 30), text='INFORMANT')
+                                   width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                                   font=pygame.font.Font('freesansbold.ttf', 30), text='INFORMANT | 150')
 
             if consts.DB.get_player_details().has_reached_fight:
-                bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
+                bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) - 100),
-                                 width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[0].name}')
-                bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
+                                 width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[0].name} '
+                                                                                     f'| {allmove[0].price}')
+                bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) + 0),
-                                 width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[1].name}')
+                                 width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[1].name} '
+                                                                                     f'| {allmove[1].price}')
             else:
-                bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
+                bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) - 100),
-                                 width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
+                                 width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text=f'???')
-                bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
+                bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) + 0),
-                                 width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
+                                 width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text=f'???')
+
+        t = consts.FONT_MONO_MEDIUM.render(f'{plyr.coins}', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (711, 10))
+        consts.MAIN_DISPLAY.blit(consts.COIN_TRIPLE_IMG, (650, 10))
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
@@ -193,7 +200,7 @@ def play():
                 else:
                     no_coins = True
 
-        if back.hovered:
+        if back.hovered and not no_coins:
             back.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 back.toggle_bg(colors.BROWN_COLOR)

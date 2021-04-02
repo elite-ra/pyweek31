@@ -29,3 +29,8 @@ FONT_MONO_SMALL = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'P
 FONT_MONO_MEDIUM = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'PTMono-Regular.ttf'), 25)
 FONT_MONO_LARGE = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'PTMono-Regular.ttf'), 30)
 FONT_MONO_VERY_LARGE = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'PTMono-Regular.ttf'), 40)
+
+
+# load images
+
+COIN_TRIPLE_IMG = pygame.image.load(os.path.join(ROOT_PATH, 'assets', 'images', 'textures', 'coin_triple.png'))
