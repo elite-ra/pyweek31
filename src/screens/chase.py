@@ -152,13 +152,14 @@ def play(skill_level, city_name):
             if missile_x[i] <= -60:
                 missile_x[i] = random.randint(800, 1540)
                 missile_y[i] = random.randint(0, 350)
-
-            if robber_y >= missile_y[i] <= robber_y + robber_small.get_height():
-                missile_x[i] -= robber_small.get_width() + 64
+            #
+            # if robber_y <= missile_y[i] <= robber_y + robber_small.get_height() and missile_x[i] < consts.SCREEN_WIDTH:
+            #     missile_x[i] = 550
 
             missile_game(missile_x[i], missile_y[i], i)
 
             missile_x[i] -= missile_change[i]
+
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 return end_screen.end_screen_func(2)
