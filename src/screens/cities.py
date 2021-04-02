@@ -48,7 +48,7 @@ def play():
         current_coins = game_obj.total_coins_stolen
         text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
         # losing condition
-        if current_coins >= 50000:
+        if current_coins >= coin_limit:
             return end_screen.end_screen_func(1)
 
         w = text.get_rect().width
@@ -57,8 +57,8 @@ def play():
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 90))
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 86), 1)
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 120))
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 116), 1)
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render('Robber Stats', True, (200, 200, 200))
         font = utils.constants.FONT_MONO_SMALL
@@ -68,7 +68,8 @@ def play():
         temp = 0
         for i in random_string.split('\n'):
             text = font.render(i, True, (200, 200, 200))
-            utils.constants.MAIN_DISPLAY.blit(text, (30, 30 + temp * 20))
+            w = text.get_rect().width
+            utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2-10, 40 + temp * 20))
             temp += 1
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):

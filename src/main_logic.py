@@ -66,8 +66,6 @@ class Game:
         change_robber_health = random.randint(int((10 - self.skill_level) * 3), int((11 - self.skill_level) * 3))
         coins_change = random.randint(int(self.skill_level * 1000), int(self.skill_level * 2500))
 
-
-
         # make move based on attributes
         choices = cities_list[:]  # all the available choices
 
@@ -140,18 +138,18 @@ class Game:
         # CHANGE VARIABLES BASED ON MOVE
         self.last_seen_city = self.current_robber_location
         self.current_robber_location = next_move
-        #print("====")
-        #print(self.current_robber_location.name)
+        # print("====")
+        # print(self.current_robber_location.name)
 
         self.robber_health -= change_robber_health
         self.coins_stolen = coins_change
         self.total_coins_stolen += self.coins_stolen
         # selling previously stolen item
-        #print(self.is_item_stolen)
-        #print(self.stolen_item)
-        #print(self.last_seen_city)
+        # print(self.is_item_stolen)
+        # print(self.stolen_item)
+        # print(self.last_seen_city)
         if self.is_item_stolen and self.current_robber_location.is_blackmarket_present:
-            #print("SELLING")
+            # print("SELLING")
             self.is_item_stolen = False  # reset: it is now sold.
             self.stolen_item = None
             # selling price 5000-10000
@@ -169,7 +167,17 @@ class Game:
     def __str__(self):
         lastseenstr = str(self.current_robber_location.name) if self.current_robber_location is not None else "N/A"
         stolenitemstr = str(self.stolen_item.capitalize()) if self.stolen_item is not None else "N/A"
-        s = f"- Robber Health:{(30 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
-            f"- Last Seen City:{(28 - len(lastseenstr)) * ' '}{lastseenstr}\n" \
-            f"- Stolen Item:{(24 - len(stolenitemstr)) * ' '}{stolenitemstr}\n"
+
+        name_name = {'MUSEUM': 'robbing museums', 'BANK': 'robbing banks', 'NORM': 'robbing rich residents(sometimes)',
+                     'GROUP_PERSON': 'robbing with friends'}
+
+        if consts.DB.player.has_informant:
+            type_str = name_name[self.robber_type]
+        else:
+            type_str = "???"
+
+        s = f"Robber Health:{(17 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
+            f"Last Seen City:{(16 - len(lastseenstr)) * ' '}{lastseenstr}\n" \
+            f"Stolen Item:{(19 - len(stolenitemstr)) * ' '}{stolenitemstr}\n" \
+            f"This type of robber prefers {type_str}"
         return s
