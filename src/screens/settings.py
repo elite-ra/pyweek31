@@ -15,23 +15,23 @@ from . import home_screen
 
 # settings screen
 def play():
-    utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
+
     # print(utils.constants.DB.get_settings())
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
-    inc_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+    inc_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                                 (consts.SCREEN_HEIGHT / 2) + 100),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                               font=pygame.font.Font('freesansbold.ttf', 18), text='+')
-    dec_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 0,
+    dec_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                                 (consts.SCREEN_HEIGHT / 2) + 100),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                               font=pygame.font.Font('freesansbold.ttf', 18), text='-')
 
-    inc_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+    inc_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                               (consts.SCREEN_HEIGHT / 2) + 50),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                             font=pygame.font.Font('freesansbold.ttf', 18), text='+')
-    dec_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 0,
+    dec_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                               (consts.SCREEN_HEIGHT / 2) + 50),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                             font=pygame.font.Font('freesansbold.ttf', 18), text='-')
@@ -47,7 +47,18 @@ def play():
 
     is_game_over = False
     while not is_game_over:
+        utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
         curr_setting = consts.DB.get_settings()
+
+        t = consts.FONT_MONO_SMALL.render(f'Music: ', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 150, consts.SCREEN_HEIGHT/2 + 100))
+        t = consts.FONT_MONO_MEDIUM.render(f'{curr_setting["volume"]["music"]}', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 + 0, consts.SCREEN_HEIGHT/2 + 100))
+
+        t = consts.FONT_MONO_MEDIUM.render(f'{curr_setting["volume"]["fx"]}', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 + 0, consts.SCREEN_HEIGHT / 2 + 50))
+        t = consts.FONT_MONO_SMALL.render(f'Fx: ', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 150, consts.SCREEN_HEIGHT/2 + 50))
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
@@ -58,50 +69,64 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-        # button interaction
-        if inc_main_vol.hovered:
-            inc_main_vol.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
+        if curr_setting['volume']['music'] == 100:
+            inc_main_vol.toggle_bg(colors.GREY_COLOR)
+        else:
+            # button interaction
+            if inc_main_vol.hovered and curr_setting['volume']['music'] < 100:
                 inc_main_vol.toggle_bg(colors.BROWN_COLOR)
-                # update volume bar
-                ns = dict(curr_setting)
-                ns['volume']['music'] += 10
-                consts.DB.set_settings(ns)
-        else:
-            inc_main_vol.toggle_bg(colors.BLACK_COLOR)
+                if mouse_down:
+                    inc_main_vol.toggle_bg(colors.BROWN_COLOR)
+                    # update volume bar
 
-        if dec_main_vol.hovered:
-            dec_main_vol.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
+                    ns = dict(curr_setting)
+                    ns['volume']['music'] += 10
+
+                    consts.DB.set_settings(ns)
+            else:
+                inc_main_vol.toggle_bg(colors.BLACK_COLOR)
+
+        if curr_setting['volume']['music'] == 0:
+            dec_main_vol.toggle_bg(colors.GREY_COLOR)
+        else:
+            if dec_main_vol.hovered and curr_setting['volume']['music'] > 0:
                 dec_main_vol.toggle_bg(colors.BROWN_COLOR)
-                # update volume bar
-                ns = dict(curr_setting)
-                ns['volume']['music'] -= 10
-                consts.DB.set_settings(ns)
-        else:
-            dec_main_vol.toggle_bg(colors.BLACK_COLOR)
+                if mouse_down:
+                    dec_main_vol.toggle_bg(colors.BROWN_COLOR)
+                    # update volume bar
+                    ns = dict(curr_setting)
+                    ns['volume']['music'] -= 10
+                    consts.DB.set_settings(ns)
+            else:
+                dec_main_vol.toggle_bg(colors.BLACK_COLOR)
 
-        if inc_fx_vol.hovered:
-            inc_fx_vol.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
+        if curr_setting['volume']['fx'] == 100:
+            inc_fx_vol.toggle_bg(colors.GREY_COLOR)
+        else:
+            if inc_fx_vol.hovered and curr_setting['volume']['fx'] < 100:
                 inc_fx_vol.toggle_bg(colors.BROWN_COLOR)
-                # update volume bar
-                ns = dict(curr_setting)
-                ns['volume']['fx'] += 10
-                consts.DB.set_settings(ns)
-        else:
-            inc_fx_vol.toggle_bg(colors.BLACK_COLOR)
+                if mouse_down:
+                    inc_fx_vol.toggle_bg(colors.BROWN_COLOR)
+                    # update volume bar
+                    ns = dict(curr_setting)
+                    ns['volume']['fx'] += 10
+                    consts.DB.set_settings(ns)
+            else:
+                inc_fx_vol.toggle_bg(colors.BLACK_COLOR)
 
-        if dec_fx_vol.hovered:
-            dec_fx_vol.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
-                dec_fx_vol.toggle_bg(colors.BROWN_COLOR)
-                # update volume bar
-                ns = dict(curr_setting)
-                ns['volume']['fx'] -= 10
-                consts.DB.set_settings(ns)
+        if curr_setting['volume']['fx'] == 0:
+            dec_fx_vol.toggle_bg(colors.GREY_COLOR)
         else:
-            dec_fx_vol.toggle_bg(colors.BLACK_COLOR)
+            if dec_fx_vol.hovered and curr_setting['volume']['fx'] > 0:
+                dec_fx_vol.toggle_bg(colors.BROWN_COLOR)
+                if mouse_down:
+                    dec_fx_vol.toggle_bg(colors.BROWN_COLOR)
+                    # update volume bar
+                    ns = dict(curr_setting)
+                    ns['volume']['fx'] -= 10
+                    consts.DB.set_settings(ns)
+            else:
+                dec_fx_vol.toggle_bg(colors.BLACK_COLOR)
 
         if back.hovered:
             back.toggle_bg(colors.BROWN_COLOR)
@@ -116,6 +141,7 @@ def play():
             reset_btn.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 consts.DB.reset_player_settings()
+
                 return home_screen.play()
         else:
             reset_btn.toggle_bg(colors.RED_COLOR)

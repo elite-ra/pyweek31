@@ -52,6 +52,7 @@ class Database:
     def reset_player_settings(self):
         plyr = models.Player.new()
         self.player = plyr
+        self.set_player_details(self.player)
 
 
 def read_json(fp):

@@ -40,8 +40,8 @@ def play():
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=pygame.font.Font('freesansbold.ttf', 30), text='Shop')
 
-    fight_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 250,
-                                                                (consts.SCREEN_HEIGHT / 2) - 200),
+    fight_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+                                                                (consts.SCREEN_HEIGHT / 2) + 250),
                               width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                               font=pygame.font.Font('freesansbold.ttf', 30), text='Fight')
 
