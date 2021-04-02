@@ -68,9 +68,7 @@ def main(skill_level):
     player_selected_moves = consts.DB.get_player_moves()
 
     while not done:
-
         mouse_down = False
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -82,16 +80,6 @@ def main(skill_level):
         screen.blit(vilimg, [490, 60+220])
 
         screen.blit(img, [0, 500])
-
-        if hpvil <= 0:
-            break
-        elif hpcop <= 0:
-            condition = False
-            break
-
-        # update cop, villain health
-        health_cop(hpcop, screen)
-        health_vil(hpvil, screen)
 
         move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(25, 525),
                             width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
@@ -109,77 +97,51 @@ def main(skill_level):
                             width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[3].name}')
 
-        if move_1.hovered:
-            move_1.toggle_bg((100, 100, 100))
-            if mouse_down:
-                move_1.toggle_bg((50, 50, 50))
-                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[0], hpcop, hpvil)
-                if rbdm is None:
-                    # missed
-                    # TODO: show eror
-                    pass
-                else:
-                    # not missed
-                    hpcop = ncphp
-                    hpvil = nrbhp
-                    # TODO: show damage
-                    if is_bckfre:
-                        # TODO: show msg
-                        pass
+        moves = [move_1, move_2, move_3, move_4]
 
-        if move_2.hovered:
-            move_2.toggle_bg((100, 100, 100))
-            if mouse_down:
-                move_2.toggle_bg((50, 50, 50))
-                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[1], hpcop, hpvil)
-                if rbdm is None:
-                    # missed
-                    # TODO: show eror
-                    pass
-                else:
-                    # not missed
-                    hpcop = ncphp
-                    hpvil = nrbhp
-                    # TODO: show damage
-                    if is_bckfre:
-                        # TODO: show msg
-                        pass
+        if hpvil <= 0:
+            break
+        elif hpcop <= 0:
+            condition = False
+            break
 
-        if move_3.hovered:
-            move_3.toggle_bg((100, 100, 100))
-            if mouse_down:
-                move_3.toggle_bg((50, 50, 50))
-                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[2], hpcop, hpvil)
-                if rbdm is None:
-                    # missed
-                    # TODO: show eror
-                    pass
-                else:
-                    # not missed
-                    hpcop = ncphp
-                    hpvil = nrbhp
-                    # TODO: show damage
-                    if is_bckfre:
-                        # TODO: show msg
-                        pass
+        # update cop, villain health
+        health_cop(hpcop, screen)
+        health_vil(hpvil, screen)
 
-        if move_4.hovered:
-            move_4.toggle_bg((100, 100, 100))
-            if mouse_down:
-                move_4.toggle_bg((50, 50, 50))
-                ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[3], hpcop, hpvil)
-                if rbdm is None:
-                    # missed
-                    # TODO: show eror
-                    pass
+        c = 0
+        for move in moves:
+            if move.hovered:
+
+                t_test1 = consts.FONT_MONO_SMALL.render(player_selected_moves[c].description, True, (0, 0, 0))
+
+                if t_test1.get_width() > 600 - 525:
+                    t_test1 = consts.FONT_MONO_SMALL.render(" ".join(player_selected_moves[c].description.split(" ")[:7]), True, (0, 0, 0))
+                    t_test2 = consts.FONT_MONO_SMALL.render(" ".join(player_selected_moves[c].description.split(" ")[7:]), True, (0, 0, 0))
+                    print()
+                    consts.MAIN_DISPLAY.blit(t_test1, (185 + 5 + 160 + 30, 525))
+                    consts.MAIN_DISPLAY.blit(t_test2, (185 + 5 + 160 + 30, 555))
+
                 else:
-                    # not missed
-                    hpcop = ncphp
-                    hpvil = nrbhp
-                    # TODO: show damage
-                    if is_bckfre:
-                        # TODO: show msg
+                    consts.MAIN_DISPLAY.blit(t_test1, (185 + 5 + 160 + 30, 525))
+
+                move.toggle_bg((100, 100, 100))
+                if mouse_down:
+                    move.toggle_bg((50, 50, 50))
+                    ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[c], hpcop, hpvil)
+                    if rbdm is None:
+                        # missed
+                        # TODO: show eror
                         pass
+                    else:
+                        # not missed
+                        hpcop = ncphp
+                        hpvil = nrbhp
+                        # TODO: show damage
+                        if is_bckfre:
+                            # TODO: show msg
+                            pass
+            c += 1
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
@@ -246,7 +208,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             cophp -= damagee
             copdmg += damagee
         else:
-            #print("HIT", damagee)
+
             # didnt backfire, normal hit
             vilhp -= damagee
             robdmg += damagee
@@ -255,5 +217,5 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
     ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
     copdmg += ndm
     cophp -= ndm
-    #print(ndm)
+
     return cophp, vilhp, copdmg, robdmg, is_backfire
