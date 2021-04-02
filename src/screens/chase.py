@@ -110,8 +110,6 @@ def play(skill_level, city_name):
             utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
         bg_X -= 2 + 0.1 * skill_level
 
-
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 status = False
@@ -148,24 +146,23 @@ def play(skill_level, city_name):
                 # set
                 consts.DB.set_player_details(plyr)
                 coin_x[i] = random.randint(800, 1540)
-                coin_y[i] = random.randint(0,350)
+                coin_y[i] = random.randint(0, 350)
         
         for i in range(n):
             if missile_x[i] <= -60:
                 missile_x[i] = random.randint(800, 1540)
                 missile_y[i] = random.randint(0, 350)
 
-            missile_game(missile_x[i], missile_y[i], i)
+            if robber_y >= missile_y[i] <= robber_y + robber_small.get_height():
+                missile_x[i] -= robber_small.get_width() + 64
 
-            if missile_x[i] - 100 <= robber_x <= missile_x[i] and missile_y[i] + 20 <= robber_y <= missile_y[i] + 120:
-                missile_x[i] = 550
+            missile_game(missile_x[i], missile_y[i], i)
 
             missile_x[i] -= missile_change[i]
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 return end_screen.end_screen_func(2)
 
-            
 
             for j in range(m):
                 if missile_x[i] - 40 <= coin_x[j] <= missile_x[i] + 104 and missile_y[i] - 30 <= coin_y[j] <= missile_y[i] + 94:
