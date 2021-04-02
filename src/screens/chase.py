@@ -17,6 +17,7 @@ city_bg_map = {
 
 
 def play(skill_level, city_name):
+    chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png')).convert()
 
     plyr = utils.constants.DB.get_player_details()
     plyr.has_reached_chase = True
@@ -32,7 +33,7 @@ def play(skill_level, city_name):
     robber_x = 650
     robber_y = 220
 
-    bgimg = pygame.image.load(city_bg_map[city_name])
+
 
     n = 6
     missile = []
@@ -99,14 +100,15 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(time_display, (750, 10))
 
     time1 = time.time()
-
+    bg_X = 0
     status = True
     while status:
-        utils.constants.MAIN_DISPLAY.blit(bgimg, (0, 0))
-        s = pygame.Surface((800, 600))  # the size of your rect
-        s.set_alpha(120)  # alpha level
-        s.fill((0, 0, 0))  # this fills the entire surface
-        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+
+        rel_x = bg_X % chase_cont.get_width()
+        utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x - chase_cont.get_width(), 0))
+        if rel_x < consts.SCREEN_WIDTH:
+            utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
+        bg_X -= 2 + 0.1 * skill_level
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -139,29 +141,29 @@ def play(skill_level, city_name):
             if collect_coin:
                 plyr = consts.DB.get_player_details()
                 # increase:
-                plyr.coins += 30
+                # plyr.coins += 30
                 coins += 30
                 # set
-                consts.DB.set_player_details(plyr)
+
                 coin_x[i] = random.randint(800, 1540)
-                coin_y[i] = random.randint(0,350)
+                coin_y[i] = random.randint(0, 350)
         
         for i in range(n):
             if missile_x[i] <= -60:
                 missile_x[i] = random.randint(800, 1540)
                 missile_y[i] = random.randint(0, 350)
+            #
+            # if robber_y <= missile_y[i] <= robber_y + robber_small.get_height() and missile_x[i] < consts.SCREEN_WIDTH:
+            #     missile_x[i] = 550
 
             missile_game(missile_x[i], missile_y[i], i)
 
-            if missile_x[i] - 100 <= robber_x <= missile_x[i] and missile_y[i] + 20 <= robber_y <= missile_y[i] + 120:
-                missile_x[i] = 550
-
             missile_x[i] -= missile_change[i]
+
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 return end_screen.end_screen_func(2)
 
-            
 
             for j in range(m):
                 if missile_x[i] - 40 <= coin_x[j] <= missile_x[i] + 104 and missile_y[i] - 30 <= coin_y[j] <= missile_y[i] + 94:
@@ -169,6 +171,7 @@ def play(skill_level, city_name):
                     coin_y[j] = random.randint(0, 350)
 
         
+
 
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
@@ -181,18 +184,21 @@ def play(skill_level, city_name):
 
         # show fight scene
         if time_taken >= 30:
+
             s = pygame.Surface((800, 600))  # the size of your rect
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
             font = utils.constants.FONT_MONO_VERY_LARGE
-            text = font.render('You caught the robber!', True, (255, 255, 255))
+            text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
             pygame.display.update()
             pygame.time.wait(4000)
+            plyr.coins += coins
+            consts.DB.set_player_details(plyr)
             return fight.main(skill_level)
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
