@@ -11,12 +11,17 @@ from . import shop
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
+import os
 
 pygame.init()
 
 
 # temporary home screen
 def play():
+
+    img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
+
+
     city_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                                (consts.SCREEN_HEIGHT / 2) + 100),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
@@ -49,8 +54,9 @@ def play():
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
     is_game_over = False
     while not is_game_over:
+
         mouse_down = False
-        consts.MAIN_DISPLAY.fill((0, 0, 0))
+        consts.MAIN_DISPLAY.blit(img, (0, 0))
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

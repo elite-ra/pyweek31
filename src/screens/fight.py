@@ -18,20 +18,23 @@ def main(skill_level):
     utils.constants.DB.set_player_details(plyr)
 
     global ROB_DMG_MAX, ROB_DMG_MIN
-    print(skill_level)
+    #print(skill_level)
     ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - (0 if 10 * int(skill_level)/10 * 5 < 21 else 20)
     ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
     rob_max_helth = 100 * (skill_level/10 - 0.1 + 1)
     BG = (153, 102, 255)
-    print(rob_max_helth)
+    #print(rob_max_helth)
 
     myfont = utils.constants.FONT_MONO_VERY_SMALL
 
     # Images and Sprites
     background_image = pygame.image.load(
         os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'fight_bg_blur.png'))
-    copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop.png'))
-    vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Villain.png'))
+    copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop_n.png'))
+    copimg = pygame.transform.scale(copimg, (108, 200))
+    vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Robber.png'))
+    vilimg = pygame.transform.scale(vilimg, (108, 220))
+    img = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'bg_platform_down.png'))
 
     screen = utils.constants.MAIN_DISPLAY
 
@@ -75,10 +78,11 @@ def main(skill_level):
                 mouse_down = True
 
         screen.blit(background_image, [0, 0])
-        screen.blit(copimg, [230, 300])
-        screen.blit(vilimg, [490, 300])
+        screen.blit(copimg, [230, 100+200])
+        screen.blit(vilimg, [490, 60+220])
 
-        pygame.draw.rect(screen, (80, 80, 80), (0, 500, 800, 100))
+        screen.blit(img, [0, 500])
+
         if hpvil <= 0:
             break
         elif hpcop <= 0:
@@ -89,20 +93,20 @@ def main(skill_level):
         health_cop(hpcop, screen)
         health_vil(hpvil, screen)
 
-        move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 482),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_1 = TextButton(surface=consts.MAIN_DISPLAY, pos=(25, 525),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[0].name}')
 
-        move_2 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 482),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_2 = TextButton(surface=consts.MAIN_DISPLAY, pos=(185 + 5, 525),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[1].name}')
 
-        move_3 = TextButton(surface=consts.MAIN_DISPLAY, pos=(7, 536),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_3 = TextButton(surface=consts.MAIN_DISPLAY, pos=(25, 555),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[2].name}')
 
-        move_4 = TextButton(surface=consts.MAIN_DISPLAY, pos=(96, 536),
-                            width=87, height=52, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
+        move_4 = TextButton(surface=consts.MAIN_DISPLAY, pos=(185 + 5, 555),
+                            width=160, height=25, fg_color=(255, 255, 255), bg_color=(50, 50, 50),
                             font=consts.FONT_MONO_VERY_SMALL, text=f'{player_selected_moves[3].name}')
 
         if move_1.hovered:
@@ -116,10 +120,8 @@ def main(skill_level):
                     pass
                 else:
                     # not missed
-                    print(ncphp)
                     hpcop = ncphp
                     hpvil = nrbhp
-                    print(hpvil, hpcop)
                     # TODO: show damage
                     if is_bckfre:
                         # TODO: show msg
@@ -244,7 +246,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             cophp -= damagee
             copdmg += damagee
         else:
-            print("HIT", damagee)
+            #print("HIT", damagee)
             # didnt backfire, normal hit
             vilhp -= damagee
             robdmg += damagee
@@ -253,5 +255,5 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
     ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
     copdmg += ndm
     cophp -= ndm
-    print(ndm)
+    #print(ndm)
     return cophp, vilhp, copdmg, robdmg, is_backfire
