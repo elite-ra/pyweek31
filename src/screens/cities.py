@@ -81,61 +81,17 @@ def play():
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
 
-            if pygame.mouse.get_pressed()[0] or show_city:
+            if pygame.mouse.get_pressed()[0]:
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
-                if (i.collidepoint(x, y)) or show_city:
+                if (i.collidepoint(x, y)):
                     show_city = True
-                    if pygame.mouse.get_pressed()[0] and i.collidepoint(x, y):
-                        true_city = i
-                        true_city_t = a
-                        true_b = b
 
-                    pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
-                    pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
-                    city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
+                if pygame.mouse.get_pressed()[0] and i.collidepoint(x, y):
+                    true_city = i
+                    true_city_t = a
+                    true_b = b
 
-                    choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
-                                                                               (consts.SCREEN_HEIGHT / 2) + 100),
-                                             width=500, height=30, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
-                                             font=utils.constants.FONT_MONO_MEDIUM, text='Choose this city')
-
-                    if choose_city.hovered:
-                        choose_city.toggle_bg((0, 100, 0))
-
-                        if mouse_down:
-                            do_chase, skill_level = game_obj.play_turn(true_city_t)
-                            if do_chase:
-                                s = pygame.Surface((800, 600))  # the size of your rect
-                                s.set_alpha(240)  # alpha level
-                                s.fill((0, 0, 0))  # this fills the entire surface
-                                utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
-                                font = utils.constants.FONT_MONO_VERY_LARGE
-                                text = font.render('You found the robber!', True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
-                                font = utils.constants.FONT_MONO_MEDIUM
-                                text = font.render('The robber is trying to run away.', True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (170, 300))
-                                text = font.render('Chase him till his fuel runs out!', True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
-                                text = font.render("Use 'W', 'S' or arrow keys to navigate ", True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (140, 400))
-                                pygame.display.update()
-                                pygame.time.wait(5000)
-                                return chase.play(skill_level, true_city_t.name)
-
-                            else:
-                                s = pygame.Surface((800, 600))  # the size of your rect
-                                s.set_alpha(240)  # alpha level
-                                s.fill((0, 0, 0))  # this fills the entire surface
-                                utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
-                                font = utils.constants.FONT_MONO_VERY_LARGE
-                                text = font.render('You guessed wrong!!', True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (200, 200))
-                                text = font.render('Try again', True, (255, 255, 255))
-                                utils.constants.MAIN_DISPLAY.blit(text, (300, 300))
-                                pygame.display.update()
-                                pygame.time.wait(1000)
 
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
@@ -184,6 +140,53 @@ def play():
 
             if not i.collidepoint(x, y) and stats_showing:
                 stats_showing = False
+
+        if show_city:
+
+
+            pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
+            pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
+            city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
+            choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
+                                                                       (consts.SCREEN_HEIGHT / 2) + 100),
+                                     width=500, height=30, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
+                                     font=utils.constants.FONT_MONO_MEDIUM, text='Choose this city')
+
+            if choose_city.hovered:
+                choose_city.toggle_bg((0, 100, 0))
+                if mouse_down:
+                    do_chase, skill_level = game_obj.play_turn(true_city_t)
+                    if do_chase:
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.set_alpha(240)  # alpha level
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        font = utils.constants.FONT_MONO_VERY_LARGE
+                        text = font.render('You found the robber!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 200))
+                        font = utils.constants.FONT_MONO_MEDIUM
+                        text = font.render('The robber is trying to run away.', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 300))
+                        text = font.render('Chase him till his fuel runs out!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (170, 350))
+                        text = font.render("Use 'W', 'S' or arrow keys to navigate ", True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (140, 400))
+                        pygame.display.update()
+                        pygame.time.wait(5000)
+                        return chase.play(skill_level, true_city_t.name)
+
+                    else:
+                        s = pygame.Surface((800, 600))  # the size of your rect
+                        s.set_alpha(240)  # alpha level
+                        s.fill((0, 0, 0))  # this fills the entire surface
+                        utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        font = utils.constants.FONT_MONO_VERY_LARGE
+                        text = font.render('You guessed wrong!!', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (200, 200))
+                        text = font.render('Try again', True, (255, 255, 255))
+                        utils.constants.MAIN_DISPLAY.blit(text, (300, 300))
+                        pygame.display.update()
+                        pygame.time.wait(1000)
 
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
