@@ -102,9 +102,9 @@ def play(skill_level, city_name):
         time_display = utils.constants.FONT_MONO_SMALL.render(timern, True, (0, 0, 0))
         utils.constants.MAIN_DISPLAY.blit(time_display, (750, 10))
 
-    time1 = time.time()
     bg_X = 0
     status = True
+    no_of_frames = 0
     while status:
 
         rel_x = bg_X % chase_cont.get_width()
@@ -112,6 +112,8 @@ def play(skill_level, city_name):
         if rel_x < consts.SCREEN_WIDTH:
             utils.constants.MAIN_DISPLAY.blit(chase_cont, (rel_x, 0))
         bg_X -= 1.5
+        no_of_frames += 1
+        print(no_of_frames)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -173,7 +175,7 @@ def play(skill_level, city_name):
         coin_triple_display(coin_triple_x, coin_triple_y)
         coins_display(575, 510)
 
-        time_taken = round(time.time() - time1, 1)
+        time_taken = round(no_of_frames/60, 1) # round(time.time() - time1, 1)
         display_time(str(time_taken))
 
         # show fight scene

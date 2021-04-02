@@ -118,7 +118,7 @@ def play():
                 consts.DB.reset_player_settings()
                 return home_screen.play()
         else:
-            back.toggle_bg(colors.BLACK_COLOR)
+            reset_btn.toggle_bg(colors.RED_COLOR)
 
         # update all the things in game
         pygame.display.update()
