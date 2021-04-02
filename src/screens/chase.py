@@ -46,25 +46,37 @@ def play(skill_level, city_name):
         bird_y.append(random.randint(0, 350))
         bird_change.append(2 + 0.1 * skill_level)
 
-    coin = pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (random.randint(800, 1540),
-                                                                            random.randint(0, 350), 32, 32))
-    coin_x = random.randint(800, 1540)
-    coin_y = random.randint(0, 350)
+    m = 3
+    coin = []
+    coin_x = []
+    coin_y = []
+    for i in range(m):
+        coin.append(pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'textures', 'coin.png')))
+        coin_x.append(random.randint(800, 1540))
+        coin_y.append(random.randint(0, 350))
     coin_change = 2 + 0.1 * skill_level
+
+    coin_triple = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'textures', 'coin_triple.png'))
+    coin_triple_x = 500
+    coin_triple_y = 500
+    coins = 0
+
+    coins_font = utils.constants.FONT_MONO_MEDIUM
 
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(x + 24, y + 30, 80, 68), 2)
 
     def robber_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(robber_small, (x, y))
 
     def bird_game(x, y, i):
         utils.constants.MAIN_DISPLAY.blit(bird[i], (x, y))
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(x, y + 4, 64, 56), 2)
 
-    def coin_game(x,y):
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), (x, y, 32, 32))
+    def coin_game(x,y, i):
+        utils.constants.MAIN_DISPLAY.blit(coin[i], (x, y))
+
+    def coin_triple_display(x, y):
+        utils.constants.MAIN_DISPLAY.blit(coin_triple, (x, y))
 
     def is_collision(heli_x, heli_y, bird_x, bird_y):
         if heli_x - 40 <= bird_x <= heli_x + 104 and heli_y - 30 <= bird_y <= heli_y + 94:
@@ -72,14 +84,18 @@ def play(skill_level, city_name):
         else:
             return False
 
-    def is_collect_coin(heli_x, heli_y, coin_x, coin_y):
+    def is_collect_coin(heli_x, heli_y, coin_x, coin_y, i):
         if heli_x - 40 <= coin_x <= heli_x + 104 and heli_y - 30 <= coin_y <= heli_y + 94:
             return True
         else:
             return False
 
+    def coins_display(x, y):
+        coins_text = coins_font.render(str(coins), True, (255, 255, 0))
+        utils.constants.MAIN_DISPLAY.blit(coins_text, (x , y))
+
     def display_time(timern):
-        time_display = utils.constants.FONT_MONO_SMALL.render(timern, True, (0, 0, 0))
+        time_display = utils.constants.FONT_MONO_SMALL.render(timern, True, (0,0,0))
         utils.constants.MAIN_DISPLAY.blit(time_display, (750, 10))
 
     time1 = time.time()
@@ -111,10 +127,24 @@ def play(skill_level, city_name):
         if heli_y <= -27:
             heli_y = -27
         
-        coin_x -= coin_change
-        if coin_x <= -60:
-            coin_x = random.randint(800, 1540)
-            coin_y = random.randint(0,350)
+        for i in range(m):
+            coin_x[i] -= coin_change
+            if coin_x[i] <= -60:
+                coin_x[i] = random.randint(800, 1540)
+                coin_y[i] = random.randint(0,350)
+
+            coin_game(coin_x[i], coin_y[i], i)
+
+            collect_coin = is_collect_coin(heli_x, heli_y, coin_x[i], coin_y[i], i)
+            if collect_coin:
+                plyr = consts.DB.get_player_details()
+                # increase:
+                plyr.coins += 30
+                coins += 30
+                # set
+                consts.DB.set_player_details(plyr)
+                coin_x[i] = random.randint(800, 1540)
+                coin_y[i] = random.randint(0,350)
         
         for i in range(n):
             if bird_x[i] <= -60:
@@ -127,19 +157,18 @@ def play(skill_level, city_name):
             if collision:
                 return end_screen.end_screen_func(2)
 
-        collect_coin = is_collect_coin(heli_x, heli_y, coin_x, coin_y)
-        if collect_coin:
-            plyr = consts.DB.get_player_details()
-            # increase:
-            plyr.coins += 30
-            # set
-            consts.DB.set_player_details(plyr)
-            coin_x = random.randint(800, 1540)
-            coin_y = random.randint(0,350)
+            for j in range(m):
+                if bird_x[i] - 40 <= coin_x[j] <= bird_x[i] + 104 and bird_y[i] - 30 <= coin_y[j] <= bird_y[i] + 94:
+                    coin_x[j] = random.randint(800, 1540)
+                    coin_y[j] = random.randint(0, 350)
+
+        
 
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
-        coin_game(coin_x, coin_y)
+        coin_triple_display(coin_triple_x, coin_triple_y)
+        coins_display(575, 510)
+
 
         time_taken = round(time.time() - time1, 1)
         display_time(str(time_taken))
