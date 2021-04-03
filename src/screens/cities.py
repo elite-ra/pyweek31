@@ -3,6 +3,7 @@
 
 if __name__ == "__main__":
     import sys
+
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
 
@@ -41,6 +42,7 @@ def play():
     game_obj = Game()
 
     running = True
+    true_city_t = 'a'
     while running:
 
         pygame.display.update()
@@ -112,7 +114,7 @@ def play():
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]
-            if i.collidepoint(x, y) and not stats_showing:
+            if i.collidepoint(x, y) and not stats_showing and a != true_city_t:
                 stats_showing = a
 
                 mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
