@@ -154,7 +154,7 @@ def play(skill_level, city_name):
                 # plyr.coins += 30
                 coins += 30
                 # set
-
+                music_controller.play_coin_collect()
                 coin_x[i] = random.randint(800, 1600 - 32)
                 coin_y[i] = random.randint(0, 600 - 32)
 
@@ -196,6 +196,7 @@ def play(skill_level, city_name):
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+            music_controller.play_coin_bag()
             font = utils.constants.FONT_MONO_LARGE
             text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (75, 200))
