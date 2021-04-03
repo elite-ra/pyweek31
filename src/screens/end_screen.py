@@ -10,6 +10,7 @@ from . import home_screen
 import pygame
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
+from .. import music_controller
 
 
 def end_screen_func(a):
@@ -26,6 +27,11 @@ def end_screen_func(a):
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         font = consts.FONT_MONO_LARGE
         # coins limit reached
@@ -58,6 +64,7 @@ def end_screen_func(a):
             city_button.toggle_bg((139, 0, 0))
             if mouse_down:
                 city_button.toggle_bg((255, 0, 0))
+                music_controller.play_click_normal()
                 return home_screen.play()
 
         pygame.display.update()

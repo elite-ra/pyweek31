@@ -11,6 +11,7 @@ from . import home_screen
 import pygame
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
+from .. import music_controller
 
 
 def play():
@@ -33,6 +34,11 @@ def play():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         font = consts.FONT_MONO_LARGE
         # they get em coins.

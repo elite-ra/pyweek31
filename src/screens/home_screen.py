@@ -10,10 +10,7 @@ if __name__ == "__main__":
 
 import pygame
 
-from . import chase
-from . import cities
 from . import settings
-from . import fight
 from . import explain_city
 from . import shop
 from ..utils import constants as consts
@@ -30,6 +27,9 @@ pygame.init()
 def play():
     # INITIALIZE the sounds
     music_controller.update_volume()
+    music_controller.stop_fx1()
+    music_controller.stop_fx2()
+    music_controller.stop_fx3()
 
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
 

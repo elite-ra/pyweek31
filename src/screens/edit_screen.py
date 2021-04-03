@@ -8,16 +8,12 @@ if __name__ == "__main__":
 
 import pygame
 
-from . import chase
-from . import cities
-from . import settings
-from . import fight
-from . import shop
-from . import home_screen
+
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
-import os
+from . import home_screen
+from .. import music_controller
 
 
 # temporary home screen
@@ -118,6 +114,11 @@ def play():
                 is_game_over = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         if back.hovered and not modal_showing:
             back.toggle_bg(colors.BROWN_COLOR)

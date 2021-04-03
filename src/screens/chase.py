@@ -3,6 +3,7 @@
 
 if __name__ == "__main__":
     import sys
+
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
 
@@ -10,15 +11,14 @@ import pygame
 import random
 import os
 from .. import utils
-import time
 from . import end_screen
 from . import fight
 from ..utils import constants as consts
+from . import home_screen
 from .. import music_controller
 
 
 def play(skill_level, city_name):
-
     # SOUNDS
     music_controller.play_heli_looped()
     music_controller.play_jetpack_looped()
@@ -79,10 +79,8 @@ def play(skill_level, city_name):
     def missile_game(x, y, i):
         utils.constants.MAIN_DISPLAY.blit(missile[i], (x, y))
 
-
     def coin_game(x, y, i):
         utils.constants.MAIN_DISPLAY.blit(coin[i], (x, y))
-
 
     def coin_triple_display(x, y):
         utils.constants.MAIN_DISPLAY.blit(coin_triple, (x, y))
@@ -127,6 +125,9 @@ def play(skill_level, city_name):
                     heli_change = -3
                 if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     heli_change = 3
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
@@ -183,7 +184,7 @@ def play(skill_level, city_name):
         coin_triple_display(coin_triple_x, coin_triple_y)
         coins_display(575, 510)
 
-        time_taken = round(no_of_frames/60, 1) # round(time.time() - time1, 1)
+        time_taken = round(no_of_frames / 60, 1)  # round(time.time() - time1, 1)
         display_time(str(time_taken))
 
         # show fight scene
@@ -213,6 +214,6 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(text, (0, 60))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (50, 50, 50), (5, 100, 65, 400))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),
-                         pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65, 400-int((time_taken / 30) * 400)))
+                         pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65, 400 - int((time_taken / 30) * 400)))
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)

@@ -11,6 +11,7 @@ import pygame
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
 from . import cities
+from .. import music_controller
 
 
 def play():
@@ -27,6 +28,11 @@ def play():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         # You are faces with details about a robber, and a few cities which the robber goes to.
         # The game's objective is to guess the city the robber is going to go to on the next turn.
@@ -89,6 +95,7 @@ an informant from the shop by using the coins gotten from the later stages of th
             city_button.toggle_bg((139, 0, 0))
             if mouse_down:
                 city_button.toggle_bg((255, 0, 0))
+                music_controller.play_click_normal()
                 return cities.play()
 
 

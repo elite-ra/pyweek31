@@ -8,13 +8,10 @@ if __name__ == "__main__":
 
 import pygame
 
-from . import chase
-from . import cities
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
 from .. import utils
-from ..utils import database
 from . import home_screen
 from .. import music_controller
 
@@ -74,6 +71,10 @@ def play():
                 is_game_over = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         if curr_setting['volume']['music'] == 100:
             inc_main_vol.toggle_bg(colors.GREY_COLOR)

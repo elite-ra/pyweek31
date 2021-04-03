@@ -17,6 +17,7 @@ from . import end_screen
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
 from . import win_screen
+from . import home_screen
 from .. import music_controller
 
 ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
@@ -86,6 +87,10 @@ def main(skill_level):
                 done = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
 
         screen.blit(copimg, [230, 100 + 200])
         screen.blit(vilimg, [490, 60 + 220])

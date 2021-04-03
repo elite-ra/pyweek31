@@ -9,14 +9,15 @@ if __name__ == "__main__":
 
 import pygame
 
-from .. import utils, music_controller
+from .. import utils
 from ..main_logic import Game
 from . import chase
 from . import end_screen
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
-
 import os
+from . import home_screen
+from .. import music_controller
 
 
 def play():
@@ -55,6 +56,12 @@ def play():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    music_controller.play_click_normal()
+                    return home_screen.play()
+
 
         # Draw coins stolen
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 550, 800, 50))
