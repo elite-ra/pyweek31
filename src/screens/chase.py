@@ -213,6 +213,6 @@ def play(skill_level, city_name):
         utils.constants.MAIN_DISPLAY.blit(text, (0, 60))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (50, 50, 50), (5, 100, 65, 400))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),
-                         pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65, int(((30 - time_taken) / 30) * 400)))
+                         pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65, 400-int((time_taken / 30) * 400)))
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
