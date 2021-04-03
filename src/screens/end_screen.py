@@ -36,7 +36,10 @@ def end_screen_func(a):
 
         # bird strike
         elif a == 2:
-            text = font.render('Your crashed and the robber got away. The robber won.', True, (255, 255, 255))
+            text = font.render('You crashed and the robber got away.', True, (255, 255, 255))
+            w, h = text.get_rect().width, text.get_rect().height
+            consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)-40))
+            text = font.render('The robber won.', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
