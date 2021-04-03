@@ -25,7 +25,7 @@ def play():
                    [(550, 278), (63, 30)]]
 
     cities_list = utils.models.City.get_all_cities()
-
+    music_controller.play_menu_bg()
     bg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'cities.png'))
 
     coin_limit = 25000

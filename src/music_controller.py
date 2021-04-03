@@ -30,12 +30,13 @@ FX_heli = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects
 FX_jetpack = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'jetpack_final.ogg'))
 FX_select_norm = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_norm.ogg'))
 FX_select_woop = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_woop.ogg'))
+FX_coin_collect = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_collect.ogg'))
+FX_coin_bag = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_bag.ogg'))
+
 
 BG_chase = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'chase_bg.ogg'))
 BG_fight = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'fight_bg.ogg'))
-
-FX_coin_collect = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_collect.ogg'))
-FX_coin_bag = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_bag.ogg'))
+BG_main = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'menu_city_bg.ogg'))
 
 
 def update_volume():
@@ -48,8 +49,8 @@ def update_volume():
 
 
 def play_menu_bg():
-    pass
-
+    channel_bg.stop()
+    channel_bg.play(BG_main, loops=-1)
 
 def play_chase_bg():
     channel_bg.stop()
