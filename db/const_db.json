@@ -2,7 +2,7 @@
   "ALL_MOVES": [
     {
       "name": "Kick",
-      "description": "Normal kick, does 15 damage",
+      "description": "A kick that does 15 damage.",
       "damage": 15,
       "percent_damage": null,
       "can_backfire": false,

@@ -128,8 +128,12 @@ def play():
         elif not modal_showing:
             back.toggle_bg(colors.BLACK_COLOR)
 
+        c = 0
         for mv, btn in mv_btns:
             if btn.hovered and not modal_showing:
+                t_test1 = consts.FONT_MONO_SMALL.render(all_moves[c].description, True, (0, 0, 0))
+                consts.MAIN_DISPLAY.blit(t_test1, (20, 525))
+
                 btn.toggle_bg(colors.BROWN_COLOR)
                 if mouse_down:
                     btn.toggle_bg(colors.GREEN_COLOR)
@@ -139,7 +143,7 @@ def play():
                         selected.append(btn)
             elif not modal_showing:
                 btn.toggle_bg(colors.BLACK_COLOR)
-
+            c += 1
         for i in selected:
             if not modal_showing:
                 i.toggle_bg(colors.GREEN_COLOR)

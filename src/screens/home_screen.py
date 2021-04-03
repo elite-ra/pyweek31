@@ -42,22 +42,22 @@ def play():
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=pygame.font.Font('freesansbold.ttf', 30), text='Shop')
 
-    settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
+    settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 200,
                                                                    (consts.SCREEN_HEIGHT / 2) - 300),
                                  width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text='Settings')
 
     plyr = consts.DB.get_player_details()
     if plyr.has_reached_fight:
-        edit_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                   (consts.SCREEN_HEIGHT / 2) - 150),
-                                 width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+        edit_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
+                                                                   (consts.SCREEN_HEIGHT / 2) + 150),
+                                 width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text='Edit Fight Moves')
     else:
         edit_button = None
-        edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                     (consts.SCREEN_HEIGHT / 2) - 150),
-                                   width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
+        edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
+                                                                     (consts.SCREEN_HEIGHT / 2) + 150),
+                                   width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                    font=pygame.font.Font('freesansbold.ttf', 30), text='???')
 
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)

@@ -1,10 +1,13 @@
 {
-    "COINS": 0,
+    "COINS": 360,
     "HAS_INFORMANT": false,
-    "HAS_REACHED_CHASE_ONCE": false,
-    "HAS_REACHED_FIGHT_ONCE": false,
+    "HAS_REACHED_CHASE_ONCE": true,
+    "HAS_REACHED_FIGHT_ONCE": true,
     "STORE": {
-        "BOUGHT_BUT_UNUSED": [],
+        "BOUGHT_BUT_UNUSED": [
+            "Stare",
+            "The huge missile."
+        ],
         "SELECTED": [
             "Punch",
             "Kick",

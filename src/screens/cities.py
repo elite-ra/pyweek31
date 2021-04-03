@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
 import pygame
 
-from .. import utils
+from .. import utils, music_controller
 from ..main_logic import Game
 from . import chase
 from . import end_screen
@@ -93,6 +93,7 @@ def play():
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if (i.collidepoint(x, y)):
+                    music_controller.play_click_normal()
                     show_city = True
 
                 if pygame.mouse.get_pressed()[0] and i.collidepoint(x, y):
@@ -104,6 +105,7 @@ def play():
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
 
             if show_city:
+
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
@@ -160,6 +162,7 @@ def play():
             if choose_city.hovered:
                 choose_city.toggle_bg((0, 100, 0))
                 if mouse_down:
+                    music_controller.play_click_woop()
                     do_chase, skill_level = game_obj.play_turn(true_city_t)
                     if do_chase:
                         s = pygame.Surface((800, 600))  # the size of your rect
