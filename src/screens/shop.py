@@ -120,7 +120,9 @@ def play():
 
         if back.hovered and not modal_showing:
             back.toggle_bg((128, 128, 128))
+
             if mouse_down:
+                music_controller.play_click_normal()
                 back.toggle_bg((128, 128, 128))
                 # update volume bar
                 return home_screen.play()
@@ -154,6 +156,7 @@ def play():
 
             else:
                 informant.toggle_bg((128, 128, 128))
+                music_controller.play_click_normal()
                 # check coins
                 if plyr.coins < 400 and not plyr.has_informant:
                     REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
@@ -202,7 +205,9 @@ def play():
 
                     pygame.display.update()
                 else:
+
                     bm1.toggle_bg((128, 128, 128))
+                    music_controller.play_click_normal()
                     # check coins
                     if plyr.coins < allmove[0].price:
                         REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
@@ -219,6 +224,7 @@ def play():
                 bm1.toggle_bg(colors.BLACK_COLOR)
         else:
             if bm1.hovered:
+
                 t = consts.FONT_MONO_SMALL.render('Play the game to find out what this is!', True, (0, 0, 0))
                 consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 - t.get_width() / 2, 550))
 
@@ -252,6 +258,7 @@ def play():
 
                     bm2.toggle_bg((128, 128, 128))
                     # check coins
+                    music_controller.play_click_normal()
                     if plyr.coins < allmove[1].price:
                         REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
                     else:

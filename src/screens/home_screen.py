@@ -1,7 +1,6 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
-# TODO pranjal check for games played >=4 and if yes set games_played = None and set informant = false
 
 if __name__ == "__main__":
     import sys
@@ -34,7 +33,6 @@ def play():
 
     # INITIALIZE the sounds
     music_controller.update_volume()
-    music_controller.stop_fx1()
     music_controller.stop_fx2()
     music_controller.stop_fx3()
     music_controller.stop_fx4()
@@ -92,7 +90,7 @@ def play():
         edit_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                                    (consts.SCREEN_HEIGHT / 2) + 200),
                                  width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=utils.constants.FONT_MONO_LARGE, text='Edit Fight Moves')
+                                 font=utils.constants.FONT_MONO_LARGE, text='Edit Fight Deck')
     else:
         edit_button = None
         edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
@@ -189,8 +187,11 @@ def play():
             row, col = pygame.mouse.get_pos()
 
             if REL_COORDS[0] <= row <= REL_COORDS[0] + 30 and REL_COORDS[1] <= col <= REL_COORDS[1] + 30:
+                x_btn.toggle_bg(colors.DARK_RED)
                 if mouse_down:
                     modal_showing = False
+            else:
+                x_btn.toggle_ng(colors.RED_COLOR)
 
         # update all the things in game
         pygame.display.update()

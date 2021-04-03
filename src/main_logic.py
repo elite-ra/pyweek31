@@ -13,8 +13,8 @@ from .utils.models import City
 from .utils import constants as consts
 
 Giza = City('Giza', 3, False, 40000, 20, 37, True, ['sarcophagus', 'gold slipper'])
-Agra = City('Agra', 10, False, 530000, 18, 83, False, ['mughal artefact'])
-Paris = City('Paris', 22, True, 9310000, 15, 65, True, ['painting from le louvre'])
+Agra = City('Agra', 10, False, 530000, 15, 83, False, ['mughal artefact'])
+Paris = City('Paris', 22, True, 9310000, 13, 65, True, ['painting from le louvre'])
 New_York = City('New York', 24, True, 12245180, 1, 32, False, None)
 Rome = City('Rome', 20, False, 56213, 17, 72, True, ['precious gladiator sword'])
 
@@ -182,8 +182,8 @@ class Game:
         else:
             type_str = "???"
 
-        s = f"Robber Health:{(17 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
-            f"Last Seen City:{(16 - len(lastseenstr)) * ' '}{lastseenstr}\n" \
-            f"Stolen Item:{(19 - len(stolenitemstr)) * ' '}{stolenitemstr}\n" \
+        s = f"Robber Health:{(27 - len(str(self.robber_health))) * ' '}{self.robber_health}\n" \
+            f"Last Seen City:{(26 - len(lastseenstr)) * ' '}{lastseenstr}\n" \
+            f"Stolen Item:{(29 - len(stolenitemstr)) * ' '}{stolenitemstr}\n" \
             f"This type of robber prefers {type_str}"
         return s

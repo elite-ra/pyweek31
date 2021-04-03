@@ -20,7 +20,7 @@ from . import win_screen
 from . import home_screen
 from .. import music_controller
 
-ROB_DMG_MIN, ROB_DMG_MAX = 15, 20
+ROB_DMG_MIN, ROB_DMG_MAX = 10, 20
 
 sounds = {
     "Punch": music_controller.play_punch_kick,

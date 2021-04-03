@@ -168,7 +168,7 @@ def play(skill_level, city_name):
                 plyr = consts.DB.get_player_details()
                 # increase:
                 # plyr.coins += 30
-                coins += 30
+                coins += 15
                 # set
                 music_controller.play_coin_collect()
                 coin_x[i] = random.randint(800, 1600 - 32)
@@ -213,16 +213,15 @@ def play(skill_level, city_name):
             music_controller.stop_fx2()
             music_controller.stop_fx1()
             s = pygame.Surface((800, 600))  # the size of your rect
-            s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
             music_controller.play_coin_bag()
-            font = utils.constants.FONT_MONO_LARGE
-            text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (75, 200))
             font = utils.constants.FONT_MONO_MEDIUM
-            text = font.render('The robber is hostile! Fight him!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (175, 300))
+            text = font.render(f'You caught the robber, and got {coins} coins!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_width()/2, 200))
+            font = utils.constants.FONT_MONO_MEDIUM
+            text = font.render('The robber is angry! Fight him!', True, (255, 255, 255))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_width()/2, 300))
             pygame.display.update()
             pygame.time.wait(4000)
             plyr.coins += coins
@@ -232,7 +231,7 @@ def play(skill_level, city_name):
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
         font = utils.constants.FONT_MONO_VERY_SMALL
-        text = font.render('Robber Fuel', True, (255, 255, 255))
+        text = font.render('Jetpack Fuel', True, (255, 255, 255))
         utils.constants.MAIN_DISPLAY.blit(text, (0, 60))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (50, 50, 50), (5, 100, 65, 400))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),

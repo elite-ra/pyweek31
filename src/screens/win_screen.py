@@ -15,7 +15,7 @@ from .. import music_controller
 
 
 def play():
-
+    music_controller.play_coin_bag()
     plyr = consts.DB.get_player_details()
     if plyr.has_informant:
         plyr.games_played += 1
@@ -48,7 +48,11 @@ def play():
         font = consts.FONT_MONO_LARGE
         # they get em coins.
 
-        text = font.render('You caught the robber! You get 150 coins!', True, (255, 255, 255))
+        text = font.render('You caught the robber!', True, (255, 255, 255))
+        w, h = text.get_rect().width, text.get_rect().height
+        consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2 - 50)))
+        font = consts.FONT_MONO_SMALL
+        text = font.render('The police department awards you with 150 coins!', True, (255, 255, 255))
         w, h = text.get_rect().width, text.get_rect().height
         consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
@@ -60,6 +64,7 @@ def play():
         if city_button.hovered:
             city_button.toggle_bg((139, 0, 0))
             if mouse_down:
+                music_controller.play_click_normal()
                 city_button.toggle_bg((255, 0, 0))
                 return home_screen.play()
 

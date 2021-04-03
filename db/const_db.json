@@ -43,7 +43,7 @@
       "percent_damage": 20.0,
       "can_backfire": false,
       "accuracy": 70.0,
-      "price": 50
+      "price": 100
     },
     {
       "name": "The huge missile",
@@ -51,8 +51,8 @@
       "damage": null,
       "percent_damage": 85.0,
       "can_backfire": false,
-      "accuracy": 40.0,
-      "price": 100
+      "accuracy": 50.0,
+      "price": 250
     }
   ]
 }

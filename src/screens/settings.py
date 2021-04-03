@@ -49,7 +49,7 @@ def play():
                            pos=(consts.SCREEN_WIDTH / 2 - 150, consts.SCREEN_HEIGHT / 2 + 150),
                            width=300, height=40,
                            fg_color=colors.WHITE_COLOR, bg_color=colors.RED_COLOR,
-                           font=utils.constants.FONT_MONO_VERY_SMALL, text='Reset Game Progress')
+                           font=utils.constants.FONT_MONO_SMALL, text='Reset Game Progress')
 
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
 
@@ -91,6 +91,7 @@ def play():
             if inc_main_vol.hovered and curr_setting['volume']['music'] < 100:
                 inc_main_vol.toggle_bg((128, 128, 128))
                 if mouse_down:
+                    music_controller.play_click_normal()
                     inc_main_vol.toggle_bg((128, 128, 128))
                     # update volume bar
 
@@ -109,6 +110,7 @@ def play():
             if dec_main_vol.hovered and curr_setting['volume']['music'] > 0:
                 dec_main_vol.toggle_bg((128, 128, 128))
                 if mouse_down:
+                    music_controller.play_click_normal()
                     dec_main_vol.toggle_bg((128, 128, 128))
                     # update volume bar
                     ns = dict(curr_setting)
@@ -125,6 +127,7 @@ def play():
             if inc_fx_vol.hovered and curr_setting['volume']['fx'] < 100:
                 inc_fx_vol.toggle_bg((128, 128, 128))
                 if mouse_down:
+                    music_controller.play_click_normal()
                     inc_fx_vol.toggle_bg((128, 128, 128))
                     # update volume bar
                     ns = dict(curr_setting)
@@ -141,7 +144,9 @@ def play():
         else:
             if dec_fx_vol.hovered and curr_setting['volume']['fx'] > 0:
                 dec_fx_vol.toggle_bg((128, 128, 128))
+
                 if mouse_down:
+                    music_controller.play_click_normal()
                     dec_fx_vol.toggle_bg((128, 128, 128))
                     # update volume bar
                     ns = dict(curr_setting)
@@ -155,6 +160,7 @@ def play():
         if back.hovered:
             back.toggle_bg((128, 128, 128))
             if mouse_down:
+                music_controller.play_click_normal()
                 back.toggle_bg((128, 128, 128))
                 # update volume bar
                 return home_screen.play()
@@ -164,6 +170,7 @@ def play():
         if reset_btn.hovered:
             reset_btn.toggle_bg((100, 0, 0))
             if mouse_down:
+                music_controller.play_click_normal()
                 consts.DB.reset_player_settings()
 
                 return home_screen.play()

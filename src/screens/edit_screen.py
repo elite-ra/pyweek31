@@ -129,6 +129,7 @@ def play():
         if back.hovered and not modal_showing:
             back.toggle_bg((128, 128, 128))
             if mouse_down:
+                music_controller.play_click_normal()
                 back.toggle_bg((128, 128, 128))
                 # update volume bar
                 return home_screen.play()
@@ -143,6 +144,7 @@ def play():
 
                 btn.toggle_bg((128, 128, 128))
                 if mouse_down:
+                    music_controller.play_click_normal()
                     btn.toggle_bg(colors.GREEN_COLOR)
                     if btn in selected:
                         selected.remove(btn)
@@ -158,6 +160,7 @@ def play():
         if lock_moves.hovered and not modal_showing:
             lock_moves.toggle_bg((128, 128, 128))
             if mouse_down:
+                music_controller.play_click_normal()
                 lock_moves.toggle_bg((128, 128, 128))
                 # save selction
                 # check if too large
@@ -173,8 +176,8 @@ def play():
                     for i in selected:
                         # NOTE: HACK: sneaky, using TextButton.text as a parameter: DO NOT CHANGE Button text!
                         if i.text not in plyr.bought_moves + plyr.selected_moves:
-                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move '{i.text}',"
-                                                                         f"Please go to the police department!", color=(100, 0, 0))
+                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move '{i.text}', "
+                                                                         f"Please go to the police dept!", color=(100, 0, 0))
                             break
                     else:
                         new_selection = [i.text for i in selected]
