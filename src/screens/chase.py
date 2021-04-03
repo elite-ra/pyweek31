@@ -178,9 +178,7 @@ def play(skill_level, city_name):
             if missile_x[i] <= -60:
                 missile_x[i] = random.randint(800, 1540)
                 missile_y[i] = random.randint(-19, 600 - 45)
-            #
-            # if robber_y <= missile_y[i] <= robber_y + robber_small.get_height() and missile_x[i] < consts.SCREEN_WIDTH:
-            #     missile_x[i] = 550
+
 
             missile_game(missile_x[i], missile_y[i], i)
 
@@ -218,10 +216,10 @@ def play(skill_level, city_name):
             music_controller.play_coin_bag()
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render(f'You caught the robber, and got {coins} coins!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_width()/2, 200))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width/2, 200))
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('The robber is angry! Fight him!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_width()/2, 300))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width/2, 300))
             pygame.display.update()
             pygame.time.wait(4000)
             plyr.coins += coins
