@@ -1,3 +1,6 @@
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Ayush Gupta
+
 from . import home_screen
 import pygame
 from ..utils.widgets import TextButton

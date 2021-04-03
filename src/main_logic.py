@@ -43,7 +43,6 @@ class Game:
             self.skill_level = 10
 
     def play_turn(self, city_chosen_by_player):
-        # TODO: return something
 
         # do the robbers turn, which changes the robber's location.
         self.do_robber_turn()
