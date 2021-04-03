@@ -19,6 +19,7 @@ def end_screen_func(a):
     if plyr.has_informant:
         plyr.games_played += 1
     consts.DB.set_player_details(plyr)
+    print("OMG UPDATED!")
 
     while running:
 

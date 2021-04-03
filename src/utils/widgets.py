@@ -3,9 +3,9 @@
 
 if __name__ == "__main__":
     import sys
+
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
-
 
 import pygame
 
@@ -70,6 +70,8 @@ class ImageButton:
     def __init__(self, surface, image_path, pos, width, height):
         self.surface = surface
         self.pos = pos
+        self.width = width
+        self.height = height
 
         self.top_border = pos[1]  # Y of top left of rect
         self.right_border = pos[0] + width  # X of top left of rect plus width
@@ -79,8 +81,8 @@ class ImageButton:
         """Create a customizable image button."""
         # Initiate boundary variables
         # Load and render image
-        img = pygame.image.load(image_path)
-        surface.blit(img, (pos[0], pos[1], width, height))
+        self.img = pygame.image.load(image_path)
+        surface.blit(self.img, (pos[0], pos[1], width, height))
 
     @property
     def hovered(self):
@@ -90,3 +92,6 @@ class ImageButton:
             return True
         else:
             return False
+
+    def reblit(self):
+        self.surface.blit(self.img, (self.left_border, self.top_border, self.width, self.height))

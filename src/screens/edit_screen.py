@@ -168,7 +168,6 @@ def play():
                     REL_COORDS = show_modal(title='Error!', text="Too less moves selcted! Minimum: 4")
                 else:
                     # lock and save
-                    # TODO: check if user has the moves which he selected
                     plyr = consts.DB.get_player_details()
 
                     for i in selected:

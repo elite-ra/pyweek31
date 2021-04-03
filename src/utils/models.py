@@ -208,7 +208,7 @@ class Player:
             'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
             'HAS_INFORMANT': self.has_informant,
             'COINS': self.coins,
-            'GAMES_PLAYED': 0,
+            'GAMES_PLAYED': self.games_played,
             'STORE': {
                 "SELECTED": self.selected_moves,
                 "BOUGHT_BUT_UNUSED": self.bought_moves

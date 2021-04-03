@@ -162,13 +162,11 @@ def play():
                     if plyr.has_informant:
                         REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
                     else:
-                        plyr = consts.DB.get_player_details()
-                        plyr.games_played = 0
-                        consts.DB.set_player_details(plyr)
 
                         REL_COORDS = show_modal(title="Done!", text="You hired an informant!")
                         plyr = consts.DB.get_player_details()
                         plyr.has_informant = True
+                        plyr.games_played = 0
                         plyr.coins -= 400
                         consts.DB.set_player_details(plyr)
         elif not modal_showing:
