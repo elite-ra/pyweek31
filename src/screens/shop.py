@@ -143,7 +143,7 @@ def play():
             else:
                 informant.toggle_bg(colors.BROWN_COLOR)
                 # check coins
-                if plyr.coins < 400:
+                if plyr.coins < 400 and not plyr.has_informant:
                     REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
                 else:
                     plyr = consts.DB.get_player_details()
