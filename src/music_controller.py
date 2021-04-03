@@ -25,7 +25,6 @@ channel_fx4 = mixer.Channel(4)
 
 
 FX_explosion = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'explosion.ogg'))
-FX_fight = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'fight_sound.ogg'))
 FX_heli = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'helicopter_final.ogg'))
 FX_jetpack = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'jetpack_final.ogg'))
 FX_select_norm = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_norm.ogg'))
@@ -33,6 +32,10 @@ FX_select_woop = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', '
 FX_coin_collect = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_collect.ogg'))
 FX_coin_bag = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_bag.ogg'))
 
+FX_punch_kick = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'punch_kick.ogg'))
+FX_gunshot = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'gunshot.ogg'))
+FX_smash = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'super_mega_smash.ogg'))
+FX_stare = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'stare.ogg'))
 
 BG_chase = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'chase_bg.ogg'))
 BG_fight = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'fight_bg.ogg'))
@@ -82,9 +85,29 @@ def play_jetpack_looped():
     channel_fx2.play(FX_jetpack, loops=-1)
 
 
-def play_fight_sound():
+def play_punch_kick():
     channel_fx1.stop()
-    channel_fx1.play(FX_fight)
+    channel_fx1.play(FX_punch_kick)
+
+
+def play_gunshot():
+    channel_fx1.stop()
+    channel_fx1.play(FX_gunshot)
+
+
+def play_super_mega_smash():
+    channel_fx1.stop()
+    channel_fx1.play(FX_smash)
+
+
+def play_stare():
+    channel_fx1.stop()
+    channel_fx1.play(FX_stare)
+
+
+def play_the_huge_missile():
+    channel_fx1.stop()
+    channel_fx1.play(FX_explosion)
 
 
 def play_explosion():

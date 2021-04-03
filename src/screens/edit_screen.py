@@ -57,7 +57,7 @@ def play():
                                                               consts.SCREEN_HEIGHT / 2 + 100 + 50), width=308,
                             height=40,
                             fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                            font=pygame.font.Font('freesansbold.ttf', 20), text=f'Save move selection')
+                            font=consts.FONT_MONO_SMALL_MEDIUM, text=f'Save move selection')
 
     mv_btns = [(all_moves[0].name, mv1_btn),
                (all_moves[1].name, mv2_btn),
@@ -173,7 +173,7 @@ def play():
                     for i in selected:
                         # NOTE: HACK: sneaky, using TextButton.text as a parameter: DO NOT CHANGE Button text!
                         if i.text not in plyr.bought_moves + plyr.selected_moves:
-                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move {i.text},"
+                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move '{i.text}',"
                                                                          f"Please go to the police department!", color=(100, 0, 0))
                             break
                     else:

@@ -46,7 +46,7 @@
       "price": 50
     },
     {
-      "name": "The huge missile.",
+      "name": "The huge missile",
       "description": "Does 85% damage. But it may never hit!",
       "damage": null,
       "percent_damage": 85.0,

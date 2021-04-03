@@ -22,6 +22,15 @@ from .. import music_controller
 
 ROB_DMG_MIN, ROB_DMG_MAX = 15, 20
 
+sounds = {
+    "Punch": music_controller.play_punch_kick,
+    "Kick": music_controller.play_punch_kick,
+    "Gunshot": music_controller.play_gunshot,
+    "Super Mega Smash": music_controller.play_super_mega_smash,
+    "The Huge missile": music_controller.play_the_huge_missile,
+    "Stare": music_controller.play_stare
+}
+
 
 def play(skill_level):
 
@@ -148,8 +157,7 @@ def play(skill_level):
                 if mouse_down:
                     move.toggle_bg((50, 50, 50))
                     ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[c], hpcop, hpvil)
-                    music_controller.play_fight_sound()
-                    music_controller.play_fight_sound()
+                    sounds[f'{player_selected_moves[c].name}']()
                     if rbdm is None:
                         # missed
                         t_mis1 = consts.FONT_MONO_SMALL.render(f'You missed! The robber dealt {cpdm} damage to you!',
