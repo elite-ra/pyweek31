@@ -34,42 +34,15 @@ def play():
                     music_controller.play_click_normal()
                     return home_screen.play()
 
-        # You are faces with details about a robber, and a few cities which the robber goes to.
-        # The game's objective is to guess the city the robber is going to go to on the next turn.
-        #
-        # All of the robbers follow certain rules.
-        #
-        # 1) They must change cities after every move.
-        # 2) They lose a certain amount of health during every turn.
-        # 3) If their health drops below a fixed threshold, they have to go to a city with a hospital.
-        # 4) If they have stolen an artefact they will prefer a city with a black market but will prioritize going to
-        # a hospital if no city is available with both and health is below the threshold.
-        #
-        # Robbers don't follow the same pattern each time, they may prefer banks or, museums, or something else!
-        #
-        # The information regarding black market is hidden initially and can be unlocked by buying an informant from
-        # the shop by using the coins gotten from the later stages of the game.
+        explanation = '''You are on the robber's tail! But... where is he now?
 
-        explanation = '''City Choosing Explanation:
+Guess which city the robber the robber is now - he moves cities after every theft.
 
-You are faced with details about a robber, and a few cities which the robber goes to.
-The game's objective is to guess the city the robber is going to go to on the next turn.
+Tips: If his health is low, he needs a hospital, and if he needs to sell his stolen goods, 
+he will try to sell it on a black market. The robber may suprise you based on his mood.
 
-All of the robbers follow certain rules.
-
-1) They must change cities after every move.
-2) They lose a certain amount of health during every turn.
-3) If their health drops below a fixed threshold, they have to go to a city with a 
-   hospital.
-4) If they have stolen an artefact they will prefer a city with a black market but will 
-   prioritize going to a hospital if no city is available with both and health is below 
-   the threshold.
-
-Robbers don't follow the same pattern each time, they may prefer banks or, museums, or 
-something else!
-
-The information regarding black market is hidden initially and can be unlocked by buying 
-an informant from the shop by using the coins gotten from the later stages of the game.'''
+Hire an informant to get more information.
+'''
 
         font = consts.FONT_MONO_SMALL
         text = font.render('', True, (255, 255, 255))
