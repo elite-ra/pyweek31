@@ -1,6 +1,11 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
 # TODO: fill with colors!
 WHITE_COLOR = (255, 255, 255)
 BLACK_COLOR = (0, 0, 0)

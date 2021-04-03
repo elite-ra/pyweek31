@@ -1,6 +1,12 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
+
 import pygame
 
 from . import chase
@@ -11,8 +17,6 @@ from ..utils import colors
 from .. import utils
 from . import home_screen
 from ..utils import database
-
-# TODO: show message on hover on button.
 
 
 # settings screen

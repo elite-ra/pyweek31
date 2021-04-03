@@ -6,6 +6,10 @@ from . import constants as consts
 from . import models
 import os
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
 
 class Database:
     def __init__(self):
