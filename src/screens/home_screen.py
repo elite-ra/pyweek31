@@ -47,7 +47,7 @@ def play():
     shop_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                                (consts.SCREEN_HEIGHT / 2) - 300),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                             font=utils.constants.FONT_MONO_LARGE, text='Shop')
+                             font=utils.constants.FONT_MONO_LARGE, text='Police Dept')
 
     settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 200,
                                                                    (consts.SCREEN_HEIGHT / 2) - 300),
@@ -84,7 +84,7 @@ def play():
                 mouse_down = True
 
         if play_button.hovered:
-            play_button.toggle_bg(colors.BROWN_COLOR)
+            play_button.toggle_bg((0, 100, 0))
             if mouse_down:
                 music_controller.play_click_normal()
                 play_button.toggle_bg(colors.BROWN_COLOR)
@@ -94,7 +94,7 @@ def play():
 
         if shop_button.hovered:
 
-            shop_button.toggle_bg(colors.BROWN_COLOR)
+            shop_button.toggle_bg((0, 100, 0))
             if mouse_down:
                 music_controller.play_click_normal()
                 shop_button.toggle_bg(colors.BROWN_COLOR)
@@ -103,7 +103,7 @@ def play():
             shop_button.toggle_bg(colors.BLACK_COLOR)
 
         if settings_button.hovered:
-            settings_button.toggle_bg(colors.BROWN_COLOR)
+            settings_button.toggle_bg((0, 100, 0))
             if mouse_down:
                 music_controller.play_click_normal()
                 settings_button.toggle_bg(colors.BROWN_COLOR)
@@ -115,7 +115,7 @@ def play():
             edit_d_button.toggle_bg(colors.GREY_COLOR)
         else:
             if edit_button.hovered:
-                edit_button.toggle_bg(colors.RED_COLOR)
+                edit_button.toggle_bg((0, 100, 0))
                 if mouse_down:
                     music_controller.play_click_normal()
                     edit_button.toggle_bg(colors.RED_COLOR)
