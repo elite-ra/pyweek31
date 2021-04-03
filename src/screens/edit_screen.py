@@ -77,7 +77,10 @@ def play():
     def show_modal(title, text):
         nonlocal modal_showing
         modal_showing = True
-
+        maj_sur = pygame.Surface((800, 600))
+        maj_sur.set_alpha(180)
+        maj_sur.fill(colors.BLACK_COLOR)
+        consts.MAIN_DISPLAY.blit(maj_sur, (0, 0))
         text_a = consts.FONT_MONO_MEDIUM.render(title, True, (255, 255, 255))
         text_b = consts.FONT_MONO_SMALL.render(text, True, (255, 255, 255))
 
@@ -169,11 +172,9 @@ def play():
             row, col = pygame.mouse.get_pos()
 
             if REL_COORDS[0] <= row <= REL_COORDS[0] + 30 and REL_COORDS[1] <= col <= REL_COORDS[1] + 30:
-                print("HOVERED")
 
                 if mouse_down:
 
-                    print("clickclock")
                     modal_showing = False
 
         # update all the things in game
