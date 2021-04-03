@@ -15,6 +15,10 @@ from .. import music_controller
 
 def end_screen_func(a):
     running = True
+    plyr = consts.DB.get_player_details()
+    if plyr.has_informant:
+        plyr.games_played += 1
+    consts.DB.set_player_details(plyr)
 
     while running:
 

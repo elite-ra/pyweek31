@@ -16,6 +16,11 @@ from .. import music_controller
 
 def play():
 
+    plyr = consts.DB.get_player_details()
+    if plyr.has_informant:
+        plyr.games_played += 1
+    consts.DB.set_player_details(plyr)
+
     # GIVE COINS
     plyr = consts.DB.get_player_details()
     plyr.coins += 150

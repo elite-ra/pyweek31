@@ -20,11 +20,11 @@
     },
     {
       "name": "Gunshot",
-      "description": "A shot that does 30 damage. But, you miss 10% of the time.",
+      "description": "A shot that does 30 damage. But, you miss 40% of the time.",
       "damage": 30,
       "percent_damage": null,
       "can_backfire": false,
-      "accuracy": 90.0,
+      "accuracy": 60.0,
       "price": 0
     },
     {

@@ -1,6 +1,7 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
+# TODO pranjal check for games played >=4 and if yes set games_played = None and set informant = false
 
 if __name__ == "__main__":
     import sys

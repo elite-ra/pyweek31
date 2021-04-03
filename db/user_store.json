@@ -1,8 +1,9 @@
 {
-    "COINS": 1580,
+    "COINS": 2360,
     "HAS_INFORMANT": true,
     "HAS_REACHED_CHASE_ONCE": true,
     "HAS_REACHED_FIGHT_ONCE": true,
+    "GAMES_PLAYED": 0,
     "STORE": {
         "BOUGHT_BUT_UNUSED": [
             "Punch",

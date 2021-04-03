@@ -200,6 +200,7 @@ class Player:
         self.selected_moves = user_store_db['STORE']['SELECTED']
         self.bought_moves = user_store_db['STORE']['BOUGHT_BUT_UNUSED']
         self.coins = user_store_db['COINS']
+        self.games_played = user_store_db['GAMES_PLAYED']
 
     def to_dict(self):
         d = {
@@ -207,6 +208,7 @@ class Player:
             'HAS_REACHED_CHASE_ONCE': self.has_reached_chase,
             'HAS_INFORMANT': self.has_informant,
             'COINS': self.coins,
+            'GAMES_PLAYED': 0,
             'STORE': {
                 "SELECTED": self.selected_moves,
                 "BOUGHT_BUT_UNUSED": self.bought_moves
@@ -221,6 +223,7 @@ class Player:
             'HAS_REACHED_FIGHT_ONCE': False,
             'HAS_REACHED_CHASE_ONCE': False,
             'HAS_INFORMANT': False,
+            'GAMES_PLAYED': None,
             'COINS': 0,
             'STORE': {
                 "SELECTED": ['Punch', 'Kick', 'Super Mega Smash', 'Gunshot'],
