@@ -29,7 +29,7 @@ FONT_MONO_MEDIUM = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', '
 FONT_MONO_LARGE = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'PTMono-Regular.ttf'), 30)
 FONT_MONO_VERY_LARGE = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'PTMono-Regular.ttf'), 40)
 FONT_MAIN_SCREEN = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'BloggerSans-MediumItalic.otf'), 140)
-
+FONT_TITLE = pygame.font.Font(os.path.join(ROOT_PATH, 'assets', 'fonts', 'BloggerSans-MediumItalic.otf'), 32)
 
 # TODO: load all images here instead
 

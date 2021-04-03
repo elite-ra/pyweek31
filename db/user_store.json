@@ -5,14 +5,14 @@
     "HAS_REACHED_FIGHT_ONCE": true,
     "STORE": {
         "BOUGHT_BUT_UNUSED": [
-            "Kick",
-            "Super Mega Smash"
+            "Punch",
+            "The huge missile."
         ],
         "SELECTED": [
-            "The huge missile.",
+            "Gunshot",
+            "Super Mega Smash",
             "Stare",
-            "Punch",
-            "Gunshot"
+            "Kick"
         ]
     }
 }

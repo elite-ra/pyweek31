@@ -27,7 +27,6 @@ pygame.display.set_caption('Aquilam')
 pygame.display.set_icon(icon)
 
 
-# temporary home screen
 def play():
     logo = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'logo.png'))
     # INITIALIZE the sounds

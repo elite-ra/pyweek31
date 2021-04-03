@@ -34,7 +34,9 @@ def play():
                     music_controller.play_click_normal()
                     return home_screen.play()
 
-        explanation = '''You are on the robber's tail! But... where is he now?
+        explanation = '''Where is the Robber?
+
+You are on the robbers trail!
 
 Guess which city the robber the robber is now - he moves cities after every theft.
 

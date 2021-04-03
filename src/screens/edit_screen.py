@@ -15,13 +15,15 @@ from ..utils import colors
 from . import home_screen
 from .. import music_controller
 from .. import utils
+import os
 
 
-# temporary home screen
 def play():
+    img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
+
     back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                         (consts.SCREEN_HEIGHT / 2) - 300),
-                      width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                      width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                       font=utils.constants.FONT_MONO_LARGE, text='<-')
 
     all_moves = consts.DB.get_all_moves()
@@ -72,7 +74,6 @@ def play():
         if mv in selc_moves:
             selected.append(mv_btn)
 
-
     modal_showing = False
     x_btn = None
 
@@ -105,7 +106,9 @@ def play():
     REL_COORDS = None
     while not is_game_over:
         if not modal_showing:
-            consts.MAIN_DISPLAY.fill((9, 25, 255))
+            consts.MAIN_DISPLAY.blit(img, (0, 0))
+            t = consts.FONT_TITLE.render('Choose your moves for fighting', True, (255, 255, 255))
+            consts.MAIN_DISPLAY.blit(t,(50, 30))
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
@@ -169,7 +172,8 @@ def play():
                     for i in selected:
                         # NOTE: HACK: sneaky, using TextButton.text as a parameter: DO NOT CHANGE Button text!
                         if i.text not in plyr.bought_moves + plyr.selected_moves:
-                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move {i.text}, Please go to the shop!")
+                            REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move {i.text},"
+                                                                         f"Please go to the police department!")
                             break
                     else:
                         new_selection = [i.text for i in selected]

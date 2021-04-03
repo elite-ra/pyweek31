@@ -13,6 +13,7 @@ from ..utils.widgets import TextButton
 from ..utils import colors
 from .. import utils
 from . import home_screen
+import os
 from .. import music_controller
 
 
@@ -49,9 +50,11 @@ def play():
                            fg_color=colors.WHITE_COLOR, bg_color=colors.RED_COLOR,
                            font=pygame.font.Font('freesansbold.ttf', 10), text='Reset Game Progress')
 
+    img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
+
     is_game_over = False
     while not is_game_over:
-        utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
+        utils.constants.MAIN_DISPLAY.blit(img, (0,0))
         curr_setting = consts.DB.get_settings()
 
         t = consts.FONT_MONO_SMALL.render(f'Music: ', True, (0, 0, 0))
