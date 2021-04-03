@@ -108,7 +108,12 @@ def play():
                 return settings.play()
 
         if edit_button is None:
+
             edit_d_button.toggle_bg(colors.GREY_COLOR)
+            if edit_d_button.hovered:
+                t = consts.FONT_MONO_SMALL.render('Play the game to find out what this is!', True, (0, 0, 0))
+                consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 -t.get_width()/2, 550))
+
         else:
             if edit_button.hovered:
                 edit_button.toggle_bg((0, 100, 0))
