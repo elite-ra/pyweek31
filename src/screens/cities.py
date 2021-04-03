@@ -105,9 +105,9 @@ def play():
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
-                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 75,
+                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(600,
                                                                            500),
-                                         width=150, height=20, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
+                                         width=150, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
                                          font=utils.constants.FONT_MONO_SMALL, text='Choose this city')
 
             x = pygame.mouse.get_pos()[0]
