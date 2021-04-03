@@ -105,7 +105,6 @@ def play():
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
 
             if show_city:
-
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
@@ -135,8 +134,9 @@ def play():
                                                                 (255, 255, 255))
 
                 s = pygame.Surface((300,
-                                    5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height()
-                                    + 5 + text_d.get_height() + 5))
+                                    5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
+                                    text_c.get_rect().height + 5 + text_d.get_rect().height + 5 +
+                                    text_e.get_rect().height + 5 + text_f.get_height() + 5))
 
                 s.blit(text_a, (5, 0))
                 s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))

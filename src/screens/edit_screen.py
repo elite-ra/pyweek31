@@ -89,19 +89,19 @@ def play():
         text_a = consts.FONT_MONO_MEDIUM.render(title, True, (255, 255, 255))
         text_b = consts.FONT_MONO_SMALL.render(text, True, (255, 255, 255))
 
-        s = pygame.Surface((500,
+        s = pygame.Surface((700,
                             20 + text_a.get_height() + 5 + text_b.get_height() + 20))
 
         s.blit(text_a, (20, 20))
         s.blit(text_b, (20, 20 + text_a.get_rect().height + 5))
         nonlocal x_btn
-        x_btn = TextButton(surface=s, pos=(470, 0), width=30, height=30, fg_color=colors.WHITE_COLOR,
+        x_btn = TextButton(surface=s, pos=(670, 0), width=30, height=30, fg_color=colors.WHITE_COLOR,
                            bg_color=colors.RED_COLOR, font=pygame.font.Font('freesansbold.ttf', 30),
                            text=f'X')
 
-        consts.MAIN_DISPLAY.blit(s, (consts.SCREEN_WIDTH / 2 - 250, consts.SCREEN_HEIGHT / 2 -
+        consts.MAIN_DISPLAY.blit(s, (consts.SCREEN_WIDTH / 2 - 350, consts.SCREEN_HEIGHT / 2 -
                                      (20 + text_a.get_height() + 5 + text_b.get_height() + 20)))
-        btn_x = consts.SCREEN_WIDTH/2 - 250 + 470
+        btn_x = consts.SCREEN_WIDTH/2 - 350 + 670
         btn_y = consts.SCREEN_HEIGHT/2 - (20 + text_a.get_height() + 5 + text_b.get_height() + 20) + 0
         return btn_x, btn_y
 
