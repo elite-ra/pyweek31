@@ -74,18 +74,20 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-
         if play_button.hovered:
             play_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
+                music_controller.play_click_normal()
                 play_button.toggle_bg(colors.BROWN_COLOR)
                 return cities.play()
         else:
             play_button.toggle_bg(colors.BLACK_COLOR)
 
         if shop_button.hovered:
+
             shop_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
+                music_controller.play_click_normal()
                 shop_button.toggle_bg(colors.BROWN_COLOR)
                 return shop.play()
         else:
@@ -94,6 +96,7 @@ def play():
         if settings_button.hovered:
             settings_button.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
+                music_controller.play_click_normal()
                 settings_button.toggle_bg(colors.BROWN_COLOR)
                 return settings.play()
         else:
@@ -105,6 +108,7 @@ def play():
             if edit_button.hovered:
                 edit_button.toggle_bg(colors.RED_COLOR)
                 if mouse_down:
+                    music_controller.play_click_normal()
                     edit_button.toggle_bg(colors.RED_COLOR)
                     return edit_screen.play()
             else:
