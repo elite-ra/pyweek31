@@ -14,6 +14,7 @@ from ..utils.widgets import TextButton
 from ..utils import colors
 from . import home_screen
 from .. import music_controller
+from .. import utils
 
 
 # temporary home screen

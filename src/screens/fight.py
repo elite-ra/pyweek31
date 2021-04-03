@@ -263,7 +263,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             robdmg += damagee
 
     # robber hit, always hits.
-    ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
+    ndm = random.randint(20, 25)
     copdmg += ndm
     cophp -= ndm
 
