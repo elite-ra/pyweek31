@@ -38,10 +38,13 @@ def play():
 
 Guess which city the robber the robber is now - he moves cities after every theft.
 
-Tips: If his health is low, he needs a hospital, and if he needs to sell his stolen goods, 
-he will try to sell it on a black market. The robber may suprise you based on his mood.
+Tips: If his health is low, he needs a hospital, 
+      and if he needs to sell his stolen goods, 
+      he will try to sell it on a black market.
+      
+Remember, The robber may suprise you!
 
-Hire an informant to get more information.
+Hire an informant from the police department to get more information about the robber.
 '''
 
         font = consts.FONT_MONO_SMALL
@@ -57,12 +60,12 @@ Hire an informant to get more information.
         font = consts.FONT_MONO_MEDIUM
         text = font.render(explanation.split('\n')[0], True, (200, 200, 200))
         w = text.get_rect().width
-        consts.MAIN_DISPLAY.blit(text, ((800-w)/2, 10))
+        consts.MAIN_DISPLAY.blit(text, ((800-w)/2 + 20, 10))
         temp = 1
         font = consts.FONT_MONO_SMALL
         for i in explanation.split('\n')[1:]:
             text = font.render(i, True, (200, 200, 200))
-            consts.MAIN_DISPLAY.blit(text, (5, 10 + temp * 20))
+            consts.MAIN_DISPLAY.blit(text, (20, 10 + temp * 20))
             temp += 1
         if city_button.hovered:
             city_button.toggle_bg((139, 0, 0))
@@ -70,7 +73,6 @@ Hire an informant to get more information.
                 city_button.toggle_bg((255, 0, 0))
                 music_controller.play_click_normal()
                 return cities.play()
-
 
         pygame.display.update()
         consts.CLOCK.tick(consts.TICK_RATE)

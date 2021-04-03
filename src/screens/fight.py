@@ -40,7 +40,6 @@ def main(skill_level):
     copimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Cop_n.png'))
     copimg = pygame.transform.scale(copimg, (108, 200))
     vilimg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'Robber.png'))
-    vilimg = pygame.transform.scale(vilimg, (108, 220))
     img = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'bg_platform_down.png'))
 
     screen = utils.constants.MAIN_DISPLAY
