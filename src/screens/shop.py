@@ -130,7 +130,7 @@ def play():
                         t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
                         consts.MAIN_DISPLAY.blit(t, (50, 100))
                         plyr.has_informant = True
-                        plyr.coins -= 150
+                        plyr.coins -= 400
                         consts.DB.set_player_details(plyr)
                         no_coins = True
         else:
