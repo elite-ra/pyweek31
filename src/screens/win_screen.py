@@ -7,7 +7,6 @@ if __name__ == "__main__":
     sys.exit()
 
 
-
 from . import home_screen
 import pygame
 from ..utils.widgets import TextButton
