@@ -23,7 +23,7 @@ from .. import music_controller
 ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 
 
-def main(skill_level):
+def play(skill_level):
 
     music_controller.play_fight_bg()
 
@@ -56,6 +56,8 @@ def main(skill_level):
             colour = (255, 0, 0)
         pygame.draw.rect(dscreen, (255, 255, 255), (40, 10, 200, 20))
         pygame.draw.rect(dscreen, colour, (41, 11, math.ceil(2 * value - 1), 18))
+        text_health = utils.constants.FONT_MONO_VERY_SMALL.render(f'{int(value)}', True, (0, 0, 0))
+        utils.constants.MAIN_DISPLAY.blit(text_health, (45, 12))
 
     def health_vil(value, dscreen):
 
@@ -68,6 +70,8 @@ def main(skill_level):
             colour = (255, 0, 0)
         pygame.draw.rect(dscreen, (255, 255, 255), (560, 10, 200, 20))
         pygame.draw.rect(dscreen, colour, (561, 11, math.ceil(2 * percentval - 1), 18))
+        text_health = utils.constants.FONT_MONO_VERY_SMALL.render(f'{int(value)}', True, (0, 0, 0))
+        utils.constants.MAIN_DISPLAY.blit(text_health, (565, 12))
 
     done = False
     hpcop = 100
