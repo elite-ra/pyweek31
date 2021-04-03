@@ -21,8 +21,11 @@ from . import edit_screen
 from .. import music_controller
 import os
 
-pygame.init()
 
+icon = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'icon.png'))
+pygame.init()
+pygame.display.set_caption('Aquilam')
+pygame.display.set_icon(icon)
 
 # temporary home screen
 def play():
