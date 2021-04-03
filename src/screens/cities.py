@@ -23,7 +23,6 @@ def play():
 
     coin_limit = 50000
 
-
     show_city = False
 
     def city_name(name, x, y):
@@ -40,7 +39,6 @@ def play():
     while running:
 
         pygame.display.update()
-
         utils.constants.MAIN_DISPLAY.blit(bg, (0, 0))
         mouse_down = False
 
@@ -51,28 +49,29 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-        # Coins stolen
+        # Draw coins stolen
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 550, 800, 50))
         font = utils.constants.FONT_MONO_SMALL
         current_coins = game_obj.total_coins_stolen
-        text = font.render(f'Coins stolen({current_coins}/{coin_limit})', True, (255, 255, 255))
+        coins_stolen_text = font.render(f'Coins stolen ({current_coins}/{coin_limit})', True, (255, 255, 255))
         # losing condition
         if current_coins >= coin_limit:
             return end_screen.end_screen_func(1)
-
-        w = text.get_rect().width
-        utils.constants.MAIN_DISPLAY.blit(text, (100 + (600 - w) / 2, 555))
+        w = coins_stolen_text.get_rect().width
+        utils.constants.MAIN_DISPLAY.blit(coins_stolen_text, (100 + (600 - w) / 2, 555))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (200, 200, 200), pygame.Rect(120, 575, 560, 10))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 215, 0),
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 120))
+        # Draw robber statistics
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 120))  # rectangle up top
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 116), 1)
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render('Robber Stats', True, (200, 200, 200))
         font = utils.constants.FONT_MONO_SMALL
         w = text.get_rect().width
         utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2, 5))
+        # the following takes the str from Game and pretty formats it to blit
         random_string = str(game_obj)
         temp = 0
         for i in random_string.split('\n'):
