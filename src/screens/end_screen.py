@@ -40,22 +40,25 @@ def end_screen_func(a):
         font = consts.FONT_MONO_LARGE
         # coins limit reached
         if a == 1:
-            text = font.render('Too much was stolen! The robber won.', True, (255, 255, 255))
+            text = font.render('The robber stole too much!', True, (255, 255, 255))
+            w, h = text.get_rect().width, text.get_rect().height
+            consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
+            text = font.render('Better luck next time!', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
         # bird strike
         elif a == 2:
-            text = font.render('You crashed and the robber got away.', True, (255, 255, 255))
+            text = font.render("You were hit by the robber's missile!", True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)-40))
-            text = font.render('The robber won.', True, (255, 255, 255))
+            text = font.render('The robber got away!', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
         # losing in fight
         elif a == 3:
-            text = font.render('You lost all your health! The robber won.', True, (255, 255, 255))
+            text = font.render('The robber defeated you!', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 

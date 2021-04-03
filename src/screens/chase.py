@@ -228,7 +228,7 @@ def play(skill_level, city_name):
             plyr.coins += coins
             consts.DB.set_player_details(plyr)
             music_controller.stop_bg()
-            return fight.main(skill_level)
+            return fight.play(skill_level)
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
         font = utils.constants.FONT_MONO_VERY_SMALL

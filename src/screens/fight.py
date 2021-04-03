@@ -20,10 +20,10 @@ from . import win_screen
 from . import home_screen
 from .. import music_controller
 
-ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
+ROB_DMG_MIN, ROB_DMG_MAX = 15, 20
 
 
-def main(skill_level):
+def play(skill_level):
 
     music_controller.play_fight_bg()
 
@@ -31,10 +31,6 @@ def main(skill_level):
     plyr.has_reached_fight = True
     utils.constants.DB.set_player_details(plyr)
 
-    global ROB_DMG_MAX, ROB_DMG_MIN
-
-    ROB_DMG_MIN = (10 * int(skill_level) / 10 * 2) - (0 if 10 * int(skill_level) / 10 * 5 < 21 else 20)
-    ROB_DMG_MAX = 10 * int(skill_level) / 10 * 5
     rob_max_helth = 100 * (skill_level / 10 - 0.1 + 1)
 
     # Images and Sprites
@@ -56,6 +52,8 @@ def main(skill_level):
             colour = (255, 0, 0)
         pygame.draw.rect(dscreen, (255, 255, 255), (40, 10, 200, 20))
         pygame.draw.rect(dscreen, colour, (41, 11, math.ceil(2 * value - 1), 18))
+        text_health = utils.constants.FONT_MONO_VERY_SMALL.render(f'{int(value)}', True, (0, 0, 0))
+        utils.constants.MAIN_DISPLAY.blit(text_health, (45, 12))
 
     def health_vil(value, dscreen):
 
@@ -68,6 +66,8 @@ def main(skill_level):
             colour = (255, 0, 0)
         pygame.draw.rect(dscreen, (255, 255, 255), (560, 10, 200, 20))
         pygame.draw.rect(dscreen, colour, (561, 11, math.ceil(2 * percentval - 1), 18))
+        text_health = utils.constants.FONT_MONO_VERY_SMALL.render(f'{int(value)}', True, (0, 0, 0))
+        utils.constants.MAIN_DISPLAY.blit(text_health, (565, 12))
 
     done = False
     hpcop = 100
@@ -265,7 +265,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             robdmg += damagee
 
     # robber hit, always hits.
-    ndm = random.randint(15, 20)
+    ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
     copdmg += ndm
     cophp -= ndm
 
