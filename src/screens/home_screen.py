@@ -14,6 +14,7 @@ from . import chase
 from . import cities
 from . import settings
 from . import fight
+from . import explain_city
 from . import shop
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
@@ -79,7 +80,7 @@ def play():
             if mouse_down:
                 music_controller.play_click_normal()
                 play_button.toggle_bg(colors.BROWN_COLOR)
-                return cities.play()
+                return explain_city.play()
         else:
             play_button.toggle_bg(colors.BLACK_COLOR)
 
