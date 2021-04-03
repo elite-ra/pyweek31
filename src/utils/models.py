@@ -13,6 +13,12 @@
 # 9 : bank_count 21-25 | per_capita_income  5000001-10000000 | crime_rate 90-95% |
 # 10: bank_count 26+   | per_capita_income 10000001-25000000 | crime_rate 96-99% |
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
+
 import typing
 from . import constants as consts
 

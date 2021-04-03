@@ -1,3 +1,12 @@
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Ayush Gupta
+
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
+
 from . import home_screen
 import pygame
 from ..utils.widgets import TextButton

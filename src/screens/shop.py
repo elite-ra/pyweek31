@@ -1,6 +1,12 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
+
 import pygame
 
 from . import chase
@@ -11,8 +17,6 @@ from ..utils import colors
 from .. import utils
 from . import home_screen
 from ..utils import database
-
-# TODO: show message on hover on button.
 
 
 # settings screen
@@ -26,13 +30,46 @@ def play():
     no_coins = False
     is_game_over = False
 
-    while not is_game_over:
-        back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
-                                                            (consts.SCREEN_HEIGHT / 2) - 300),
-                          width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                          font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
+    modal_showing = False
+    x_btn = None
 
-        if not no_coins:
+    def show_modal(title, text):
+
+        nonlocal modal_showing
+        modal_showing = True
+        maj_sur = pygame.Surface((800, 600))
+        maj_sur.set_alpha(180)
+        maj_sur.fill(colors.BLACK_COLOR)
+        consts.MAIN_DISPLAY.blit(maj_sur, (0, 0))
+        text_aaa = consts.FONT_MONO_MEDIUM.render(title, True, (255, 255, 255))
+        text_bbb = consts.FONT_MONO_SMALL.render(text, True, (255, 255, 255))
+
+        surf = pygame.Surface((500,
+                            20 + text_aaa.get_height() + 5 + text_bbb.get_height() + 20))
+
+        surf.blit(text_aaa, (20, 20))
+        surf.blit(text_bbb, (20, 20 + text_aaa.get_rect().height + 5))
+        nonlocal x_btn
+        x_btn = TextButton(surface=surf, pos=(470, 0), width=30, height=30, fg_color=colors.WHITE_COLOR,
+                           bg_color=colors.RED_COLOR, font=pygame.font.Font('freesansbold.ttf', 30),
+                           text=f'X')
+
+        consts.MAIN_DISPLAY.blit(surf, (consts.SCREEN_WIDTH / 2 - 250, consts.SCREEN_HEIGHT / 2 -
+                                      (20 + text_aaa.get_height() + 5 + text_bbb.get_height() + 20)))
+        btn_x = consts.SCREEN_WIDTH / 2 - 250 + 470
+        btn_y = consts.SCREEN_HEIGHT / 2 - (20 + text_aaa.get_height() + 5 + text_bbb.get_height() + 20) + 0
+        return btn_x, btn_y
+
+    REL_COORDS = None
+
+    back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
+                                                        (consts.SCREEN_HEIGHT / 2) - 300),
+                      width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+                      font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
+
+    while not is_game_over:
+
+        if not modal_showing:
             utils.constants.MAIN_DISPLAY.fill((255, 255, 255))
 
             informant = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
@@ -61,9 +98,10 @@ def play():
                                  width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                  font=pygame.font.Font('freesansbold.ttf', 30), text=f'???')
 
-        t = consts.FONT_MONO_MEDIUM.render(f'{plyr.coins}', True, (249,195, 6))
-        consts.MAIN_DISPLAY.blit(t, (720, 22))
-        consts.MAIN_DISPLAY.blit(consts.COIN_TRIPLE_IMG, (650, 10))
+            t = consts.FONT_MONO_MEDIUM.render(f'{plyr.coins}', True, (0, 0, 0))
+            consts.MAIN_DISPLAY.blit(t, (711, 10))
+            consts.MAIN_DISPLAY.blit(consts.COIN_TRIPLE_IMG, (650, 10))
+
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
@@ -74,80 +112,26 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-        if back.hovered and not no_coins:
+        if back.hovered and not modal_showing:
             back.toggle_bg(colors.BROWN_COLOR)
             if mouse_down:
                 back.toggle_bg(colors.BROWN_COLOR)
                 # update volume bar
                 return home_screen.play()
-        else:
+        elif not modal_showing:
             back.toggle_bg(colors.BLACK_COLOR)
 
-        if informant.hovered and not no_coins:
+        if informant.hovered and not modal_showing:
             informant.toggle_bg(colors.BROWN_COLOR)
-
-            mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
-
-            text_a = consts.FONT_MONO_MEDIUM.render('Informant!', True, (255, 255, 255))
-            text_b = consts.FONT_MONO_SMALL.render('Hire an informant. The informant', True, (255, 255, 255))
-            text_c = consts.FONT_MONO_SMALL.render('reveals more details about the robber.', True, (255, 255, 255))
-            text_d = consts.FONT_MONO_SMALL.render('Cost: 400 coins', True, (255, 255, 255))
-
-            s = pygame.Surface((400, 5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
-
-            s.blit(text_a, (5, 0))
-            s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
-            s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
-            s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
-                            text_c.get_rect().height + 5))
-            consts.MAIN_DISPLAY.blit(s, (mx, my))
-
-            if mouse_down:
-                informant.toggle_bg(colors.BROWN_COLOR)
-                # check coins
-                if plyr.coins < 400:
-                    s = pygame.Surface((800, 600))  # the size of your rect
-                    s.set_alpha(240)  # alpha level
-                    s.fill((0, 0, 0))  # this fills the entire surface
-                    consts.MAIN_DISPLAY.blit(s, (0, 0))
-                    t = consts.FONT_MONO_MEDIUM.render("You don't have enough coins!", True, (255, 255, 255))
-                    utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                    no_coins = True
-                else:
-                    plyr = consts.DB.get_player_details()
-                    if plyr.has_informant:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.set_alpha(240)  # alpha level
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade!", True, (255,255,255))
-                        utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                        no_coins = True
-                    else:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                        consts.MAIN_DISPLAY.blit(t, (350, 100))
-                        plyr.has_informant = True
-                        plyr.coins -= 400
-                        consts.DB.set_player_details(plyr)
-                        no_coins = True
-        else:
-            informant.toggle_bg(colors.BLACK_COLOR)
-
-        if consts.DB.get_player_details().has_reached_fight:
-            if bm1.hovered and not no_coins:
-                bm1.toggle_bg(colors.BROWN_COLOR)
+            if not mouse_down:
                 mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
 
-                text_a = consts.FONT_MONO_MEDIUM.render(f'{allmove[0].name}', True, (255, 255, 255))
-                text_b = consts.FONT_MONO_SMALL.render(f'Buy the "{allmove[0].name}" move', True, (255, 255, 255))
-                text_c = consts.FONT_MONO_SMALL.render(f'{allmove[0].description}', True, (255, 255, 255))
-                text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[0].price} coins', True, (255, 255, 255))
+                text_a = consts.FONT_MONO_MEDIUM.render('Informant!', True, (255, 255, 255))
+                text_b = consts.FONT_MONO_SMALL.render('Hire an informant. The informant', True, (255, 255, 255))
+                text_c = consts.FONT_MONO_SMALL.render('reveals more details about the robber.', True, (255, 255, 255))
+                text_d = consts.FONT_MONO_SMALL.render('Cost: 400 coins', True, (255, 255, 255))
 
-                s = pygame.Surface((400,
-                                    5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
+                s = pygame.Surface((400, 5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
 
                 s.blit(text_a, (5, 0))
                 s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
@@ -156,114 +140,118 @@ def play():
                                 text_c.get_rect().height + 5))
                 consts.MAIN_DISPLAY.blit(s, (mx, my))
 
-                pygame.display.update()
+            else:
+                informant.toggle_bg(colors.BROWN_COLOR)
+                # check coins
+                if plyr.coins < 400 and not plyr.has_informant:
+                    REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
+                else:
+                    plyr = consts.DB.get_player_details()
+                    if plyr.has_informant:
+                        REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
+                    else:
+                        REL_COORDS = show_modal(title="Done!", text="You hired an informant!")
+                        plyr = consts.DB.get_player_details()
+                        plyr.has_informant = True
+                        plyr.coins -= 400
+                        consts.DB.set_player_details(plyr)
+        elif not modal_showing:
+            informant.toggle_bg(colors.BLACK_COLOR)
 
-                if mouse_down:
+        if consts.DB.get_player_details().has_reached_fight:
+            if bm1.hovered and not modal_showing:
+
+
+                bm1.toggle_bg(colors.BROWN_COLOR)
+
+                if not mouse_down:
+                    mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
+
+                    text_a = consts.FONT_MONO_MEDIUM.render(f'{allmove[0].name}', True, (255, 255, 255))
+                    text_b = consts.FONT_MONO_SMALL.render(f'Buy the "{allmove[0].name}" move', True, (255, 255, 255))
+                    text_c = consts.FONT_MONO_SMALL.render(f'{allmove[0].description}', True, (255, 255, 255))
+                    text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[0].price} coins', True, (255, 255, 255))
+
+                    s = pygame.Surface((400,
+                                        5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
+
+                    s.blit(text_a, (5, 0))
+                    s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
+                    s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
+                    s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
+                                    text_c.get_rect().height + 5))
+                    consts.MAIN_DISPLAY.blit(s, (mx, my))
+
+                    pygame.display.update()
+                else:
                     bm1.toggle_bg(colors.BROWN_COLOR)
                     # check coins
                     if plyr.coins < allmove[0].price:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.set_alpha(240)  # alpha level
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("You don't have enough coins!", True, (255, 255, 255))
-                        utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                        no_coins = True
+                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
                     else:
                         if allmove[0].name in plyr.bought_moves:
-                            s = pygame.Surface((800, 600))  # the size of your rect
-                            s.set_alpha(240)  # alpha level
-                            s.fill((0, 0, 0))  # this fills the entire surface
-                            consts.MAIN_DISPLAY.blit(s, (0, 0))
-                            t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade!", True, (255, 255, 255))
-                            utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                            no_coins = True
+                            REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
                         else:
-                            s = pygame.Surface((800, 600))  # the size of your rect
-                            s.fill((0, 0, 0))  # this fills the entire surface
-                            consts.MAIN_DISPLAY.blit(s, (0, 0))
-                            t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                            consts.MAIN_DISPLAY.blit(t, (350, 100))
+                            REL_COORDS = show_modal(title="Done!", text="You got the move!")
                             plyr = consts.DB.get_player_details()
                             plyr.bought_moves.append(allmove[0].name)
                             plyr.coins -= allmove[0].price
                             consts.DB.set_player_details(plyr)
-                            no_coins = True
-            else:
+            elif not modal_showing:
                 bm1.toggle_bg(colors.BLACK_COLOR)
 
         if consts.DB.get_player_details().has_reached_fight:
-            if bm2.hovered and not no_coins:
-                mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
-                bm2.toggle_bg(colors.BROWN_COLOR)
-                text_a = consts.FONT_MONO_MEDIUM.render(f'{allmove[1].name}', True, (255, 255, 255))
-                text_b = consts.FONT_MONO_SMALL.render(f'Buy the "{allmove[1].name}" move', True, (255, 255, 255))
-                text_c = consts.FONT_MONO_SMALL.render(f'{allmove[1].description}', True, (255, 255, 255))
-                text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[1].price} coins', True, (255, 255, 255))
+            if bm2.hovered and not modal_showing:
 
-                s = pygame.Surface((400,
-                                    5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
+                if not mouse_down:
+                    mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
+                    bm2.toggle_bg(colors.BROWN_COLOR)
+                    text_a = consts.FONT_MONO_MEDIUM.render(f'{allmove[1].name}', True, (255, 255, 255))
+                    text_b = consts.FONT_MONO_SMALL.render(f'Buy the "{allmove[1].name}" move', True, (255, 255, 255))
+                    text_c = consts.FONT_MONO_SMALL.render(f'{allmove[1].description}', True, (255, 255, 255))
+                    text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[1].price} coins', True, (255, 255, 255))
 
-                s.blit(text_a, (5, 0))
-                s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
-                s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
-                s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
-                                text_c.get_rect().height + 5))
-                consts.MAIN_DISPLAY.blit(s, (mx, my))
+                    s = pygame.Surface((400,
+                                        5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
 
-                pygame.display.update()
-                if mouse_down:
+                    s.blit(text_a, (5, 0))
+                    s.blit(text_b, (5, 5 + text_a.get_rect().height + 5))
+                    s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
+                    s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
+                                    text_c.get_rect().height + 5))
+                    consts.MAIN_DISPLAY.blit(s, (mx, my))
+
+                    pygame.display.update()
+                else:
+
                     bm2.toggle_bg(colors.BROWN_COLOR)
                     # check coins
                     if plyr.coins < allmove[1].price:
-                        s = pygame.Surface((800, 600))  # the size of your rect
-                        s.set_alpha(240)  # alpha level
-                        s.fill((0, 0, 0))  # this fills the entire surface
-                        consts.MAIN_DISPLAY.blit(s, (0, 0))
-                        t = consts.FONT_MONO_MEDIUM.render("You don't have enough coins!", True, (255, 255, 255))
-                        utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                        no_coins = True
+                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
                     else:
                         if allmove[1].name in plyr.bought_moves:
-                            s = pygame.Surface((800, 600))  # the size of your rect
-                            s.set_alpha(240)  # alpha level
-                            s.fill((0, 0, 0))  # this fills the entire surface
-                            consts.MAIN_DISPLAY.blit(s, (0, 0))
-                            t = consts.FONT_MONO_MEDIUM.render("You already have this upgrade!", True, (255, 255, 255))
-                            utils.constants.MAIN_DISPLAY.blit(t, (200, 10))
-                            no_coins = True
+                            REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
                         else:
-                            s = pygame.Surface((800, 600))  # the size of your rect
-                            s.fill((0, 0, 0))  # this fills the entire surface
-                            consts.MAIN_DISPLAY.blit(s, (0, 0))
-                            t = consts.FONT_MONO_MEDIUM.render("Bought!", True, (100, 100, 100))
-                            consts.MAIN_DISPLAY.blit(t, (350, 100))
+                            REL_COORDS = show_modal(title="Done!", text="You got the move!")
                             plyr = consts.DB.get_player_details()
                             plyr.bought_moves.append(allmove[1].name)
                             plyr.coins -= allmove[1].price
                             consts.DB.set_player_details(plyr)
-                            no_coins = True
-            else:
+            elif not modal_showing:
                 bm2.toggle_bg(colors.BLACK_COLOR)
 
-        if no_coins:
-            # show X
-            txx = consts.FONT_MONO_LARGE.render('X', True, (255, 0, 0))
-            consts.MAIN_DISPLAY.blit(txx, (100, 100))
-            tx = 100
-            ty = 100
+        if modal_showing:
+            
+            # NOTE: cant use .hovered here as .hovered is relative to the passed position with correspond to the
+            #  main screen, not surface
+            row, col = pygame.mouse.get_pos()
 
-            if mouse_down:
-                x = pygame.mouse.get_pos()[0]
-                y = pygame.mouse.get_pos()[1]
+            if REL_COORDS[0] <= row <= REL_COORDS[0] + 30 and REL_COORDS[1] <= col <= REL_COORDS[1] + 30:
+                if mouse_down:
+                    modal_showing = False
 
-                if (tx <= x <= tx + txx.get_width()) and (ty <= y <= ty + txx.get_height()):
-                    no_coins = False
-                else:
-                    no_coins = True
-
-        if (consts.DB.get_player_details().has_reached_fight and bm1.hovered and not no_coins) or \
-                (consts.DB.get_player_details().has_reached_fight and bm2.hovered and not no_coins):
+        if (consts.DB.get_player_details().has_reached_fight and bm1.hovered and not modal_showing) or \
+                (consts.DB.get_player_details().has_reached_fight and bm2.hovered and not modal_showing):
             pass
         else:
             pygame.display.update()

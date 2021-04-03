@@ -1,6 +1,11 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Pranjal Rastogi
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
 import pygame
 
 from . import chase
@@ -11,6 +16,7 @@ from ..utils import colors
 from .. import utils
 from ..utils import database
 from . import home_screen
+from .. import music_controller
 
 
 # settings screen
@@ -83,6 +89,8 @@ def play():
                     ns['volume']['music'] += 10
 
                     consts.DB.set_settings(ns)
+
+                    music_controller.update_volume()
             else:
                 inc_main_vol.toggle_bg(colors.BLACK_COLOR)
 
@@ -97,6 +105,8 @@ def play():
                     ns = dict(curr_setting)
                     ns['volume']['music'] -= 10
                     consts.DB.set_settings(ns)
+                    music_controller.update_volume()
+
             else:
                 dec_main_vol.toggle_bg(colors.BLACK_COLOR)
 
@@ -110,7 +120,10 @@ def play():
                     # update volume bar
                     ns = dict(curr_setting)
                     ns['volume']['fx'] += 10
+
                     consts.DB.set_settings(ns)
+                    music_controller.update_volume()
+
             else:
                 inc_fx_vol.toggle_bg(colors.BLACK_COLOR)
 
@@ -125,6 +138,8 @@ def play():
                     ns = dict(curr_setting)
                     ns['volume']['fx'] -= 10
                     consts.DB.set_settings(ns)
+                    music_controller.update_volume()
+
             else:
                 dec_fx_vol.toggle_bg(colors.BLACK_COLOR)
 

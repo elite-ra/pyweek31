@@ -1,3 +1,13 @@
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Kartikey Pandey
+
+
+if __name__ == "__main__":
+    import sys
+
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
 import pygame
 import os
 import random
@@ -7,21 +17,21 @@ from . import end_screen
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
 from . import win_screen
+from .. import music_controller
 
 ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 
 
 def main(skill_level):
-
     plyr = utils.constants.DB.get_player_details()
     plyr.has_reached_fight = True
     utils.constants.DB.set_player_details(plyr)
 
     global ROB_DMG_MAX, ROB_DMG_MIN
 
-    ROB_DMG_MIN = (10 * int(skill_level)/10 * 2) - (0 if 10 * int(skill_level)/10 * 5 < 21 else 20)
-    ROB_DMG_MAX = 10 * int(skill_level)/10 * 5
-    rob_max_helth = 100 * (skill_level/10 - 0.1 + 1)
+    ROB_DMG_MIN = (10 * int(skill_level) / 10 * 2) - (0 if 10 * int(skill_level) / 10 * 5 < 21 else 20)
+    ROB_DMG_MAX = 10 * int(skill_level) / 10 * 5
+    rob_max_helth = 100 * (skill_level / 10 - 0.1 + 1)
 
     # Images and Sprites
     background_image = pygame.image.load(
@@ -46,7 +56,7 @@ def main(skill_level):
 
     def health_vil(value, dscreen):
 
-        percentval = (value/rob_max_helth) * 100
+        percentval = (value / rob_max_helth) * 100
         if percentval > 50:
             colour = (0, 255, 0)
         elif 50 >= percentval > 10:
@@ -117,9 +127,9 @@ def main(skill_level):
                 t_test1 = consts.FONT_MONO_SMALL.render(player_selected_moves[c].description, True, (0, 0, 0))
 
                 if t_test1.get_width() > 600 - 525:
-                    t_test1 = consts.FONT_MONO_SMALL.\
+                    t_test1 = consts.FONT_MONO_SMALL. \
                         render(" ".join(player_selected_moves[c].description.split(" ")[:7]), True, (0, 0, 0))
-                    t_test2 = consts.FONT_MONO_SMALL.\
+                    t_test2 = consts.FONT_MONO_SMALL. \
                         render(" ".join(player_selected_moves[c].description.split(" ")[7:]), True, (0, 0, 0))
                     consts.MAIN_DISPLAY.blit(t_test1, (185 + 5 + 160 + 30, 525))
                     consts.MAIN_DISPLAY.blit(t_test2, (185 + 5 + 160 + 30, 555))
@@ -131,6 +141,8 @@ def main(skill_level):
                 if mouse_down:
                     move.toggle_bg((50, 50, 50))
                     ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[c], hpcop, hpvil)
+                    music_controller.play_fight_sound()
+                    music_controller.play_fight_sound()
                     if rbdm is None:
                         # missed
                         t_mis1 = consts.FONT_MONO_SMALL.render(f'You missed! The robber dealt {cpdm} damage to you!',
@@ -144,8 +156,10 @@ def main(skill_level):
                         hpcop = ncphp
                     else:
                         # not missed
+
                         hpcop = ncphp
                         hpvil = nrbhp
+                        cpdm, rbdm = round(cpdm, 1), round(rbdm, 1)
 
                         if is_bckfre:
                             # backfired
@@ -186,7 +200,7 @@ def main(skill_level):
 
 
 def damage_calc(move: utils.models.FightMove, cophp, robhp):
-    if random.random() < move.accuracy/100:
+    if random.random() < move.accuracy / 100:
         not_miss = True
     else:
         not_miss = False
@@ -201,15 +215,15 @@ def damage_calc(move: utils.models.FightMove, cophp, robhp):
             backfire_chance = random.choice([0, 0, 1])  # fixed for all moves.
             if backfire_chance:
                 # move hits cop itself
-                dmg = (move.percentage_damage/100) * cophp
+                dmg = (move.percentage_damage / 100) * cophp
                 return dmg, True
             else:
                 # move hits robber
-                dmg = (move.percentage_damage/100) * robhp
+                dmg = (move.percentage_damage / 100) * robhp
                 return dmg, False
         else:
             # cant backfire
-            dmg = (move.percentage_damage/100) * robhp
+            dmg = (move.percentage_damage / 100) * robhp
             return dmg, False
     else:
         # move is normal damage

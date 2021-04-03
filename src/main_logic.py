@@ -1,6 +1,13 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Ayush Gupta, Pranjal Rastogi
 
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
+
+
 import random
 from .utils.models import City
 from .utils import constants as consts
@@ -43,12 +50,10 @@ class Game:
             self.skill_level = 10
 
     def play_turn(self, city_chosen_by_player):
-        # TODO: return something
 
         # do the robbers turn, which changes the robber's location.
         self.do_robber_turn()
 
-        print('Turn done')
         if city_chosen_by_player == self.current_robber_location:
             # It is a correct guess - the robber moved to what you chose!
             return True, self.skill_level
@@ -169,7 +174,7 @@ class Game:
         lastseenstr = str(self.current_robber_location.name) if self.current_robber_location is not None else "N/A"
         stolenitemstr = str(self.stolen_item.capitalize()) if self.stolen_item is not None else "N/A"
 
-        name_name = {'MUSEUM': 'robbing museums', 'BANK': 'robbing banks', 'NORM': 'robbing rich residents(sometimes)',
+        name_name = {'MUSEUM': 'robbing museums', 'BANK': 'robbing banks', 'NORM': 'robbing rich residents(mostly)',
                      'GROUP_PERSON': 'robbing with friends'}
 
         if consts.DB.player.has_informant:

@@ -3,7 +3,7 @@
 
 if __name__ == "__main__":
     import sys
-    print("\n\nDo not run this file!\nRun main.py instead!\n\n")
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
 
 
@@ -15,4 +15,5 @@ import os
 
 def play_game():
     database.validate_databases_and_settings()
+
     home_screen.play()

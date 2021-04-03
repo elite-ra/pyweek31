@@ -1,9 +1,15 @@
 # Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
 # Author: Ayush Gupta
 
+if __name__ == "__main__":
+    import sys
+
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
 import pygame
 
-from .. import utils
+from .. import utils, music_controller
 from ..main_logic import Game
 from . import chase
 from . import end_screen
@@ -21,7 +27,7 @@ def play():
 
     bg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'cities.png'))
 
-    coin_limit = 50000
+    coin_limit = 25000
 
     show_city = False
 
@@ -36,6 +42,7 @@ def play():
     game_obj = Game()
 
     running = True
+    true_city_t = 'a'
     while running:
 
         pygame.display.update()
@@ -86,6 +93,7 @@ def play():
                 x = pygame.mouse.get_pos()[0]
                 y = pygame.mouse.get_pos()[1]
                 if (i.collidepoint(x, y)):
+                    music_controller.play_click_normal()
                     show_city = True
 
                 if pygame.mouse.get_pressed()[0] and i.collidepoint(x, y):
@@ -97,17 +105,18 @@ def play():
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
 
             if show_city:
+
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
-                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 75,
+                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(600,
                                                                            500),
-                                         width=150, height=20, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
+                                         width=150, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
                                          font=utils.constants.FONT_MONO_SMALL, text='Choose this city')
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]
-            if i.collidepoint(x, y) and not stats_showing:
+            if i.collidepoint(x, y) and not stats_showing and a != true_city_t:
                 stats_showing = a
 
                 mx, my = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
@@ -146,15 +155,14 @@ def play():
                 else:
                     utils.constants.MAIN_DISPLAY.blit(s, (mx - 300, my))
 
-
             if not i.collidepoint(x, y) and stats_showing:
                 stats_showing = False
 
         if show_city:
-
             if choose_city.hovered:
                 choose_city.toggle_bg((0, 100, 0))
                 if mouse_down:
+                    music_controller.play_click_woop()
                     do_chase, skill_level = game_obj.play_turn(true_city_t)
                     if do_chase:
                         s = pygame.Surface((800, 600))  # the size of your rect

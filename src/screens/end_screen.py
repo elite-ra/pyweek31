@@ -1,3 +1,11 @@
+# Copyright (c) 2021 Ayush Gupta, Kartikey Pandey, Pranjal Rastogi, Sohan Varier, Shreyansh Kumar
+# Author: Ayush Gupta
+
+if __name__ == "__main__":
+    import sys
+    print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
+    sys.exit()
+
 from . import home_screen
 import pygame
 from ..utils.widgets import TextButton
@@ -28,7 +36,10 @@ def end_screen_func(a):
 
         # bird strike
         elif a == 2:
-            text = font.render('Your crashed and the robber got away. The robber won.', True, (255, 255, 255))
+            text = font.render('You crashed and the robber got away.', True, (255, 255, 255))
+            w, h = text.get_rect().width, text.get_rect().height
+            consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)-40))
+            text = font.render('The robber won.', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
