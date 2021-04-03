@@ -1,18 +1,15 @@
 {
-    "COINS": 480,
+    "COINS": 0,
     "HAS_INFORMANT": false,
     "HAS_REACHED_CHASE_ONCE": true,
-    "HAS_REACHED_FIGHT_ONCE": true,
+    "HAS_REACHED_FIGHT_ONCE": false,
     "STORE": {
-        "BOUGHT_BUT_UNUSED": [
-            "Super Mega Smash",
-            "Stare"
-        ],
+        "BOUGHT_BUT_UNUSED": [],
         "SELECTED": [
-            "Kick",
             "Punch",
-            "Gunshot",
-            "The huge missile."
+            "Kick",
+            "Super Mega Smash",
+            "Gunshot"
         ]
     }
 }
