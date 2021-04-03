@@ -4,9 +4,9 @@
 
 if __name__ == "__main__":
     import sys
+
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
-
 
 import pygame
 
@@ -15,17 +15,17 @@ from . import explain_city
 from . import shop
 from .. import utils
 from ..utils import constants as consts
-from ..utils.widgets import TextButton
+from ..utils.widgets import TextButton, ImageButton
 from ..utils import colors
 from . import edit_screen
 from .. import music_controller
 import os
 
-
 icon = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'icon.png'))
 pygame.init()
 pygame.display.set_caption('Aquilam')
 pygame.display.set_icon(icon)
+
 
 # temporary home screen
 def play():
@@ -44,16 +44,6 @@ def play():
                                                                (consts.SCREEN_HEIGHT / 2) + 100),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=utils.constants.FONT_MONO_LARGE, text='Play')
-
-    shop_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
-                                                               (consts.SCREEN_HEIGHT / 2) - 300),
-                             width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                             font=utils.constants.FONT_MONO_LARGE, text='Police Dept')
-
-    settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 200,
-                                                                   (consts.SCREEN_HEIGHT / 2) - 300),
-                                 width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=utils.constants.FONT_MONO_LARGE, text='Settings')
 
     plyr = consts.DB.get_player_details()
     if plyr.has_reached_fight:
@@ -74,9 +64,21 @@ def play():
 
         mouse_down = False
         consts.MAIN_DISPLAY.blit(img, (0, 0))
+
+        shop_button = ImageButton(surface=consts.MAIN_DISPLAY, pos=(5,
+                                                                    5),
+                                  width=70, height=70,
+                                  image_path=os.path.join(consts.ROOT_PATH, 'assets', 'images', 'textures', 'shop.png'))
+
+        settings_button = ImageButton(surface=consts.MAIN_DISPLAY, pos=(730,
+                                                                        5),
+                                      width=70, height=70,
+                                      image_path=os.path.join(consts.ROOT_PATH, 'assets', 'images', 'textures',
+                                                              'settings.png'))
+
         consts.MAIN_DISPLAY.blit(logo, [(800 - 512) / 2, -100])
         title = consts.FONT_MAIN_SCREEN.render('AQUILAM', True, (200, 255, 255))
-        consts.MAIN_DISPLAY.blit(title, (consts.SCREEN_WIDTH/2 - title.get_width()/2, 230))
+        consts.MAIN_DISPLAY.blit(title, (consts.SCREEN_WIDTH / 2 - title.get_width() / 2, 230))
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -96,22 +98,14 @@ def play():
 
         if shop_button.hovered:
 
-            shop_button.toggle_bg((0, 100, 0))
             if mouse_down:
                 music_controller.play_click_normal()
-                shop_button.toggle_bg(colors.BROWN_COLOR)
                 return shop.play()
-        else:
-            shop_button.toggle_bg(colors.BLACK_COLOR)
 
         if settings_button.hovered:
-            settings_button.toggle_bg((0, 100, 0))
             if mouse_down:
                 music_controller.play_click_normal()
-                settings_button.toggle_bg(colors.BROWN_COLOR)
                 return settings.play()
-        else:
-            settings_button.toggle_bg(colors.BLACK_COLOR)
 
         if edit_button is None:
             edit_d_button.toggle_bg(colors.GREY_COLOR)
