@@ -31,6 +31,7 @@ def play():
     music_controller.stop_fx1()
     music_controller.stop_fx2()
     music_controller.stop_fx3()
+    music_controller.stop_fx4()
     music_controller.stop_bg()
 
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
@@ -69,6 +70,8 @@ def play():
 
         mouse_down = False
         consts.MAIN_DISPLAY.blit(img, (0, 0))
+        title = consts.FONT_MAIN_SCREEN.render('AQUILAM', True, (200, 255, 255))
+        consts.MAIN_DISPLAY.blit(title, (consts.SCREEN_WIDTH/2 - title.get_width()/2, 80))
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

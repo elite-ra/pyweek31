@@ -43,6 +43,7 @@ def update_volume():
     channel_fx1.set_volume(vol_set['fx']/100)
     channel_fx2.set_volume(vol_set['fx']/100)
     channel_fx3.set_volume(vol_set['fx']/100)
+    channel_fx4.set_volume(vol_set['fx']/100)
 
 
 def play_menu_bg():
@@ -105,6 +106,10 @@ def stop_fx2():
 
 def stop_fx3():
     channel_fx3.stop()
+
+
+def stop_fx4():
+    channel_fx4.stop()
 
 
 def stop_bg():
