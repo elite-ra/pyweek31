@@ -67,7 +67,7 @@ def play():
         maj_sur.set_alpha(180)
         maj_sur.fill(colors.BLACK_COLOR)
         consts.MAIN_DISPLAY.blit(maj_sur, (0, 0))
-        text_aaa = consts.FONT_MONO_MEDIUM.render(titlee, True, (255, 255, 255))
+        text_aaa = consts.FONT_MONO_MEDIUM.render(titlee, True, (100, 0, 0))
         text_bbb = consts.FONT_MONO_SMALL.render(text1, True, (255, 255, 255))
         text_ccc = consts.FONT_MONO_SMALL.render(text2, True, (255, 255, 255))
 

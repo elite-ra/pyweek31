@@ -31,7 +31,7 @@ def play():
     modal_showing = False
     x_btn = None
 
-    def show_modal(title, text):
+    def show_modal(title, text, color):
 
         nonlocal modal_showing
         modal_showing = True
@@ -39,7 +39,7 @@ def play():
         maj_sur.set_alpha(180)
         maj_sur.fill(colors.BLACK_COLOR)
         consts.MAIN_DISPLAY.blit(maj_sur, (0, 0))
-        text_aaa = consts.FONT_MONO_MEDIUM.render(title, True, (255, 255, 255))
+        text_aaa = consts.FONT_MONO_MEDIUM.render(title, True, color)
         text_bbb = consts.FONT_MONO_SMALL.render(text, True, (255, 255, 255))
 
         surf = pygame.Surface((500,
@@ -156,14 +156,14 @@ def play():
                 informant.toggle_bg((128, 128, 128))
                 # check coins
                 if plyr.coins < 400 and not plyr.has_informant:
-                    REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
+                    REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
                 else:
                     plyr = consts.DB.get_player_details()
                     if plyr.has_informant:
-                        REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
+                        REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!", color=(100, 0, 0))
                     else:
 
-                        REL_COORDS = show_modal(title="Done!", text="You hired an informant!")
+                        REL_COORDS = show_modal(title="Done!", text="You hired an informant!", color=(0, 100, 0))
                         plyr = consts.DB.get_player_details()
                         plyr.has_informant = True
                         plyr.games_played = 0
@@ -205,12 +205,12 @@ def play():
                     bm1.toggle_bg((128, 128, 128))
                     # check coins
                     if plyr.coins < allmove[0].price:
-                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
+                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
                     else:
                         if allmove[0].name in plyr.bought_moves + plyr.selected_moves:
-                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
+                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!", color=(100, 0, 0))
                         else:
-                            REL_COORDS = show_modal(title="Done!", text="You got the move!")
+                            REL_COORDS = show_modal(title="Done!", text="You got the move!", color=(0, 100, 0))
                             plyr = consts.DB.get_player_details()
                             plyr.bought_moves.append(allmove[0].name)
                             plyr.coins -= allmove[0].price
@@ -253,12 +253,12 @@ def play():
                     bm2.toggle_bg((128, 128, 128))
                     # check coins
                     if plyr.coins < allmove[1].price:
-                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
+                        REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!", color=(100, 0, 0))
                     else:
                         if allmove[1].name in plyr.bought_moves + plyr.selected_moves:
-                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
+                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!", color=(100, 0, 0))
                         else:
-                            REL_COORDS = show_modal(title="Done!", text="You got the move!")
+                            REL_COORDS = show_modal(title="Done!", text="You got the move!", color=(0, 100, 0))
                             plyr = consts.DB.get_player_details()
                             plyr.bought_moves.append(allmove[1].name)
                             plyr.coins -= allmove[1].price
