@@ -22,20 +22,20 @@ def play():
     # print(utils.constants.DB.get_settings())
     # the main game loop, looped every frame, looped every clock.tick(TICK_RATE)
     inc_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
-                                                                (consts.SCREEN_HEIGHT / 2) + 100),
+                                                                (consts.SCREEN_HEIGHT / 2) - 200),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                               font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='+')
     dec_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                (consts.SCREEN_HEIGHT / 2) + 100),
+                                                                (consts.SCREEN_HEIGHT / 2) - 200),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                               font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='-')
 
     inc_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
-                                                              (consts.SCREEN_HEIGHT / 2) + 50),
+                                                              (consts.SCREEN_HEIGHT / 2) - 100),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                             font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='+')
     dec_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                              (consts.SCREEN_HEIGHT / 2) + 50),
+                                                              (consts.SCREEN_HEIGHT / 2) - 100),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                             font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='-')
 
@@ -44,7 +44,8 @@ def play():
                       width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                       font=utils.constants.FONT_MONO_LARGE, text='<-')
 
-    reset_btn = TextButton(surface=consts.MAIN_DISPLAY, pos = (500, 100), width=100, height=40,
+    reset_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=(consts.SCREEN_WIDTH/2 - 150, consts.SCREEN_HEIGHT/2 + 150),
+                           width=300, height=40,
                            fg_color=colors.WHITE_COLOR, bg_color=colors.RED_COLOR,
                            font=pygame.font.Font('freesansbold.ttf', 10), text='Reset Game Progress')
 
@@ -54,14 +55,14 @@ def play():
         curr_setting = consts.DB.get_settings()
 
         t = consts.FONT_MONO_SMALL.render(f'Music: ', True, (0, 0, 0))
-        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 150, consts.SCREEN_HEIGHT/2 + 100))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 180, consts.SCREEN_HEIGHT/2 - 200))
         t = consts.FONT_MONO_MEDIUM.render(f'{curr_setting["volume"]["music"]}', True, (0, 0, 0))
-        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 + 0, consts.SCREEN_HEIGHT/2 + 100))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 + 0, consts.SCREEN_HEIGHT/2 - 200))
 
-        t = consts.FONT_MONO_MEDIUM.render(f'{curr_setting["volume"]["fx"]}', True, (0, 0, 0))
-        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 + 0, consts.SCREEN_HEIGHT / 2 + 50))
         t = consts.FONT_MONO_SMALL.render(f'Fx: ', True, (0, 0, 0))
-        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 150, consts.SCREEN_HEIGHT/2 + 50))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH/2 - 180, consts.SCREEN_HEIGHT/2 - 100))
+        t = consts.FONT_MONO_MEDIUM.render(f'{curr_setting["volume"]["fx"]}', True, (0, 0, 0))
+        consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 + 0, consts.SCREEN_HEIGHT / 2 - 100))
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
