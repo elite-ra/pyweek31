@@ -209,6 +209,10 @@ def play():
                             consts.DB.set_player_details(plyr)
             elif not modal_showing:
                 bm1.toggle_bg(colors.BLACK_COLOR)
+        else:
+            if bm1.hovered:
+                t = consts.FONT_MONO_SMALL.render('Play the game to find out what this is!', True, (0, 0, 0))
+                consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 - t.get_width() / 2, 550))
 
         if consts.DB.get_player_details().has_reached_fight:
             if bm2.hovered and not modal_showing:
@@ -249,6 +253,10 @@ def play():
                             consts.DB.set_player_details(plyr)
             elif not modal_showing:
                 bm2.toggle_bg(colors.BLACK_COLOR)
+        else:
+            if bm2.hovered:
+                t = consts.FONT_MONO_SMALL.render('Play the game to find out what this is!', True, (0, 0, 0))
+                consts.MAIN_DISPLAY.blit(t, (consts.SCREEN_WIDTH / 2 - t.get_width() / 2, 550))
 
         if modal_showing:
 
