@@ -11,6 +11,7 @@ if __name__ == "__main__":
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
 
+
 class Database:
     def __init__(self):
         # print("Database initialization.")
@@ -71,5 +72,18 @@ def store_json(fp, json_dict):
 
 
 def validate_databases_and_settings():
-    # TODO: add validation system
-    pass
+    try:
+        f = open(os.path.join(consts.ROOT_PATH, 'settings.json'))
+    except FileNotFoundError:
+        print("Error loading settings")
+
+    try:
+        f = open(os.path.join(consts.ROOT_PATH, 'db', 'user_store.json'))
+    except FileNotFoundError:
+        print("Error loading usrstore")
+
+    try:
+        f = open(os.path.join(consts.ROOT_PATH, 'db', 'const_db.json'))
+    except FileNotFoundError:
+        print("Error loading cons")
+
