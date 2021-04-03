@@ -145,7 +145,12 @@ def play():
                 s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
                 s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
                                 text_c.get_rect().height + 5))
-                consts.MAIN_DISPLAY.blit(s, (mx, my))
+
+                if mx + 400 <= 800:
+                    utils.constants.MAIN_DISPLAY.blit(s, (mx, my))
+
+                else:
+                    utils.constants.MAIN_DISPLAY.blit(s, (mx - 400, my))
 
             else:
                 informant.toggle_bg((128, 128, 128))
@@ -182,7 +187,7 @@ def play():
                     text_c = consts.FONT_MONO_SMALL.render(f'{allmove[0].description}', True, (255, 255, 255))
                     text_d = consts.FONT_MONO_SMALL.render(f'Cost: {allmove[0].price} coins', True, (255, 255, 255))
 
-                    s = pygame.Surface((400,
+                    s = pygame.Surface((300,
                                         5 + text_a.get_height() + 5 + text_b.get_height() + 5 + text_c.get_height() + 5 + text_d.get_height() + 5))
 
                     s.blit(text_a, (5, 0))
@@ -190,7 +195,12 @@ def play():
                     s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
                     s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
                                     text_c.get_rect().height + 5))
-                    consts.MAIN_DISPLAY.blit(s, (mx, my))
+
+                    if mx + 300 <= 800:
+                        utils.constants.MAIN_DISPLAY.blit(s, (mx, my))
+
+                    else:
+                        utils.constants.MAIN_DISPLAY.blit(s, (mx - 300, my))
 
                     pygame.display.update()
                 else:
@@ -233,7 +243,11 @@ def play():
                     s.blit(text_c, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5))
                     s.blit(text_d, (5, 5 + text_a.get_rect().height + 5 + text_b.get_rect().height + 5 +
                                     text_c.get_rect().height + 5))
-                    consts.MAIN_DISPLAY.blit(s, (mx, my))
+                    if mx + 400 <= 800:
+                        utils.constants.MAIN_DISPLAY.blit(s, (mx, my))
+
+                    else:
+                        utils.constants.MAIN_DISPLAY.blit(s, (mx - 400, my))
 
                     pygame.display.update()
                 else:
