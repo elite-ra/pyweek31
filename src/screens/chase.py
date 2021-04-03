@@ -31,7 +31,8 @@ def play(skill_level, city_name):
     heli = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'helicopter.png'))
     heli_x = 100
     heli_y = 200
-    heli_change = 0
+    heli_change_x = 0
+    heli_change_y = 0
 
     robber = pygame.image.load(
         os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'robber_jetpack.png'))
@@ -49,7 +50,7 @@ def play(skill_level, city_name):
             pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'sprites', 'missile.png')))
         missile_x.append(random.randint(800, 1540))
         missile_y.append(random.randint(-19, 600 - 45))
-        missile_change.append(2 + 0.5 * skill_level)
+        missile_change.append(3 + 0.5 * skill_level)
 
     m = 3
     coin = []
@@ -58,7 +59,7 @@ def play(skill_level, city_name):
     for i in range(m):
         coin.append(
             pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'textures', 'coin.png')))
-        coin_x.append(random.randint(800, 1540))
+        coin_x.append(random.randint(800, 2340))
         coin_y.append(random.randint(0, 350))
     coin_change = 1.5
 
@@ -122,27 +123,39 @@ def play(skill_level, city_name):
                 status = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w or event.key == pygame.K_UP:
-                    heli_change = -3
+                    heli_change_y = -3
                 if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                    heli_change = 3
+                    heli_change_y = 3
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    heli_change_x = -3
+                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+                    heli_change_x = +3
                 if event.key == pygame.K_ESCAPE:
                     music_controller.play_click_normal()
                     return home_screen.play()
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w or event.key == pygame.K_s or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                    heli_change = 0
+                    heli_change_y = 0
+                if event.key == pygame.K_a or event.key == pygame.K_d or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    heli_change_x = 0
 
-        heli_y += heli_change
+        heli_y += heli_change_y
         if heli_y >= 600 - 98:
             heli_y = 600 - 98
         if heli_y <= -30:
             heli_y = -30
 
+        heli_x += heli_change_x
+        if heli_x >= 500:
+            heli_x = 500
+        if heli_x <= 100:
+            heli_x = 100
+
         for i in range(m):
             coin_x[i] -= coin_change
             if coin_x[i] <= -60:
-                coin_x[i] = random.randint(800, 1540)
+                coin_x[i] = random.randint(800, 2340)
                 coin_y[i] = random.randint(0, 350)
 
             coin_game(coin_x[i], coin_y[i], i)
