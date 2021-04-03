@@ -78,8 +78,8 @@ def play():
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
         # Draw robber statistics
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 120))  # rectangle up top
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 116), 1)
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 140))  # rectangle up top
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 136), 1)
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render('Robber Stats', True, (200, 200, 200))
         font = utils.constants.FONT_MONO_SMALL
@@ -88,11 +88,16 @@ def play():
         # the following takes the str from Game and pretty formats it to blit
         random_string = str(game_obj)
         temp = 0
+        # the following takes the str from Game and pretty formats it to blit
+
         for i in random_string.split('\n'):
             text = font.render(i, True, (200, 200, 200))
             w = text.get_rect().width
             utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2 - 10, 40 + temp * 20))
             temp += 1
+
+        text = consts.FONT_MONO_SMALL.render('Choose which city the robber is going to go to:', True, (200, 200, 200))
+        utils.constants.MAIN_DISPLAY.blit(text, (20, 120))
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
 
@@ -115,10 +120,11 @@ def play():
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
-                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(600,
-                                                                           500),
-                                         width=150, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
-                                         font=utils.constants.FONT_MONO_SMALL, text='Choose this city')
+                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(575,
+                                                                           520),
+                                         width=250, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
+                                         font=utils.constants.FONT_MONO_SMALL,
+                                         text='Check this city')
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]
@@ -195,6 +201,7 @@ def play():
                         s.set_alpha(240)  # alpha level
                         s.fill((0, 0, 0))  # this fills the entire surface
                         utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        music_controller.play_coin_bag()
                         font = utils.constants.FONT_MONO_VERY_LARGE
                         text = font.render('You guessed wrong!!', True, (255, 255, 255))
                         utils.constants.MAIN_DISPLAY.blit(text, (200, 200))

@@ -22,6 +22,7 @@ def play(skill_level, city_name):
     # SOUNDS
     music_controller.play_heli_looped()
     music_controller.play_jetpack_looped()
+    music_controller.play_chase_bg()
 
     chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png'))
 
@@ -132,6 +133,7 @@ def play(skill_level, city_name):
                     heli_change_x = +3
                 if event.key == pygame.K_ESCAPE:
                     music_controller.play_click_normal()
+
                     return home_screen.play()
 
             if event.type == pygame.KEYUP:
@@ -168,7 +170,7 @@ def play(skill_level, city_name):
                 # plyr.coins += 30
                 coins += 30
                 # set
-
+                music_controller.play_coin_collect()
                 coin_x[i] = random.randint(800, 1600 - 32)
                 coin_y[i] = random.randint(0, 600 - 32)
 
@@ -187,10 +189,11 @@ def play(skill_level, city_name):
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 # SOUNDS
-
+                music_controller.stop_bg()
                 music_controller.stop_fx1()
                 music_controller.play_explosion()
                 music_controller.stop_fx2()
+
                 return end_screen.end_screen_func(2)
 
         heli_game(heli_x, heli_y)
@@ -213,6 +216,7 @@ def play(skill_level, city_name):
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface
             utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+            music_controller.play_coin_bag()
             font = utils.constants.FONT_MONO_LARGE
             text = font.render(f'You caught the robber! And {coins} coins!', True, (255, 255, 255))
             utils.constants.MAIN_DISPLAY.blit(text, (75, 200))
@@ -223,6 +227,7 @@ def play(skill_level, city_name):
             pygame.time.wait(4000)
             plyr.coins += coins
             consts.DB.set_player_details(plyr)
+            music_controller.stop_bg()
             return fight.main(skill_level)
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))
