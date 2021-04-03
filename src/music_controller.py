@@ -54,13 +54,11 @@ def play_fight_bg():
 def play_click_normal():
     channel_fx1.stop()
     channel_fx1.play(FX_select_norm)
-    channel_fx1.stop()
 
 
 def play_click_woop():
     channel_fx1.stop()
     channel_fx1.play(FX_select_woop)
-    channel_fx1.stop()
 
 
 def play_heli_looped():
@@ -70,19 +68,17 @@ def play_heli_looped():
 
 def play_jetpack_looped():
     channel_fx2.stop()
-    channel_fx2.play(FX_heli, loops=-1)
+    channel_fx2.play(FX_jetpack, loops=-1)
 
 
 def play_fight_sound():
     channel_fx1.stop()
     channel_fx1.play(FX_fight)
-    channel_fx1.stop()
 
 
 def play_explosion():
     channel_fx3.stop()
     channel_fx3.play(FX_explosion)
-    channel_fx3.stop()
 
 
 def stop_fx1():

@@ -19,6 +19,7 @@ from . import end_screen
 from ..utils.widgets import TextButton
 from ..utils import constants as consts
 from . import win_screen
+from .. import music_controller
 
 ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 
@@ -143,6 +144,8 @@ def main(skill_level):
                 if mouse_down:
                     move.toggle_bg((50, 50, 50))
                     ncphp, nrbhp, cpdm, rbdm, is_bckfre = play_turn(player_selected_moves[c], hpcop, hpvil)
+                    music_controller.play_fight_sound()
+                    music_controller.play_fight_sound()
                     if rbdm is None:
                         # missed
                         t_mis1 = consts.FONT_MONO_SMALL.render(f'You missed! The robber dealt {cpdm} damage to you!',
@@ -156,6 +159,7 @@ def main(skill_level):
                         hpcop = ncphp
                     else:
                         # not missed
+
                         hpcop = ncphp
                         hpvil = nrbhp
 

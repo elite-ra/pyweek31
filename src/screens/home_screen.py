@@ -19,6 +19,7 @@ from ..utils import constants as consts
 from ..utils.widgets import TextButton
 from ..utils import colors
 from . import edit_screen
+from .. import music_controller
 import os
 
 pygame.init()
@@ -26,32 +27,20 @@ pygame.init()
 
 # temporary home screen
 def play():
+    # INITIALIZE the sounds
+    music_controller.update_volume()
 
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
-
-    city_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                               (consts.SCREEN_HEIGHT / 2) + 100),
-                             width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                             font=pygame.font.Font('freesansbold.ttf', 30), text='Cities')
-    chase_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                (consts.SCREEN_HEIGHT / 2) + 160),
-                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                              font=pygame.font.Font('freesansbold.ttf', 30), text='Chase')
 
     play_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                                (consts.SCREEN_HEIGHT / 2) + 0),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                             font=pygame.font.Font('freesansbold.ttf', 30), text='Actually Play')
+                             font=pygame.font.Font('freesansbold.ttf', 30), text='Play')
 
     shop_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                                (consts.SCREEN_HEIGHT / 2) - 300),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=pygame.font.Font('freesansbold.ttf', 30), text='Shop')
-
-    fight_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                (consts.SCREEN_HEIGHT / 2) + 250),
-                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                              font=pygame.font.Font('freesansbold.ttf', 30), text='Fight')
 
     settings_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                                    (consts.SCREEN_HEIGHT / 2) - 300),
@@ -66,8 +55,8 @@ def play():
                                  font=pygame.font.Font('freesansbold.ttf', 30), text='Edit Fight Moves')
     else:
         edit_button = None
-        edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
-                                                                     (consts.SCREEN_HEIGHT / 2) - 10),
+        edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
+                                                                     (consts.SCREEN_HEIGHT / 2) - 150),
                                    width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                    font=pygame.font.Font('freesansbold.ttf', 30), text='???')
 
@@ -85,22 +74,6 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_down = True
 
-        # button interaction
-        if city_button.hovered:
-            city_button.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
-                city_button.toggle_bg(colors.BROWN_COLOR)
-                return cities.play()
-        else:
-            city_button.toggle_bg(colors.BLACK_COLOR)
-
-        if chase_button.hovered:
-            chase_button.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
-                chase_button.toggle_bg(colors.BROWN_COLOR)
-                return chase.play(1, 'Agra')
-        else:
-            chase_button.toggle_bg(colors.BLACK_COLOR)
 
         if play_button.hovered:
             play_button.toggle_bg(colors.BROWN_COLOR)
@@ -125,14 +98,6 @@ def play():
                 return settings.play()
         else:
             settings_button.toggle_bg(colors.BLACK_COLOR)
-
-        if fight_button.hovered:
-            fight_button.toggle_bg(colors.BROWN_COLOR)
-            if mouse_down:
-                fight_button.toggle_bg(colors.BROWN_COLOR)
-                return fight.main(1)
-        else:
-            fight_button.toggle_bg(colors.BLACK_COLOR)
 
         if edit_button is None:
             edit_d_button.toggle_bg(colors.GREY_COLOR)

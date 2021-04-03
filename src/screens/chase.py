@@ -14,9 +14,15 @@ import time
 from . import end_screen
 from . import fight
 from ..utils import constants as consts
+from .. import music_controller
 
 
 def play(skill_level, city_name):
+
+    # SOUNDS
+    music_controller.play_heli_looped()
+    music_controller.play_jetpack_looped()
+
     chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png'))
 
     plyr = utils.constants.DB.get_player_details()
@@ -66,7 +72,6 @@ def play(skill_level, city_name):
 
     def heli_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(heli, (x, y))
-
 
     def robber_game(x, y):
         utils.constants.MAIN_DISPLAY.blit(robber_small, (x, y))
@@ -166,8 +171,12 @@ def play(skill_level, city_name):
 
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
-                return end_screen.end_screen_func(2)
+                # SOUNDS
 
+                music_controller.stop_fx1()
+                music_controller.play_explosion()
+                music_controller.stop_fx2()
+                return end_screen.end_screen_func(2)
 
         heli_game(heli_x, heli_y)
         robber_game(robber_x, robber_y)
@@ -179,6 +188,9 @@ def play(skill_level, city_name):
 
         # show fight scene
         if time_taken >= 30:
+            # SOUNDS
+            music_controller.stop_fx2()
+            music_controller.stop_fx1()
             s = pygame.Surface((800, 600))  # the size of your rect
             s.set_alpha(240)  # alpha level
             s.fill((0, 0, 0))  # this fills the entire surface

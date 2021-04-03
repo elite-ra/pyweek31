@@ -15,4 +15,5 @@ import os
 
 def play_game():
     database.validate_databases_and_settings()
+
     home_screen.play()
