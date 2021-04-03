@@ -174,7 +174,7 @@ class Game:
         lastseenstr = str(self.current_robber_location.name) if self.current_robber_location is not None else "N/A"
         stolenitemstr = str(self.stolen_item.capitalize()) if self.stolen_item is not None else "N/A"
 
-        name_name = {'MUSEUM': 'robbing museums', 'BANK': 'robbing banks', 'NORM': 'robbing rich residents(sometimes)',
+        name_name = {'MUSEUM': 'robbing museums', 'BANK': 'robbing banks', 'NORM': 'robbing rich residents(mostly)',
                      'GROUP_PERSON': 'robbing with friends'}
 
         if consts.DB.player.has_informant:
