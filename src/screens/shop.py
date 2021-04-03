@@ -148,7 +148,7 @@ def play():
                 else:
                     plyr = consts.DB.get_player_details()
                     if plyr.has_informant:
-                        REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
+                        REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
                     else:
                         REL_COORDS = show_modal(title="Done!", text="You hired an informant!")
                         plyr = consts.DB.get_player_details()
@@ -189,8 +189,8 @@ def play():
                     if plyr.coins < allmove[0].price:
                         REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
                     else:
-                        if allmove[0].name in plyr.bought_moves:
-                            REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
+                        if allmove[0].name in plyr.bought_moves + plyr.selected_moves:
+                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
                         else:
                             REL_COORDS = show_modal(title="Done!", text="You got the move!")
                             plyr = consts.DB.get_player_details()
@@ -229,8 +229,8 @@ def play():
                     if plyr.coins < allmove[1].price:
                         REL_COORDS = show_modal(title='Error!', text=f"You not have enough coin!")
                     else:
-                        if allmove[1].name in plyr.bought_moves:
-                            REL_COORDS = show_modal(title="Foo", text="You already have this upgrade!")
+                        if allmove[1].name in plyr.bought_moves + plyr.selected_moves:
+                            REL_COORDS = show_modal(title="Error!", text="You already have this upgrade!")
                         else:
                             REL_COORDS = show_modal(title="Done!", text="You got the move!")
                             plyr = consts.DB.get_player_details()
