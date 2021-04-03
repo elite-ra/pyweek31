@@ -44,21 +44,53 @@ def play():
         # The information regarding black market is hidden initially and can be unlocked by buying an informant from
         # the shop by using the coins gotten from the later stages of the game.
 
+        explanation = '''City Choosing Explanation:
+
+You are faced with details about a robber, and a few cities which the robber goes to.
+The game's objective is to guess the city the robber is going to go to on the next turn.
+
+All of the robbers follow certain rules.
+
+1) They must change cities after every move.
+2) They lose a certain amount of health during every turn.
+3) If their health drops below a fixed threshold, they have to go to a city with a 
+   hospital.
+4) If they have stolen an artefact they will prefer a city with a black market but will 
+   prioritize going to a hospital if no city is available with both and health is below 
+   the threshold.
+
+Robbers don't follow the same pattern each time, they may prefer banks or, museums, or 
+something else!
+
+The information regarding black market is hidden initially and can be unlocked by buying 
+an informant from the shop by using the coins gotten from the later stages of the game.'''
+
         font = consts.FONT_MONO_SMALL
         text = font.render('', True, (255, 255, 255))
         w, h = text.get_rect().width, text.get_rect().height
-        consts.MAIN_DISPLAY.blit(text, ((consts.MAIN_DISPLAY - w) / 2, ((600 - h) / 2)))
+        consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
 
         city_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                                   (consts.SCREEN_HEIGHT / 2) + 100),
+                                                                   (consts.SCREEN_HEIGHT / 2) + 200),
                                  width=200, height=40, fg_color=(0, 0, 0), bg_color=(255, 0, 0),
-                                 font=consts.FONT_MONO_LARGE, text='Try Again')
+                                 font=consts.FONT_MONO_LARGE, text='Continue')
 
+        font = consts.FONT_MONO_MEDIUM
+        text = font.render(explanation.split('\n')[0], True, (200, 200, 200))
+        w = text.get_rect().width
+        consts.MAIN_DISPLAY.blit(text, ((800-w)/2, 10))
+        temp = 1
+        font = consts.FONT_MONO_SMALL
+        for i in explanation.split('\n')[1:]:
+            text = font.render(i, True, (200, 200, 200))
+            consts.MAIN_DISPLAY.blit(text, (5, 10 + temp * 20))
+            temp += 1
         if city_button.hovered:
             city_button.toggle_bg((139, 0, 0))
             if mouse_down:
                 city_button.toggle_bg((255, 0, 0))
                 return cities.play()
+
 
         pygame.display.update()
         consts.CLOCK.tick(consts.TICK_RATE)
