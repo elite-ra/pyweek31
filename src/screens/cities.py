@@ -201,6 +201,7 @@ def play():
                         s.set_alpha(240)  # alpha level
                         s.fill((0, 0, 0))  # this fills the entire surface
                         utils.constants.MAIN_DISPLAY.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+                        music_controller.play_coin_bag()
                         font = utils.constants.FONT_MONO_VERY_LARGE
                         text = font.render('You guessed wrong!!', True, (255, 255, 255))
                         utils.constants.MAIN_DISPLAY.blit(text, (200, 200))
