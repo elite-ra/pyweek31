@@ -3,11 +3,11 @@
 
 if __name__ == "__main__":
     import sys
+
     print("\n\nDo not run this file!\nRun root/run_game.py instead!\n\n")
     sys.exit()
 
 import pygame
-
 
 from ..utils import constants as consts
 from ..utils.widgets import TextButton
@@ -28,33 +28,34 @@ def play():
 
     all_moves = consts.DB.get_all_moves()
 
-    mv1_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 250),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv1_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 250 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[0].name}')
-    mv2_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 200),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv2_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 200 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[1].name}')
-    mv3_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 150),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv3_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 150 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[2].name}')
-    mv4_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 100),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv4_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 100 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[3].name}')
-    mv5_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 50),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv5_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 50 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[4].name}')
-    mv6_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                           (consts.SCREEN_HEIGHT / 2) - 0),
-                         width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
+    mv6_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                           (consts.SCREEN_HEIGHT / 2) - 0 + 50),
+                         width=308, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                          font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[5].name}')
 
-    lock_moves = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                              consts.SCREEN_HEIGHT / 2 + 100), width=300, height=40,
+    lock_moves = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 154,
+                                                              consts.SCREEN_HEIGHT / 2 + 100 + 50), width=308,
+                            height=40,
                             fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                             font=pygame.font.Font('freesansbold.ttf', 20), text=f'Save move selection')
 
@@ -99,8 +100,8 @@ def play():
 
         consts.MAIN_DISPLAY.blit(s, (consts.SCREEN_WIDTH / 2 - 350, consts.SCREEN_HEIGHT / 2 -
                                      (20 + text_a.get_height() + 5 + text_b.get_height() + 20)))
-        btn_x = consts.SCREEN_WIDTH/2 - 350 + 670
-        btn_y = consts.SCREEN_HEIGHT/2 - (20 + text_a.get_height() + 5 + text_b.get_height() + 20) + 0
+        btn_x = consts.SCREEN_WIDTH / 2 - 350 + 670
+        btn_y = consts.SCREEN_HEIGHT / 2 - (20 + text_a.get_height() + 5 + text_b.get_height() + 20) + 0
         return btn_x, btn_y
 
     REL_COORDS = None
@@ -108,7 +109,8 @@ def play():
         if not modal_showing:
             consts.MAIN_DISPLAY.blit(img, (0, 0))
             t = consts.FONT_TITLE.render('Choose your moves for fighting', True, (255, 255, 255))
-            consts.MAIN_DISPLAY.blit(t,(50, 30))
+            w = t.get_rect().width
+            consts.MAIN_DISPLAY.blit(t, ((800 - w) / 2, 60))
 
         mouse_down = False
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
@@ -125,9 +127,9 @@ def play():
                     return home_screen.play()
 
         if back.hovered and not modal_showing:
-            back.toggle_bg(colors.BROWN_COLOR)
+            back.toggle_bg((128, 128, 128))
             if mouse_down:
-                back.toggle_bg(colors.BROWN_COLOR)
+                back.toggle_bg((128, 128, 128))
                 # update volume bar
                 return home_screen.play()
         elif not modal_showing:
@@ -139,7 +141,7 @@ def play():
                 t_test1 = consts.FONT_MONO_SMALL.render(all_moves[c].description, True, (0, 0, 0))
                 consts.MAIN_DISPLAY.blit(t_test1, (20, 525))
 
-                btn.toggle_bg(colors.BROWN_COLOR)
+                btn.toggle_bg((128, 128, 128))
                 if mouse_down:
                     btn.toggle_bg(colors.GREEN_COLOR)
                     if btn in selected:
@@ -154,9 +156,9 @@ def play():
                 i.toggle_bg(colors.GREEN_COLOR)
 
         if lock_moves.hovered and not modal_showing:
-            lock_moves.toggle_bg(colors.BROWN_COLOR)
+            lock_moves.toggle_bg((128, 128, 128))
             if mouse_down:
-                lock_moves.toggle_bg(colors.BROWN_COLOR)
+                lock_moves.toggle_bg((128, 128, 128))
                 # save selction
                 # check if too large
                 if len(selected) > 4:
@@ -198,7 +200,6 @@ def play():
             if REL_COORDS[0] <= row <= REL_COORDS[0] + 30 and REL_COORDS[1] <= col <= REL_COORDS[1] + 30:
 
                 if mouse_down:
-
                     modal_showing = False
 
         # update all the things in game
