@@ -78,14 +78,14 @@ def play():
     modal_showing = False
     x_btn = None
 
-    def show_modal(title, text):
+    def show_modal(title, text, color):
         nonlocal modal_showing
         modal_showing = True
         maj_sur = pygame.Surface((800, 600))
         maj_sur.set_alpha(180)
         maj_sur.fill(colors.BLACK_COLOR)
         consts.MAIN_DISPLAY.blit(maj_sur, (0, 0))
-        text_a = consts.FONT_MONO_MEDIUM.render(title, True, (255, 255, 255))
+        text_a = consts.FONT_MONO_MEDIUM.render(title, True, color)
         text_b = consts.FONT_MONO_SMALL.render(text, True, (255, 255, 255))
 
         s = pygame.Surface((700,
@@ -162,10 +162,10 @@ def play():
                 # save selction
                 # check if too large
                 if len(selected) > 4:
-                    REL_COORDS = show_modal(title='Error!', text="Too many moves selcted! Maximum: 4")
+                    REL_COORDS = show_modal(title='Error!', text="Too many moves selcted! Maximum: 4", color=(100, 0, 0))
 
                 elif len(selected) < 4:
-                    REL_COORDS = show_modal(title='Error!', text="Too less moves selcted! Minimum: 4")
+                    REL_COORDS = show_modal(title='Error!', text="Too less moves selcted! Minimum: 4", color=(100, 0, 0))
                 else:
                     # lock and save
                     plyr = consts.DB.get_player_details()
@@ -174,7 +174,7 @@ def play():
                         # NOTE: HACK: sneaky, using TextButton.text as a parameter: DO NOT CHANGE Button text!
                         if i.text not in plyr.bought_moves + plyr.selected_moves:
                             REL_COORDS = show_modal(title='Error!', text=f"You haven't bought move {i.text},"
-                                                                         f"Please go to the police department!")
+                                                                         f"Please go to the police department!", color=(100, 0, 0))
                             break
                     else:
                         new_selection = [i.text for i in selected]
@@ -186,7 +186,7 @@ def play():
 
                         consts.DB.set_player_details(plyr)
 
-                        REL_COORDS = show_modal(title='Saved!', text=f"Saved your moves!")
+                        REL_COORDS = show_modal(title='Saved!', text=f"Saved your moves!", color=(0, 100, 0))
 
         elif not modal_showing:
             lock_moves.toggle_bg(colors.BLACK_COLOR)
