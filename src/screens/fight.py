@@ -20,7 +20,7 @@ from . import win_screen
 from . import home_screen
 from .. import music_controller
 
-ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
+ROB_DMG_MIN, ROB_DMG_MAX = 15, 20
 
 
 def play(skill_level):
@@ -31,10 +31,6 @@ def play(skill_level):
     plyr.has_reached_fight = True
     utils.constants.DB.set_player_details(plyr)
 
-    global ROB_DMG_MAX, ROB_DMG_MIN
-
-    ROB_DMG_MIN = (10 * int(skill_level) / 10 * 2) - (0 if 10 * int(skill_level) / 10 * 5 < 21 else 20)
-    ROB_DMG_MAX = 10 * int(skill_level) / 10 * 5
     rob_max_helth = 100 * (skill_level / 10 - 0.1 + 1)
 
     # Images and Sprites
@@ -269,7 +265,7 @@ def play_turn(mv: utils.models.FightMove, cophp, vilhp):
             robdmg += damagee
 
     # robber hit, always hits.
-    ndm = random.randint(15, 20)
+    ndm = random.randint(ROB_DMG_MIN, ROB_DMG_MAX)
     copdmg += ndm
     cophp -= ndm
 
