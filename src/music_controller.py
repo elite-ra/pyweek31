@@ -29,11 +29,13 @@ FX_fight = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effect
 FX_heli = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'helicopter_final.ogg'))
 FX_jetpack = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'jetpack_final.ogg'))
 FX_select_norm = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_norm.ogg'))
+FX_select_woop = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_woop.ogg'))
 
 BG_chase = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'chase_bg.ogg'))
 
 FX_coin_collect = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_collect.ogg'))
 FX_coin_bag = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_bag.ogg'))
+
 
 def update_volume():
     vol_set = consts.DB.get_settings()['volume']

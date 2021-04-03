@@ -120,11 +120,11 @@ def play():
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
                 pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
                 city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
-                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(500,
-                                                                           550),
-                                         width=300, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
+                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(575,
+                                                                           520),
+                                         width=250, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
                                          font=utils.constants.FONT_MONO_SMALL,
-                                         text='Check if the robber is in this city')
+                                         text='Check this city')
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]
