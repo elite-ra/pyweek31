@@ -49,7 +49,7 @@ def play():
         surf.blit(text_bbb, (20, 20 + text_aaa.get_rect().height + 5))
         nonlocal x_btn
         x_btn = TextButton(surface=surf, pos=(470, 0), width=30, height=30, fg_color=colors.WHITE_COLOR,
-                           bg_color=colors.RED_COLOR, font=pygame.font.Font('freesansbold.ttf', 30),
+                           bg_color=colors.RED_COLOR, font=utils.constants.FONT_MONO_LARGE,
                            text=f'X')
 
         consts.MAIN_DISPLAY.blit(surf, (consts.SCREEN_WIDTH / 2 - 250, consts.SCREEN_HEIGHT / 2 -
@@ -63,7 +63,7 @@ def play():
     back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                         (consts.SCREEN_HEIGHT / 2) - 300),
                       width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                      font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
+                      font=utils.constants.FONT_MONO_LARGE, text='<-')
 
     while not is_game_over:
 
@@ -73,28 +73,28 @@ def play():
             informant = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
                                                                      (consts.SCREEN_HEIGHT / 2) + 100),
                                    width=500, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                   font=pygame.font.Font('freesansbold.ttf', 30), text='Informant | 400')
+                                   font=utils.constants.FONT_MONO_LARGE, text='Informant | 400')
 
             if consts.DB.get_player_details().has_reached_fight:
                 bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) - 100),
                                  width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[0].name} '
+                                 font=utils.constants.FONT_MONO_LARGE, text=f'Buy New Move: {allmove[0].name} '
                                                                                      f'| {allmove[0].price}')
                 bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) + 0),
                                  width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'Buy New Move: {allmove[1].name} '
+                                 font=utils.constants.FONT_MONO_LARGE, text=f'Buy New Move: {allmove[1].name} '
                                                                                      f'| {allmove[1].price}')
             else:
                 bm1 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) - 100),
                                  width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'???')
+                                 font=utils.constants.FONT_MONO_LARGE, text=f'???')
                 bm2 = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 350,
                                                                    (consts.SCREEN_HEIGHT / 2) + 0),
                                  width=700, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
-                                 font=pygame.font.Font('freesansbold.ttf', 30), text=f'???')
+                                 font=utils.constants.FONT_MONO_LARGE, text=f'???')
 
             t = consts.FONT_MONO_MEDIUM.render(f'{plyr.coins}', True, (0, 0, 0))
             consts.MAIN_DISPLAY.blit(t, (711, 10))

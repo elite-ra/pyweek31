@@ -21,34 +21,34 @@ def play():
     back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                         (consts.SCREEN_HEIGHT / 2) - 300),
                       width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                      font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
+                      font=utils.constants.FONT_MONO_LARGE, text='<-')
 
     all_moves = consts.DB.get_all_moves()
 
     mv1_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 250),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[0].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[0].name}')
     mv2_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 200),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[1].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[1].name}')
     mv3_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 150),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[2].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[2].name}')
     mv4_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 100),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[3].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[3].name}')
     mv5_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 50),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[4].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[4].name}')
     mv6_btn = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                            (consts.SCREEN_HEIGHT / 2) - 0),
                          width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                         font=pygame.font.Font('freesansbold.ttf', 30), text=f'{all_moves[5].name}')
+                         font=utils.constants.FONT_MONO_LARGE, text=f'{all_moves[5].name}')
 
     lock_moves = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
                                                               consts.SCREEN_HEIGHT / 2 + 100), width=300, height=40,
@@ -92,7 +92,7 @@ def play():
         s.blit(text_b, (20, 20 + text_a.get_rect().height + 5))
         nonlocal x_btn
         x_btn = TextButton(surface=s, pos=(670, 0), width=30, height=30, fg_color=colors.WHITE_COLOR,
-                           bg_color=colors.RED_COLOR, font=pygame.font.Font('freesansbold.ttf', 30),
+                           bg_color=colors.RED_COLOR, font=utils.constants.FONT_MONO_LARGE,
                            text=f'X')
 
         consts.MAIN_DISPLAY.blit(s, (consts.SCREEN_WIDTH / 2 - 350, consts.SCREEN_HEIGHT / 2 -

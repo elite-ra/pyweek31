@@ -93,11 +93,12 @@ def play():
         for i in random_string.split('\n'):
             text = font.render(i, True, (200, 200, 200))
             w = text.get_rect().width
-            utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2 - 10, 40 + temp * 20))
+            utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2, 40 + temp * 20))
             temp += 1
 
-        text = consts.FONT_MONO_SMALL.render('Choose which city the robber is going to go to:', True, (200, 200, 200))
-        utils.constants.MAIN_DISPLAY.blit(text, (20, 120))
+        text = consts.FONT_MONO_SMALL.render('CHOOSE WHICH CITY THE ROBBER IS GOING TO GO TO', True, (200, 200, 200))
+        w = text.get_rect().width
+        utils.constants.MAIN_DISPLAY.blit(text, ((800-w)/2, 120))
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
 

@@ -24,25 +24,25 @@ def play():
     inc_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                                 (consts.SCREEN_HEIGHT / 2) + 100),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                              font=pygame.font.Font('freesansbold.ttf', 18), text='+')
+                              font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='+')
     dec_main_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                                 (consts.SCREEN_HEIGHT / 2) + 100),
                               width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                              font=pygame.font.Font('freesansbold.ttf', 18), text='-')
+                              font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='-')
 
     inc_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) + 100,
                                                               (consts.SCREEN_HEIGHT / 2) + 50),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                            font=pygame.font.Font('freesansbold.ttf', 18), text='+')
+                            font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='+')
     dec_fx_vol = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
                                                               (consts.SCREEN_HEIGHT / 2) + 50),
                             width=25, height=25, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                            font=pygame.font.Font('freesansbold.ttf', 18), text='-')
+                            font=utils.constants.FONT_MONO_SMALL_MEDIUM, text='-')
 
     back = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 400,
                                                         (consts.SCREEN_HEIGHT / 2) - 300),
                       width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
-                      font=pygame.font.Font('freesansbold.ttf', 30), text='<-')
+                      font=utils.constants.FONT_MONO_LARGE, text='<-')
 
     reset_btn = TextButton(surface=consts.MAIN_DISPLAY, pos = (500, 100), width=100, height=40,
                            fg_color=colors.WHITE_COLOR, bg_color=colors.RED_COLOR,
