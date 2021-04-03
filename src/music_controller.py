@@ -32,6 +32,7 @@ FX_select_norm = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', '
 FX_select_woop = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_woop.ogg'))
 
 BG_chase = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'chase_bg.ogg'))
+BG_fight = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'fight_bg.ogg'))
 
 FX_coin_collect = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_collect.ogg'))
 FX_coin_bag = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'money_bag.ogg'))
@@ -56,7 +57,8 @@ def play_chase_bg():
 
 
 def play_fight_bg():
-    pass
+    channel_bg.stop()
+    channel_bg.play(BG_fight, loops=-1)
 
 
 def play_click_normal():

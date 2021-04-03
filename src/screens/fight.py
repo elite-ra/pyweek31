@@ -24,6 +24,9 @@ ROB_DMG_MIN, ROB_DMG_MAX = 0, 0
 
 
 def main(skill_level):
+
+    music_controller.play_fight_bg()
+
     plyr = utils.constants.DB.get_player_details()
     plyr.has_reached_fight = True
     utils.constants.DB.set_player_details(plyr)
