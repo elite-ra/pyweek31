@@ -78,8 +78,8 @@ def play():
                          pygame.Rect(120, 575, (current_coins / coin_limit) * 560, 10))
 
         # Draw robber statistics
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 120))  # rectangle up top
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 116), 1)
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), pygame.Rect(0, 0, 800, 140))  # rectangle up top
+        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (255, 255, 255), pygame.Rect(2, 2, 796, 136), 1)
         font = utils.constants.FONT_MONO_MEDIUM
         text = font.render('Robber Stats', True, (200, 200, 200))
         font = utils.constants.FONT_MONO_SMALL
@@ -88,11 +88,16 @@ def play():
         # the following takes the str from Game and pretty formats it to blit
         random_string = str(game_obj)
         temp = 0
+        # the following takes the str from Game and pretty formats it to blit
+
         for i in random_string.split('\n'):
             text = font.render(i, True, (200, 200, 200))
             w = text.get_rect().width
             utils.constants.MAIN_DISPLAY.blit(text, ((800 - w) / 2 - 10, 40 + temp * 20))
             temp += 1
+
+        text = consts.FONT_MONO_SMALL.render('Choose which city the robber is going to go to:', True, (200, 200, 200))
+        utils.constants.MAIN_DISPLAY.blit(text, (20, 120))
 
         for i, a, b in zip([pygame.Rect(a, b) for [a, b] in city_coords], cities_list, city_coords):
 
@@ -118,7 +123,8 @@ def play():
                 choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=(600,
                                                                            500),
                                          width=150, height=20, fg_color=(0, 0, 0), bg_color=(0, 255, 0),
-                                         font=utils.constants.FONT_MONO_SMALL, text='Choose this city')
+                                         font=utils.constants.FONT_MONO_SMALL,
+                                         text='Check if the robber is in this city')
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]

@@ -1,7 +1,7 @@
 {
     "_comment": "Configure music and effects (fx) volume - values are between 0 and 100, 100 being the loudest, 0 being muted.",
     "volume": {
-        "fx": 50,
-        "music": 20
+        "fx": 100,
+        "music": 100
     }
 }

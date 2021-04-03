@@ -22,6 +22,7 @@ def play(skill_level, city_name):
     # SOUNDS
     music_controller.play_heli_looped()
     music_controller.play_jetpack_looped()
+    music_controller.play_chase_bg()
 
     chase_cont = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'chase_cont.png'))
 
@@ -127,6 +128,7 @@ def play(skill_level, city_name):
                     heli_change = 3
                 if event.key == pygame.K_ESCAPE:
                     music_controller.play_click_normal()
+
                     return home_screen.play()
 
             if event.type == pygame.KEYUP:
@@ -173,10 +175,11 @@ def play(skill_level, city_name):
             collision = is_collision(heli_x, heli_y, missile_x[i], missile_y[i])
             if collision:
                 # SOUNDS
-
+                music_controller.stop_bg()
                 music_controller.stop_fx1()
                 music_controller.play_explosion()
                 music_controller.stop_fx2()
+
                 return end_screen.end_screen_func(2)
 
         heli_game(heli_x, heli_y)
@@ -206,6 +209,7 @@ def play(skill_level, city_name):
             pygame.time.wait(4000)
             plyr.coins += coins
             consts.DB.set_player_details(plyr)
+            music_controller.stop_bg()
             return fight.main(skill_level)
 
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), (0, 50, 75, 500))

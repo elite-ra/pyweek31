@@ -30,6 +30,7 @@ def play():
     music_controller.stop_fx1()
     music_controller.stop_fx2()
     music_controller.stop_fx3()
+    music_controller.stop_bg()
 
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
 

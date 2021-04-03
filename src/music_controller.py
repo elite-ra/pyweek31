@@ -30,6 +30,8 @@ FX_jetpack = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effe
 FX_select_norm = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_norm.ogg'))
 FX_select_woop = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'effects', 'select_norm.ogg'))
 
+BG_chase = mixer.Sound(os.path.join(consts.ROOT_PATH, 'assets', 'audio', 'bg', 'chase_bg.ogg'))
+
 
 def update_volume():
     vol_set = consts.DB.get_settings()['volume']
@@ -44,7 +46,8 @@ def play_menu_bg():
 
 
 def play_chase_bg():
-    pass
+    channel_bg.stop()
+    channel_bg.play(BG_chase, loops=-1)
 
 
 def play_fight_bg():
