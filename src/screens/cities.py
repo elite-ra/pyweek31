@@ -23,7 +23,6 @@ def play():
 
     coin_limit = 50000
 
-    mouse_pressed = False
 
     show_city = False
 
@@ -33,14 +32,15 @@ def play():
         utils.constants.MAIN_DISPLAY.blit(text, (x, y))
 
     stats_showing = False
-    move_played = False
+    tada = True
 
     game_obj = Game()
 
     running = True
     while running:
 
-        utils.constants.MAIN_DISPLAY.fill((0, 255, 255))
+        pygame.display.update()
+
         utils.constants.MAIN_DISPLAY.blit(bg, (0, 0))
         mouse_down = False
 
@@ -94,9 +94,17 @@ def play():
                     true_city_t = a
                     true_b = b
 
-
             pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), i, 2)
             city_name(a.name, b[0][0] + 2, b[0][1] + 2)
+
+            if show_city:
+                pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
+                pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
+                city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
+                choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 75,
+                                                                           500),
+                                         width=150, height=20, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
+                                         font=utils.constants.FONT_MONO_SMALL, text='Choose this city')
 
             x = pygame.mouse.get_pos()[0]
             y = pygame.mouse.get_pos()[1]
@@ -137,22 +145,13 @@ def play():
                     utils.constants.MAIN_DISPLAY.blit(s, (mx, my))
 
                 else:
-                    utils.constants.MAIN_DISPLAY.blit(s, (mx-300, my))
+                    utils.constants.MAIN_DISPLAY.blit(s, (mx - 300, my))
 
 
             if not i.collidepoint(x, y) and stats_showing:
                 stats_showing = False
 
         if show_city:
-
-
-            pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 0, 0), true_city, 2)
-            pygame.draw.rect(utils.constants.MAIN_DISPLAY, (0, 255, 0), true_city)
-            city_name(true_city_t.name, true_b[0][0] + 2, true_b[0][1] + 2)
-            choose_city = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 250,
-                                                                       (consts.SCREEN_HEIGHT / 2) + 100),
-                                     width=500, height=30, fg_color=(255, 255, 255), bg_color=(0, 255, 0),
-                                     font=utils.constants.FONT_MONO_MEDIUM, text='Choose this city')
 
             if choose_city.hovered:
                 choose_city.toggle_bg((0, 100, 0))
@@ -190,5 +189,4 @@ def play():
                         pygame.display.update()
                         pygame.time.wait(1000)
 
-        pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
