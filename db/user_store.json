@@ -1,13 +1,11 @@
 {
-    "COINS": 815,
+    "COINS": 0,
     "GAMES_PLAYED": null,
     "HAS_INFORMANT": false,
-    "HAS_REACHED_CHASE_ONCE": true,
-    "HAS_REACHED_FIGHT_ONCE": true,
+    "HAS_REACHED_CHASE_ONCE": false,
+    "HAS_REACHED_FIGHT_ONCE": false,
     "STORE": {
-        "BOUGHT_BUT_UNUSED": [
-            "Stare"
-        ],
+        "BOUGHT_BUT_UNUSED": [],
         "SELECTED": [
             "Punch",
             "Kick",
