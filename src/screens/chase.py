@@ -148,9 +148,10 @@ def play(skill_level, city_name):
         if heli_y <= -30:
             heli_y = -30
 
+        if heli_x>300 and heli_change_x > 0:
+            heli_change_x = ((10000 / heli_x) - 20) * 9 / 40
+
         heli_x += heli_change_x
-        if heli_x >= 500:
-            heli_x = 500
         if heli_x <= 100:
             heli_x = 100
 
@@ -206,6 +207,9 @@ def play(skill_level, city_name):
         # show fight scene
         if time_taken >= 30:
             # SOUNDS
+            robber_x -= 1.5
+            robber_y += 0.5
+        if robber_x - 90 <= heli_x:
             music_controller.stop_fx2()
             music_controller.stop_fx1()
             s = pygame.Surface((800, 600))  # the size of your rect
