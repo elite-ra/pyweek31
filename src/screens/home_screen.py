@@ -29,6 +29,7 @@ pygame.display.set_icon(icon)
 
 # temporary home screen
 def play():
+    logo = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'logo.png'))
     # INITIALIZE the sounds
     music_controller.update_volume()
     music_controller.stop_fx1()
@@ -40,7 +41,7 @@ def play():
     img = pygame.image.load(os.path.join(consts.ROOT_PATH, 'assets', 'images', 'bg', 'bg_screen.png'))
 
     play_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 100,
-                                                               (consts.SCREEN_HEIGHT / 2) + 0),
+                                                               (consts.SCREEN_HEIGHT / 2) + 100),
                              width=200, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                              font=utils.constants.FONT_MONO_LARGE, text='Play')
 
@@ -57,13 +58,13 @@ def play():
     plyr = consts.DB.get_player_details()
     if plyr.has_reached_fight:
         edit_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                                   (consts.SCREEN_HEIGHT / 2) + 150),
+                                                                   (consts.SCREEN_HEIGHT / 2) + 200),
                                  width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.BLACK_COLOR,
                                  font=utils.constants.FONT_MONO_LARGE, text='Edit Fight Moves')
     else:
         edit_button = None
         edit_d_button = TextButton(surface=consts.MAIN_DISPLAY, pos=((consts.SCREEN_WIDTH / 2) - 150,
-                                                                     (consts.SCREEN_HEIGHT / 2) + 150),
+                                                                     (consts.SCREEN_HEIGHT / 2) + 200),
                                    width=300, height=40, fg_color=colors.WHITE_COLOR, bg_color=colors.GREY_COLOR,
                                    font=utils.constants.FONT_MONO_LARGE, text='???')
 
@@ -73,8 +74,9 @@ def play():
 
         mouse_down = False
         consts.MAIN_DISPLAY.blit(img, (0, 0))
+        consts.MAIN_DISPLAY.blit(logo, [(800 - 512) / 2, -100])
         title = consts.FONT_MAIN_SCREEN.render('AQUILAM', True, (200, 255, 255))
-        consts.MAIN_DISPLAY.blit(title, (consts.SCREEN_WIDTH/2 - title.get_width()/2, 80))
+        consts.MAIN_DISPLAY.blit(title, (consts.SCREEN_WIDTH/2 - title.get_width()/2, 230))
         # gets all the events occurring every frame, which can be mouse movement, mouse click, etc.
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
