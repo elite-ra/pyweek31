@@ -62,3 +62,31 @@ class TextButton:
         # Render text and button
         pygame.draw.rect(self.surface, bg_new_color, (self.pos[0], self.pos[1], self.width, self.height))
         self.surface.blit(text_surface, text_rect)
+
+
+class ImageButton:
+    """Image PyGame button class."""
+
+    def __init__(self, surface, image_path, pos, width, height):
+        self.surface = surface
+        self.pos = pos
+
+        self.top_border = pos[1]  # Y of top left of rect
+        self.right_border = pos[0] + width  # X of top left of rect plus width
+        self.bottom_border = pos[1] + height  # Y of top left of rect plus height
+        self.left_border = pos[0]  # X of top left of rect
+
+        """Create a customizable image button."""
+        # Initiate boundary variables
+        # Load and render image
+        img = pygame.image.load(image_path)
+        surface.blit(img, (pos[0], pos[1], width, height))
+
+    @property
+    def hovered(self):
+        """Return a boolean representing if mouse is hovering over button."""
+        row, col = pygame.mouse.get_pos()
+        if self.left_border <= row <= self.right_border and self.top_border <= col <= self.bottom_border:
+            return True
+        else:
+            return False
