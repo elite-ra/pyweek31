@@ -26,7 +26,7 @@ def play():
 
     bg = pygame.image.load(os.path.join(utils.constants.ROOT_PATH, 'assets', 'images', 'bg', 'cities.png'))
 
-    coin_limit = 50000
+    coin_limit = 25000
 
     show_city = False
 
@@ -151,12 +151,10 @@ def play():
                 else:
                     utils.constants.MAIN_DISPLAY.blit(s, (mx - 300, my))
 
-
             if not i.collidepoint(x, y) and stats_showing:
                 stats_showing = False
 
         if show_city:
-
             if choose_city.hovered:
                 choose_city.toggle_bg((0, 100, 0))
                 if mouse_down:
