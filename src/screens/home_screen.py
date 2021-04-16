@@ -191,7 +191,7 @@ def play():
                 if mouse_down:
                     modal_showing = False
             else:
-                x_btn.toggle_ng(colors.RED_COLOR)
+                x_btn.toggle_bg(colors.RED_COLOR)
 
         # update all the things in game
         pygame.display.update()

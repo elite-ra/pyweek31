@@ -27,7 +27,7 @@ sounds = {
     "Kick": music_controller.play_punch_kick,
     "Gunshot": music_controller.play_gunshot,
     "Super Mega Smash": music_controller.play_super_mega_smash,
-    "The Huge missile": music_controller.play_the_huge_missile,
+    "The huge missile": music_controller.play_the_huge_missile,
     "Stare": music_controller.play_stare
 }
 
