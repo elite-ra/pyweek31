@@ -42,7 +42,7 @@ def end_screen_func(a):
         if a == 1:
             text = font.render('The robber stole too much!', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
-            consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))
+            consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2) - 100))
             text = font.render('Better luck next time!', True, (255, 255, 255))
             w, h = text.get_rect().width, text.get_rect().height
             consts.MAIN_DISPLAY.blit(text, ((800 - w) / 2, ((600 - h) / 2)))

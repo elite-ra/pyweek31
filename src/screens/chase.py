@@ -148,7 +148,7 @@ def play(skill_level, city_name):
         if heli_y <= -30:
             heli_y = -30
 
-        if heli_x>300 and heli_change_x > 0:
+        if heli_x > 300 and heli_change_x > 0:
             heli_change_x = ((10000 / heli_x) - 20) * 9 / 40
 
         heli_x += heli_change_x
@@ -178,7 +178,6 @@ def play(skill_level, city_name):
             if missile_x[i] <= -60:
                 missile_x[i] = random.randint(800, 1540)
                 missile_y[i] = random.randint(-19, 600 - 45)
-
 
             missile_game(missile_x[i], missile_y[i], i)
 
@@ -216,10 +215,10 @@ def play(skill_level, city_name):
             music_controller.play_coin_bag()
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render(f'You caught the robber, and got {coins} coins!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width/2, 200))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width / 2, 200))
             font = utils.constants.FONT_MONO_MEDIUM
             text = font.render('The robber is angry! Fight him!', True, (255, 255, 255))
-            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width/2, 300))
+            utils.constants.MAIN_DISPLAY.blit(text, (400 - text.get_rect().width / 2, 300))
             pygame.display.update()
             pygame.time.wait(4000)
             plyr.coins += coins
@@ -232,7 +231,9 @@ def play(skill_level, city_name):
         text = font.render('Jetpack Fuel', True, (255, 255, 255))
         utils.constants.MAIN_DISPLAY.blit(text, (0, 60))
         pygame.draw.rect(utils.constants.MAIN_DISPLAY, (50, 50, 50), (5, 100, 65, 400))
-        pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),
-                         pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65, 400 - int((time_taken / 30) * 400)))
+        if time_taken <= 30:
+            pygame.draw.rect(utils.constants.MAIN_DISPLAY, (95, 106, 0),
+                             pygame.Rect(5, (100 + int((time_taken / 30) * 400)), 65,
+                             400 - int((time_taken / 30) * 400)))
         pygame.display.update()
         utils.constants.CLOCK.tick(utils.constants.TICK_RATE)
